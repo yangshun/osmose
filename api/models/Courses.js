@@ -9,11 +9,10 @@
 module.exports = {
 
   attributes: {
- 	question_id: 'INT',
-	user_id: 'INT',
-	title: 'VARCHAR',
+ 	question_id: 'INTEGER',
+	user_id: 'INTEGER',
+	title: 'TEXT',
 	content: 'TEXT',
-	course_id: 'INT',
 	deleted: 'BOOLEAN'  
   }
 

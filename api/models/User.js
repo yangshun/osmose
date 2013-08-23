@@ -9,8 +9,7 @@
 module.exports = {
 
   attributes: {
-	user_id: 'INT',
-	facebook_id: 'INT',
+	facebook_id: 'INTEGER',
 	deleted: 'BOOLEAN'
   }
 

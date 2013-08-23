@@ -9,9 +9,8 @@
 module.exports = {
 
   attributes: {
-  	answer_id: 'INT',
-	question_id: 'INT',
-	user_id: 'INT',
+	question_id: 'INTEGER',
+	user_id: 'INTEGER',
 	content: 'TEXT',
 	deleted: 'BOOLEAN'
   }

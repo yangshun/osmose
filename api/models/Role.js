@@ -9,7 +9,6 @@
 module.exports = {
 
   attributes: {
-	role_id: 'INT',
 	name: 'STRING'   
   }
 
