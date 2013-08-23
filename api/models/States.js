@@ -10,7 +10,7 @@ module.exports = {
 
   attributes: {
 	post_type: 'STRING',    // Either Question, Answer or Comments
-	post_id: 'INT',
+	post_id: 'INTEGER',
 	state: 'STRING'
   }
 

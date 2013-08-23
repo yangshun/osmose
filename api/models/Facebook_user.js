@@ -9,7 +9,7 @@
 module.exports = {
 
   attributes: {
-	facebook_id: 'INT'
+	facebook_id: 'INTEGER'
   }
 
 };

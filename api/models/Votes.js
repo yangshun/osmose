@@ -10,9 +10,9 @@ module.exports = {
 
   attributes: {
 	post_type: 'STRING',
-	post_id: 'INT',
-	voter_id: 'INT',
-	score: 'INT'
+	post_id: 'INTEGER',
+	voter_id: 'INTEGER',
+	score: 'INTEGER'
   }
 
 };

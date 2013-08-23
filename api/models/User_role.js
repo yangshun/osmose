@@ -9,9 +9,8 @@
 module.exports = {
 
   attributes: {
-	role_id: 'INT',
-	user_id: 'INT',
-	course_id: 'INT'
+	user_id: 'INTEGER',
+	course_id: 'INTEGER'
   }
 
 };
