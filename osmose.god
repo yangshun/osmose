@@ -1,5 +1,5 @@
 God.watch do |w|
-  w.name = "appman"
+  w.name = "osmose"
   w.dir = "~/2013-fb-group-11"
   w.uid = 'ubuntu'
   w.start = "sudo sails lift"
