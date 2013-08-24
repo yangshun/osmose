@@ -9,7 +9,10 @@
 module.exports = {
 
   attributes: {
-	name: 'STRING'   
+	name: {
+		type: 'STRING',
+		required: true
+	}
   }
 
 };

@@ -9,8 +9,14 @@
 module.exports = {
 
   attributes: {
-	facebook_id: 'INTEGER',
-	deleted: 'BOOLEAN'
+	facebook_id: {
+		type: 'INTEGER',
+		required: true
+	},
+	deleted: {
+		type: 'BOOLEAN',
+		defaultsTo: false
+	}
   }
 
 };

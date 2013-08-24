@@ -9,10 +9,22 @@
 module.exports = {
 
   attributes: {
-	question_id: 'INTEGER',
-	user_id: 'INTEGER',
-	content: 'TEXT',
-	deleted: 'BOOLEAN'
+	question_id: {
+		type: 'INTEGER',
+		required: true,
+	},
+	user_id: {
+		type: 'INTEGER',
+		required: true
+	},
+	content: {
+		type: 'TEXT',
+		notEmpty: true
+	},
+	deleted: {
+		type: 'BOOLEAN',
+		defaultsTo: false
+	}
   }
 
 };

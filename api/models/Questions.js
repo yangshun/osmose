@@ -9,11 +9,24 @@
 module.exports = {
 
   attributes: {
-  	user_id: 'INTEGER',
-  	title: 'TEXT',
+  	user_id: {
+  		type: 'INTEGER',
+  		required: true
+  	},
+  	title: {
+  		type: 'TEXT',
+  		required: true,
+  		notEmpty: true
+  	},
   	content: 'TEXT',
-  	course_id: 'INTEGER',
-  	deleted: 'BOOLEAN'
+  	course_id: {
+  		type: 'INTEGER',
+  		required: true
+  	},
+  	deleted: {
+  		type: 'BOOLEAN',
+  		defaultsTo: false
+  	}
   }
 
 };

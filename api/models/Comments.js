@@ -9,11 +9,28 @@
 module.exports = {
 
   attributes: {
-	answer_id: 'INTEGER',
-	question_id: 'INTEGER',
-	user_id: 'INTEGER',
-	content: 'TEXT',
-	deleted: 'BOOLEAN'
+	parent_id: {
+		type: 'INTEGER',
+		required: true
+	},
+	parent_type: {
+		type: 'STRING', // 'QUESTIONS' or 'ANSWERS'
+		required: true,
+		is: /\bQUESTION|ANSWER\b/
+	},
+	content: {
+		type: 'TEXT',
+		required: true,
+		notEmpty: true
+	},
+	user_id: {
+		type: 'INTEGER',
+		required: true
+	},
+	deleted: {
+		type: 'BOOLEAN',
+		defaultsTo: false
+	}
   }
 
 };

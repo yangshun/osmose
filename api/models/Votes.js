@@ -9,10 +9,23 @@
 module.exports = {
 
   attributes: {
-	post_type: 'STRING',
-	post_id: 'INTEGER',
-	voter_id: 'INTEGER',
-	score: 'INTEGER'
+	post_type: {
+		type: 'STRING', // Questions, Answers or Comments
+		required: true,
+		is: /\bQUESTION|ANSWER|COMMENT\b/
+	},
+	post_id: {
+		type: 'INTEGER',
+		required: true
+	},
+	voter_id: {
+		type: 'INTEGER',
+		required: true
+	},
+	score: {
+		type: 'INTEGER',
+		required: true
+	}
   }
 
 };
