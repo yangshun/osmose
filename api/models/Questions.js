@@ -41,8 +41,8 @@ module.exports = {
       async.eachSeries(questions,
         function(question, next) {
           Questions.getQuestionWithDetails(question.id, function(err, details) {
-            result.push(details);
-            next();
+            if (!err) result.push(details);
+            next(err);
           });
         },
         function(err) {
@@ -52,7 +52,7 @@ module.exports = {
   },
 
  getQuestionWithDetails: function(qid, cb) {
-    this.findOne(qid).done(function(err, question) {
+    Questions.findOne(qid).done(function(err, question) {
       if (err || question === undefined) return cb(err, undefined);
       var next = function(err) {
         // console.log(err);
@@ -60,13 +60,25 @@ module.exports = {
 
       async.parallel([
         function(next) {
+          Votes.find({post_id: question.id, post_type: 'QUESTION'}).done(function(err, votes) {
+            if (!err) {
+              var score = 0;
+              votes.forEach(function(vote) {
+                score += vote.score;
+              });
+              question.score = score;
+            }
+            next(err);
+          });
+        },
+        function(next) {
           Comments.find({parent_id: question.id, parent_type: 'QUESTION'}).done(function(err, comments) {
             if (!err) question.comments = comments;
             next(err);
           });
         },
         function(next) {
-          Answers.answersWithComments(question.id, function(err, answers){
+          Answers.getAnswersWithComments(question.id, function(err, answers){
             if (!err) question.answers = answers;
             next(err);
           });
