@@ -9,7 +9,8 @@
     "sails-disk": "~0.9.0",
     "ejs": "0.8.4",
     "optimist": "0.3.4",
-    "facebook-node-sdk": "~0.2.0"
+    "facebook-node-sdk": "~0.2.0",
+    "async": "~0.2.9"
   },
   "scripts": {
     "start": "node app.js",

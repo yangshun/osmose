@@ -31,36 +31,49 @@ module.exports = {
 
   getQuestionsOfCourse: function(cid, cb) {
     Questions.find({course_id: cid}).done(function(err, questions) {
-      if (err || questions === undefined) return cb(err, questions);
-      var total = questions.length;
-      var retArr = [];
+      if (err || question === undefined) return cb(err,undefined);
+      var next = function(err) {
+        // console.log(err);
+      };
 
-      var check = function() {
-        total--;
-        if (total <= 0) {
-          return cb(err, retArr);
-        }
-      }
+      var result = [];
 
-      questions.forEach(function(question) {
-        Questions.getQuestionWithDetails(question.id, function(err, details) {
-          retArr.push(details);
-          check();
+      async.eachSeries(questions,
+        function(question, next) {
+          Questions.getQuestionWithDetails(question.id, function(err, details) {
+            result.push(details);
+            next();
+          });
+        },
+        function(err) {
+          cb(err, result); 
         });
-      });
     });
   },
 
  getQuestionWithDetails: function(qid, cb) {
-      this.findOne(qid).done(function(err, question) {
-      if (err || question === undefined) return cb(err, question);
-      Comments.find({parent_id: qid, parent_type: 'QUESTION'}).done(function(err, qcomments) {
-        question.comments = qcomments;
-        Answers.answersWithComments(qid, function(answers){
-          question.answers = answers;
-          cb(null, question);
+    this.findOne(qid).done(function(err, question) {
+      if (err || question === undefined) return cb(err, undefined);
+      var next = function(err) {
+        // console.log(err);
+      };     
+
+      async.parallel([
+        function(next) {
+          Comments.find({parent_id: question.id, parent_type: 'QUESTION'}).done(function(err, comments) {
+            if (!err) question.comments = comments;
+            next(err);
+          });
+        },
+        function(next) {
+          Answers.answersWithComments(question.id, function(err, answers){
+            if (!err) question.answers = answers;
+            next(err);
+          });
+        }],
+        function(err) {
+          cb(err, question); 
         });
-      })
     });
   }
 

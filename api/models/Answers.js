@@ -29,21 +29,21 @@ module.exports = {
 
   answersWithComments: function(qid, cb) {
   	this.findByQuestion_id(qid, function(err, answers) {
-  		var total = answers.length;
-  		var check = function() {
-			total--;
-			if (total <= 0) {
-				return cb(answers);
-			}
+  		if (err || answers === undefined) cb(err, undefined);
+  		var next = function(err) {
+  			// console.log(err)
   		}
-
-  		answers.forEach(function(answer) {
-  			Comments.find({parent_id:answer.id, parent_type:'ANSWER'}).done(function(err, comments) {
-  				answer.comments = comments;
-	  			check();
-  			})
-  		});
+  		async.eachSeries(answers,
+  			function(answer, next) {
+	  			Comments.find({parent_id:answer.id, parent_type:'ANSWER'}).done(function(err, comments) {
+	  				if (!err) answer.comments = comments;
+	  				next(err);
+	  			});
+  			},
+  			function(err) {
+  				cb(err, answers);
+  			});
 	});
-  } // answersWithComments
+  }
 
 };
