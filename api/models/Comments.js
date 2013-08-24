@@ -31,6 +31,9 @@ module.exports = {
 		type: 'BOOLEAN',
 		defaultsTo: false
 	}
-  }
+  },
 
+  deleteComment: function(comid, cb) {
+  	Comments.update({id: comid}, {deleted: true}, cb);
+  }
 };

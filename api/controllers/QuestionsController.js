@@ -24,4 +24,11 @@ module.exports = {
 		});
 	},
 
+	deletequestion: function(req, res) {
+		var qid = req.param('questionid');
+		Questions.deleteQuestion(qid, function(err, question) {
+			if (err || question === undefined) return res.send(404);
+			res.send(question);
+		});
+	}
 };

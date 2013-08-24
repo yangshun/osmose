@@ -12,6 +12,12 @@ module.exports = {
     res.send('hello world!');
   }
   */
-  
+	deleteanswer: function(req, res) {
+		var aid = req.param('answerid');
+		Answers.deleteAnswer(aid, function(err, result) {
+			if (err) return res.send(404);
+			res.send(result);
+		})
+	}
 
 };

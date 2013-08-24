@@ -87,6 +87,43 @@ module.exports = {
           cb(err, question); 
         });
     });
+  },
+
+  deleteQuestion: function(qid, cb) {
+      this.update({id: qid},{deleted: true}).done(function(err, questions) {
+      if (err || questions === undefined) return cb(err, undefined);
+        var question = questions[0];
+        console.log(question);
+        var changed = [];
+        async.parallel([
+          function(next) {
+            Comments.update({parent_id: question.id, parent_type: 'QUESTION'}, {deleted: true}).done(function(err, comments) {
+              if (!err) question.comments = comments;
+              next(err);
+            });
+          },
+          function(next) {
+            Answers.update({question_id: question.id}, {deleted: true}).done(function(err, answers) {
+              if (err || answers === undefined) return cb(err, question);
+
+              async.each(answers,
+                function(answer, nextEach) {
+                  Answers.deleteAnswer(answer.id, function(err, result) {
+                    if (!err) changed.push(result);
+                    nextEach();
+                  })
+                },
+                function(err) {
+                  question.answers = changed;
+                  next();
+                });
+            });
+          }
+        ],
+        function(err) {
+          cb(err, question);
+        });
+      });
   }
 
 };
