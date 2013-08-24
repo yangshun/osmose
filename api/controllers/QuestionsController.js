@@ -23,8 +23,6 @@ module.exports = {
 				question.comments = qcomments;
 				Answers.answersWithComments(qid, function(answers){
 					question.answers = answers;
-					console.log('Question found with question: ');
-					console.log(question);
 					res.send(question);
 				});
 			})
