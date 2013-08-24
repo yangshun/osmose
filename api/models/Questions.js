@@ -31,7 +31,7 @@ module.exports = {
 
   getQuestionsOfCourse: function(cid, cb) {
     Questions.find({course_id: cid}).done(function(err, questions) {
-      if (err || question === undefined) return cb(err,undefined);
+      if (err || questions === undefined) return cb(err,undefined);
       var next = function(err) {
         // console.log(err);
       };
