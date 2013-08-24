@@ -14,11 +14,13 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': ['facebook', 'fb_auth'],
+  // '*': ['facebook', 'fb_auth'],
+  '*': true, // For testing on localhost
 
   HomeController: {
   	'login': 'facebook'
   }
+
 
   /*
 	// Here's an example of adding some policies to a controller

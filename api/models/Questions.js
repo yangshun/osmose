@@ -27,6 +27,7 @@ module.exports = {
   		type: 'BOOLEAN',
   		defaultsTo: false
   	}
-  }
+  } 
+
 
 };

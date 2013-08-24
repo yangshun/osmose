@@ -12,6 +12,4 @@ module.exports = {
     res.send('hello world!');
   }
   */
-  
-
 };
