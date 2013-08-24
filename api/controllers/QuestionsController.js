@@ -18,14 +18,9 @@ module.exports = {
 
 	get: function(req, res) {
 		var qid = req.param('questionid');
-		Questions.findOne(qid).done(function(err, question) {
-			Comments.find({parent_id: qid, parent_type: 'QUESTION'}).done(function(err, qcomments) {
-				question.comments = qcomments;
-				Answers.answersWithComments(qid, function(answers){
-					question.answers = answers;
-					res.send(question);
-				});
-			})
+		Questions.getQuestionWithDetails(qid, function(err, question) {
+			if (err || question === undefined) return res.send(404);
+			res.send(question);
 		});
 	},
 

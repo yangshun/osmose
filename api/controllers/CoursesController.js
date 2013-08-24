@@ -13,5 +13,10 @@ module.exports = {
   }
   */
   
-
+  get: function(req, res) {
+  	return Questions.getQuestionsOfCourse(req.param('courseid'), function(err, questions) {
+  		if (err || questions === undefined) return res.send(404);
+  		res.send(questions);
+  	})
+  }
 };
