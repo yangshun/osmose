@@ -28,7 +28,7 @@ module.exports = {
   },
 
   getAnswersWithComments: function(qid, cb) {
-  	Answers.findByQuestion_id(qid, function(err, answers) {
+  	Answers.find({question_id: qid, deleted: false} , function(err, answers) {
   		if (err || answers === undefined) cb(err, undefined);
   		var next = function(err) {
   			// console.log(err)
@@ -50,7 +50,7 @@ module.exports = {
   },
 
   getAnswerWithComments: function(aid, cb) {
-    Answers.findOne(aid).done(function(err, answer) {
+    Answers.findOne({id: aid, deleted: false}).done(function(err, answer) {
       if (err || answer === undefined) return cb(err, undefined);
       var next = function(err) {
         // console.log(err);
@@ -58,7 +58,7 @@ module.exports = {
 
       async.parallel([
         function(next) {
-          Votes.find({post_id: answer.id, post_type: 'ANSWER'}).done(function(err, votes) {
+          Votes.find({post_id: answer.id, post_type: 'ANSWER', deleted: false}).done(function(err, votes) {
             if (!err) {
               var score = 0;
               votes.forEach(function(vote) {
@@ -70,7 +70,7 @@ module.exports = {
           });
         },
         function(next) {
-          Comments.find({parent_id:answer.id, parent_type:'ANSWER'}).done(function(err, comments) {
+          Comments.find({parent_id:answer.id, parent_type:'ANSWER', deleted: false}).done(function(err, comments) {
             if (!err) answer.comments = comments;
             next(err);
           });

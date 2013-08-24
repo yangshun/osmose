@@ -16,7 +16,11 @@ module.exports = {
   	},
   	description: {
   		type: 'TEXT'	
-  	}
+  	},
+    deleted: {
+      type: 'BOOLEAN',
+      defaultsTo: false
+    }
   }
 
 };

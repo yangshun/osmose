@@ -15,7 +15,7 @@ module.exports = {
   
   get: function(req, res) {
     var cid = req.param('courseid');
-    Courses.findOne(cid).done(function(err, course) {
+    Courses.findOne({id: cid, deleted: false}).done(function(err, course) {
       if (err || course === undefined) return res.send(404);
   	  Questions.getQuestionsOfCourse(req.param('courseid'), function(err, questions) {
   		  if (err || questions === undefined) return res.send(404);

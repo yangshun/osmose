@@ -30,7 +30,7 @@ module.exports = {
   },
 
   getQuestionsOfCourse: function(cid, cb) {
-    Questions.find({course_id: cid}).done(function(err, questions) {
+    Questions.find({course_id: cid, deleted: false}).done(function(err, questions) {
       if (err || questions === undefined) return cb(err,undefined);
       var next = function(err) {
         // console.log(err);
@@ -52,7 +52,7 @@ module.exports = {
   },
 
  getQuestionWithDetails: function(qid, cb) {
-    Questions.findOne(qid).done(function(err, question) {
+    Questions.findOne({id: qid, deleted: false}).done(function(err, question) {
       if (err || question === undefined) return cb(err, undefined);
       var next = function(err) {
         // console.log(err);
@@ -60,7 +60,7 @@ module.exports = {
 
       async.parallel([
         function(next) {
-          Votes.find({post_id: question.id, post_type: 'QUESTION'}).done(function(err, votes) {
+          Votes.find({post_id: question.id, post_type: 'QUESTION', deleted: false}).done(function(err, votes) {
             if (!err) {
               var score = 0;
               votes.forEach(function(vote) {
@@ -72,7 +72,7 @@ module.exports = {
           });
         },
         function(next) {
-          Comments.find({parent_id: question.id, parent_type: 'QUESTION'}).done(function(err, comments) {
+          Comments.find({parent_id: question.id, parent_type: 'QUESTION', deleted: false}).done(function(err, comments) {
             if (!err) question.comments = comments;
             next(err);
           });

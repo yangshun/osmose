@@ -25,6 +25,10 @@ module.exports = {
 	score: {
 		type: 'INTEGER',
 		required: true
+	},
+	deleted: {
+		type: 'BOOLEAN',
+		defaultsTo: false
 	}
   }
 
