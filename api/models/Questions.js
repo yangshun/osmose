@@ -30,26 +30,24 @@ module.exports = {
   },
 
   getQuestionsOfCourse: function(cid, cb) {
-    this.find({course_id: cid}).done(function(err, questions) {
+    Questions.find({course_id: cid}).done(function(err, questions) {
       if (err || questions === undefined) return cb(err, questions);
       var total = questions.length;
+      var retArr = [];
+
       var check = function() {
         total--;
         if (total <= 0) {
-          console.log(questions);
-          return cb(err, questions);
+          return cb(err, retArr);
         }
       }
 
-      // questions.forEach(function(question) {
-      //   Questions.getQuestionWithDetails(question.id, function(err, details) {
-      //     question.details = details;
-      //     check();
-      //   });
-      // });
-
-      // check();
-      console.log(questions);
+      questions.forEach(function(question) {
+        Questions.getQuestionWithDetails(question.id, function(err, details) {
+          retArr.push(details);
+          check();
+        });
+      });
     });
   },
 

@@ -51,7 +51,7 @@ module.exports.routes = {
   'get /courses/:courseid': {
     controller: 'CoursesController',
     action: 'get'
-  },
+  }
 
 
   // View routes

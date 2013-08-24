@@ -33,7 +33,7 @@ module.exports = {
   		var check = function() {
 			total--;
 			if (total <= 0) {
-				cb(answers);
+				return cb(answers);
 			}
   		}
 
@@ -43,8 +43,6 @@ module.exports = {
 	  			check();
   			})
   		});
-
-  		check();
 	});
   } // answersWithComments
 
