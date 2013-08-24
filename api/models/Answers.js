@@ -29,22 +29,22 @@ module.exports = {
 
   answersWithComments: function(qid, cb) {
   	this.findByQuestion_id(qid, function(err, answers) {
-  		var or_clause = [];
-  		for(answer in answers) {
-  			or_clause.push({parent_id: answer.id});
+  		var total = answers.length;
+  		var check = function() {
+			total--;
+			if (total <= 0) {
+				cb(answers);
+			}
   		}
 
-  		Comments.find({where:{or: or_clause, parent_type: 'ANSWER'}})
-  		.done(
-  			function(err, comments) {
-		  		answers = answers.map(function(answer){
-  					// answer.comments = comments.filter(function(comment) {
-  					// 	return comment.parent_id === answer.id;
-  					// }); // filter
-  					return answer;
-  				}); // map
-  				cb(answers);
-  			}); // done
+  		answers.forEach(function(answer) {
+  			Comments.find({parent_id:answer.id, parent_type:'ANSWER'}).done(function(err, comments) {
+  				answer.comments = comments;
+	  			check();
+  			})
+  		});
+
+  		check();
 	});
   } // answersWithComments
 
