@@ -14,9 +14,14 @@ module.exports = {
   */
   
   get: function(req, res) {
-  	Questions.getQuestionsOfCourse(req.param('courseid'), function(err, questions) {
-  		if (err || questions === undefined) return res.send(404);
-  		res.send(questions);
-  	})
+    var cid = req.param('courseid');
+    Courses.findOne(cid).done(function(err, course) {
+      if (err || course === undefined) return res.send(404);
+  	  Questions.getQuestionsOfCourse(req.param('courseid'), function(err, questions) {
+  		  if (err || questions === undefined) return res.send(404);
+  		  course.questions = questions;
+        return res.send(course);
+  	  });
+    });
   }
 };
