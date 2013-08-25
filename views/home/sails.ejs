@@ -16,10 +16,10 @@
         <img class="logo" src="http://sailsjs.org/images/sails-logo.jpg" />
     </div>
 </div>
-
-<div class="container clearfix">
+<script type="text/javascript" src="/js/angular/landing-controller.js"></script>
+<div class="container clearfix" ng-app ng-controller="LandingController">
     <div class="main">
-        <h1 id="main-title">Welcome</h1>
+        <h1 id="main-title">Welcome {{ name }} </h1>
         <p>You are currently viewing this with view engine: <% if (locals.defaultEngine) {;%><span><%- locals.defaultEngine %></span><%}%></p>
         <h2>Getting started</h2>
         <p>Don't worry, we've got your back.</p>

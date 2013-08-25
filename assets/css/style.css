@@ -1,0 +1,21 @@
+.main-container { width: 960px; margin: 0 auto; }
+body { font-family: 'omnes-pro', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'omnes-pro', sans-serif; font-weight: 500; color: #666; }
+.top-bar { background: #0977d5;}
+.top-bar-section ul li>a { font-weight: 400; }
+.top-bar-section ul { background: #0977d5;}
+.top-bar-section li a:not(.button) { background: #0977d5; }
+.top-bar-section li a:not(.button):hover { background: #3282c6; }
+.top-bar-section ul li.active>a { background: #07569a; }
+
+/* Navigationa */
+.navigation .nav-bar-logo { padding-bottom: 3px; }
+
+/* Landing */
+.login-box { background-color: #eee; width: 600px; margin: 30px auto; padding: 20px; padding-top: 50px; text-align: center;}
+.login-box h1 { font-size: 24px; }
+.login-box .landing-logo { width: 300px; }
+
+/* Footer */
+.footer-container { background-color: #333; }
+.footer { text-align: center; color: #fff;}

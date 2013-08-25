@@ -8,8 +8,9 @@
 module.exports = {
 
   index: function (req, res) {
-  	res.view({
-        'fb_id': req.fb_id
+    if (!req.fb_id) req.fb_id = 0;      
+    res.view({
+        'fb_id': req.fb_id,
     });
   },
 
@@ -26,6 +27,9 @@ module.exports = {
     else {
         res.redirect('/home');
     }
-  }
+  },
 
+  landing: function (req, res) {
+    res.view();
+  }
 };
