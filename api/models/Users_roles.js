@@ -13,6 +13,10 @@ module.exports = {
 		type: 'INTEGER',
 		required: true
 	},
+	role_id: {
+		type: 'INTEGER',
+		required: true
+	},
 	course_id: {
 		type: 'INTEGER',
 		required: true

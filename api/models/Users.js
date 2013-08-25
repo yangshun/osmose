@@ -13,6 +13,9 @@ module.exports = {
 		type: 'INTEGER',
 		required: true
 	},
+	name: {
+		type: 'STRING'
+	},
 	deleted: {
 		type: 'BOOLEAN',
 		defaultsTo: false
