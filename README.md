@@ -9,4 +9,6 @@ How to setup the project
 	- CREATE DATABASE sails;
 5. Grant privileges to sails database
 	- GRANT ALL PRIVILEGES ON sails.* TO 'sails'@'localhost';
-5. sails lift
+6. In /etc/hosts (MAC)
+  - Add the line: `127.0.0.1    local.osmose.soedar.com`
+7. sails lift
