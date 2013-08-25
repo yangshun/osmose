@@ -38,17 +38,17 @@ module.exports.routes = {
 
   '/home': 'HomeController.index',
 
-  'get /questions': {
+  'get /api/questions': {
     controller: 'QuestionsController',
     action: 'getall'
   },
 
-  'get /questions/:questionid': {
+  'get /api/questions/:questionid': {
     controller: 'QuestionsController',
     action: 'get'
   },
 
-  'get /courses/:courseid': {
+  'get /api/courses/:courseid': {
     controller: 'CoursesController',
     action: 'get'
   }
