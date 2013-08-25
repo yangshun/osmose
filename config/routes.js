@@ -39,9 +39,9 @@ module.exports.routes = {
   '/home': 'HomeController.index',
 
    // Courses routes
-  'get    /api/courses/'        : 'CoursesController.index',
+  'get    /api/courses'        : 'CoursesController.index',
   'get    /api/courses/:id'     : 'CoursesController.show',
-  'post   /api/courses/'        : 'CoursesController.create',
+  'post   /api/courses'        : 'CoursesController.create',
   'put    /api/courses/:id'     : 'CoursesController.update',
   'delete /api/courses/:id'     : 'CoursesController.remove',
 
