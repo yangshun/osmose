@@ -6,14 +6,24 @@
  */
 
 module.exports = {
+  index: function(req, res) {
 
-  /* e.g.
-  sayHello: function (req, res) {
-    res.send('hello world!');
-  }
-  */
-	deleteanswer: function(req, res) {
-		var aid = req.param('answerid');
+  },
+
+  show: function(req, res) {
+
+  },
+
+  post: function(req, res) {
+
+  },
+
+  update: function(req, res) {
+
+  },
+
+	remove: function(req, res) {
+		var aid = req.param('id');
 		Answers.deleteAnswer(aid, function(err, result) {
 			if (err) return res.send(404);
 			res.send(result);

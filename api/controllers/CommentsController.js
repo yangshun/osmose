@@ -6,15 +6,24 @@
  */
 
 module.exports = {
+  index: function(req, res) {
 
-  /* e.g.
-  sayHello: function (req, res) {
-    res.send('hello world!');
-  }
-  */
+  },
+
+  show: function(req, res) {
+
+  },
+
+  create: function(req, res) {
+
+  },
+
+  update: function(req, res) {
+
+  },
   
-	deletecomment: function(req, res) {
-		var aid = req.param('commentid');
+	remove: function(req, res) {
+		var aid = req.param('id');
 		Comments.deleteComment(aid, function(err, result) {
 			if (err) return res.send(404);
 			res.send(result);

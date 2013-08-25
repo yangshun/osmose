@@ -5,13 +5,23 @@
  * @description	:: Contains logic for handling requests.
  */
 
-module.exports = {
+module.exports = {  
+  index: function(req, res) {
 
-  /* e.g.
-  sayHello: function (req, res) {
-    res.send('hello world!');
-  }
-  */
+  },
+
+  show: function(req, res) {
+
+  },
+
+  create: function(req, res) {
+
+  },
+
+  update: function(req, res) {
+
+  },
   
-
+  remove: function(req, res) {
+  }
 };
