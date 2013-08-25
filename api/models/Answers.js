@@ -79,6 +79,18 @@ module.exports = {
           cb(err, answer); 
         });
     });
+  },
+  
+  deleteAnswer: function(aid, cb) {
+  	this.update({id: aid},{deleted: true}).done(function(err, answer) {
+  		if (err || answer === undefined) cb(err, undefined);
+
+  		Comments.update({parent_id: aid, parent_type: 'ANSWER'}, {deleted: true}).done(function(err, comments) {
+	  		if (err || comments === undefined) return cb(err, undefined);
+	  		answer.comments = comments;
+  			cb(null, answer);
+  		});
+  	});
   }
 
 };

@@ -13,5 +13,12 @@ module.exports = {
   }
   */
   
+	deletecomment: function(req, res) {
+		var aid = req.param('commentid');
+		Comments.deleteComment(aid, function(err, result) {
+			if (err) return res.send(404);
+			res.send(result);
+		})
+	}
 
 };

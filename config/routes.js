@@ -51,8 +51,22 @@ module.exports.routes = {
   'get /api/courses/:courseid': {
     controller: 'CoursesController',
     action: 'get'
-  }
+  },
 
+  'delete /comments/:commentid': {
+    controller: 'CommentsController',
+    action: 'deletecomment'
+  },
+
+  'delete /answers/:answerid': {
+    controller: 'AnswersController',
+    action: 'deleteanswer'
+  },
+
+  'delete /questions/:questionid': {
+    controller: 'QuestionsController',
+    action: 'deletequestion'
+  },
 
   // View routes
 
