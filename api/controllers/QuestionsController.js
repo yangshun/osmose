@@ -7,7 +7,7 @@
 
 module.exports = {
 	index: function(req, res) {
-		res.send('index');
+		res.api.failure();
 	},
 
 	show: function(req, res) {
