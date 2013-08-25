@@ -33,6 +33,17 @@ module.exports = {
 
   landing: function (req, res) {
     console.log('landing');
-    res.view();
+    if (req.fb_id == 0) {
+        redirect_url = req.protocol + "://" + req.get('host') + '/home'
+        url = req.facebook.getLoginUrl({'redirect_uri': redirect_url});
+
+        res.view({
+            'fb_login_url': url,
+            _layoutFile: '../landing-layout.ejs'
+        }); 
+    }
+    else {
+        res.redirect('/home');
+    }
   }
 };

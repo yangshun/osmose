@@ -1,6 +1,9 @@
 .main-container {  margin: 0 auto; }
 body { font-family: 'omnes-pro', sans-serif; }
 h1, h2, h3, h4, h5, h6 { font-family: 'omnes-pro', sans-serif; font-weight: 500; color: #666; }
+p { font-size: 14px; }
+.button { background-color: #07569a; border: none; font-weight: 500; }
+.button:hover { background-color: #0977d5; }
 
 /* Navigation */
 .navigation .nav-bar-logo { padding-bottom: 3px; }
@@ -11,10 +14,16 @@ h1, h2, h3, h4, h5, h6 { font-family: 'omnes-pro', sans-serif; font-weight: 500;
 .top-bar-section li a:not(.button):hover { background: #07569a; }
 
 /* Landing */
-.login-box { background-color: #eee; margin: 30px auto; padding: 20px; padding-top: 50px; text-align: center;}
+.landing-page { height: 100%; width: 100%; background-image: url('../img/background.jpg'); background-repeat: no-repeat; background-size: cover;}
+.login-box-container { background-color: #f0f0f0; text-align: center; margin-top: 10%; padding: 0; }
+.login-box { padding: 20px; padding-top: 50px; }
 .login-box h1 { font-size: 24px; }
 .login-box .landing-logo { width: 300px; }
+.login-box-container .login-bottom { background-color: #ccc; padding: 10px 0; margin-bottom: 0; }
+.login-box-container .login-bottom a { margin: 0 10px; color: #333; }
+.login-box-container .login-bottom a:hover { color: #0977d5; }
 
 /* Footer */
 .footer-container { background-color: #333; }
+.landing-page .footer-container { position: fixed; bottom: 0; top: initial;}
 .footer { text-align: center; color: #fff;}
