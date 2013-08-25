@@ -1,5 +1,6 @@
 .main-container {  margin: 0 auto; }
-body { font-family: 'omnes-pro', sans-serif; }
+html { background-color: #333; }
+body { font-family: 'omnes-pro', sans-serif; background-color: #fff; }
 h1, h2, h3, h4, h5, h6 { font-family: 'omnes-pro', sans-serif; font-weight: 500; color: #666; }
 p { font-size: 14px; }
 .button { background-color: #07569a; border: none; font-weight: 500; }
@@ -16,11 +17,12 @@ p { font-size: 14px; }
 /* Landing */
 .landing-page { height: 100%; width: 100%; background-image: url('../img/background.jpg'); background-repeat: no-repeat; background-size: cover;}
 .login-box-container { background-color: #f0f0f0; text-align: center; margin-top: 10%; padding: 0; }
-.login-box { padding: 20px; padding-top: 50px; }
+.login-box { padding: 50px 20px 0 20px; }
 .login-box h1 { font-size: 24px; }
 .login-box .landing-logo { width: 300px; }
+.login-box .definition { font-family: Georgia; font-style: italic; color: #aaa; font-size: 12px;}
 .login-box-container .login-bottom { background-color: #ccc; padding: 10px 0; margin-bottom: 0; }
-.login-box-container .login-bottom a { margin: 0 10px; color: #333; }
+.login-box-container .login-bottom a { margin: 0 10px; color: #333; font-weight: 600; }
 .login-box-container .login-bottom a:hover { color: #0977d5; }
 
 /* Footer */
