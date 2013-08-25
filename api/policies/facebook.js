@@ -14,7 +14,7 @@ function facebook_middleware(req, res, next) {
 
     req.facebook = facebook;
     facebook.getUser(function(err, fb_id) {
-        req.fb_id = fb_id;
+        req.session.fb_id = fb_id;
         next();
     });
 }

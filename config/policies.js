@@ -17,7 +17,8 @@ module.exports.policies = {
   '*': ['facebook', 'fb_auth', 'api_helper'],
 
   HomeController: {
-  	'login': 'facebook'
+  	'login': 'facebook',
+  	'landing': 'facebook'
   },
 
 

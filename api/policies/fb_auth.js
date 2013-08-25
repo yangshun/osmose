@@ -3,7 +3,7 @@
  */
 
 function fb_auth(req, res, next) {
-    if (req.fb_id == 0) {
+    if (req.session.fb_id == 0) {
         res.redirect('/home/login');
     }
     else {
