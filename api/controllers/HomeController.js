@@ -15,7 +15,7 @@ module.exports = {
   },
 
   login: function (req, res) {
-    console.log(req);
+    // console.log(req);
     // We only show the login page if the user is not login
     // If the user is login, we will redirect to the home page
     if (req.fb_id == 0) {
@@ -32,6 +32,7 @@ module.exports = {
   },
 
   landing: function (req, res) {
+    console.log('landing');
     res.view();
   }
 };

@@ -38,7 +38,7 @@ module.exports.routes = {
     // view: 'home/sails'
   },
 
-  '/home': 'HomeController.index',
+  // '/home': 'HomeController.index',
 
    // Courses routes
   'get    /api/courses'        : 'CoursesController.index',
