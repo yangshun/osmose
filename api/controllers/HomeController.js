@@ -47,6 +47,7 @@ module.exports = {
   },
 
   landing: function (req, res) {
+    console.log('landing');
     res.view();
   }
 };
