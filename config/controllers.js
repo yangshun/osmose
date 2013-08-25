@@ -46,7 +46,7 @@ module.exports.controllers = {
     // 'post /:controller'
     // 'put /:controller/:id'
     // 'delete /:controller/:id'
-    rest: true,
+    rest: false,
 
 
     // If a blueprint route catches a request,

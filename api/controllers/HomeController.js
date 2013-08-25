@@ -15,10 +15,12 @@ module.exports = {
   },
 
   login: function (req, res) {
+    console.log(req);
     // We only show the login page if the user is not login
     // If the user is login, we will redirect to the home page
     if (req.fb_id == 0) {
-        url = req.facebook.getLoginUrl({'redirect_uri': 'http://osmose.com:1337/home/'});
+        redirect_url = req.protocol + "://" + req.get('host') + '/home'
+        url = req.facebook.getLoginUrl({'redirect_uri': redirect_url});
 
         res.view({
             'fb_login_url': url

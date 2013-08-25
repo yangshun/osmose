@@ -40,35 +40,41 @@ module.exports.routes = {
 
   '/home': 'HomeController.index',
 
-  'get /questions': {
-    controller: 'QuestionsController',
-    action: 'getall'
-  },
+   // Courses routes
+  'get    /api/courses'        : 'CoursesController.index',
+  'get    /api/courses/:id'     : 'CoursesController.show',
+  'post   /api/courses'        : 'CoursesController.create',
+  'put    /api/courses/:id'     : 'CoursesController.update',
+  'delete /api/courses/:id'     : 'CoursesController.remove',
 
-  'get /questions/:questionid': {
-    controller: 'QuestionsController',
-    action: 'get'
-  },
+  // Questions routes
+  'get    /api/questions'       : 'QuestionsController.index',
+  'get    /api/questions/:id'   : 'QuestionsController.show',
+  'post   /api/questions'       : 'QuestionsController.create',
+  'put    /api/questions/:id'   : 'QuestionsController.update',
+  'delete /api/questions/:id'   : 'QuestionsController.remove',
 
-  'get /courses/:courseid': {
-    controller: 'CoursesController',
-    action: 'get'
-  },
+  // Answers routes
+  'get    /api/answers'         : 'AnswersController.index',
+  'get    /api/answers/:id'     : 'AnswersController.show',
+  'post   /api/answers'         : 'AnswersController.create',
+  'put    /api/answers/:id'     : 'AnswersController.update',
+  'delete /api/answers/:id'     : 'AnswersController.remove',
 
-  'delete /comments/:commentid': {
-    controller: 'CommentsController',
-    action: 'deletecomment'
-  },
+  // Comments routes
+  'get    /api/comments'        : 'CommentsController.index',
+  'get    /api/comments/:id'    : 'CommentsController.show',
+  'post   /api/comments'        : 'CommentsController.create',
+  'put    /api/comments/:id'    : 'CommentsController.update',
+  'delete /api/comments/:id'    : 'CommentsController.remove',
 
-  'delete /answers/:answerid': {
-    controller: 'AnswersController',
-    action: 'deleteanswer'
-  },
+  // Votes routes
+  'get    /api/votes'           : 'VotesController.index',
+  'get    /api/votes/:id'       : 'VotesController.show',
+  'post   /api/votes'           : 'VotesController.create',
+  'put    /api/votes/:id'       : 'VotesController.update',
+  'delete /api/votes/:id'       : 'VotesController.remove',
 
-  'delete /questions/:questionid': {
-    controller: 'QuestionsController',
-    action: 'deletequestion'
-  },
 
   // View routes
 
