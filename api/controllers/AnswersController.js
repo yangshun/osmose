@@ -14,7 +14,7 @@ module.exports = {
 
   },
 
-  post: function(req, res) {
+  create: function(req, res) {
 
   },
 
