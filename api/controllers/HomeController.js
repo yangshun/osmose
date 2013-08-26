@@ -47,7 +47,6 @@ module.exports = {
   },
 
   landing: function (req, res) {
-    console.log('landing');
     if (req.session.fb_id == 0) {
         redirect_url = req.protocol + "://" + req.get('host') + '/home'
         url = req.facebook.getLoginUrl({'redirect_uri': redirect_url});

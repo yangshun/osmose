@@ -12,4 +12,10 @@ module.exports = {
     res.send('hello world!');
   }
   */
+  me: function(req, res) {
+  	req.facebook.api('/me', function(err, data) {
+  		if (!err) res.api.success(data);
+  		else res.api.failure(404);
+  	});
+  }
 };

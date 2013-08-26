@@ -39,6 +39,7 @@ module.exports.routes = {
   },
 
   // '/home': 'HomeController.index',
+  'get    /api/me'            : 'UsersController.me',
 
    // Courses routes
   'get    /api/courses'        : 'CoursesController.index',
