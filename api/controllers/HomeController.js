@@ -8,26 +8,12 @@
 module.exports = {
 
   index: function (req, res) {
-    var render = function() {
-      res.view({
-        'fb_id': req.session.fb_id
+    console.log(req.session.user);
+    
+    return res.view({
+        'fb_id': req.session.fb_id,
+        'user': req.session.user
       });
-    }
-
-    if (!req.session.fb_id) req.session.fb_id = 0;      
-    var fb_id = req.session.fb_id;
-    Users.find({facebook_id: fb_id}).done(function(err, users) {
-      if (users.length === 0) {
-        req.facebook.api('/' + fb_id, function(err, data) {
-          Users.create({facebook_id: fb_id, name: data.name}).done(function(err, user){
-            if (err) res.send(404);
-            else render();
-          });
-        });
-      } else {
-        render();
-      }
-    });
   },
 
   login: function (req, res) {
@@ -47,7 +33,6 @@ module.exports = {
   },
 
   landing: function (req, res) {
-    console.log('landing');
     if (req.session.fb_id == 0) {
         redirect_url = req.protocol + "://" + req.get('host') + '/home'
         url = req.facebook.getLoginUrl({'redirect_uri': redirect_url});

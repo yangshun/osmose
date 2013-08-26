@@ -13,9 +13,42 @@ function facebook_middleware(req, res, next) {
                                     response: res });
 
     req.facebook = facebook;
+
+    // Determine if the user is login to Facebook
     facebook.getUser(function(err, fb_id) {
         req.session.fb_id = fb_id;
-        next();
+
+        if (fb_id == 0) {
+            next();
+            return;
+        }
+
+        Users.find({facebook_id: fb_id}).done(function(err, users) {
+            if (err) {
+                return res.send(500);
+            }
+
+            // User does not exist, we create a new user
+            if (users.length === 0) {
+                req.facebook.api('/me', function(err, data) {
+                    if (err) {
+                        console.log(err);
+                        return res.send(500);
+                    }
+                    Users.create({facebook_id: fb_id, name: data.name}).done(function(err, user){
+                        if (err) {
+                            return res.send(500);
+                        }
+                        req.session.user = user;
+                        next();
+                    });
+                });
+            } 
+            else {
+                req.session.user = users[0];
+                next();
+            }
+        });
     });
 }
 
