@@ -23,6 +23,8 @@ module.exports = {
   },
 
   feed: function (req, res) {
-    res.send('feed')
+    res.view({
+        _layoutFile: '../layout.ejs'
+    });
   }
 };
