@@ -4,7 +4,7 @@
 
 function fb_auth(req, res, next) {
     if (req.session.fb_id == 0) {
-        res.redirect('/home/login');
+        res.redirect('/');
     }
     else {
         next();

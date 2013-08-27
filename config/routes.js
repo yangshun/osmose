@@ -32,11 +32,8 @@ module.exports.routes = {
   // located at `views/home/index.ejs`
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
-  '/': {
-    controller: 'HomeController',
-    action: 'landing'
-    // view: 'home/sails'
-  },
+  '/': 'RootController',
+  '/feed': 'RootController.feed',
 
   // '/home': 'HomeController.index',
   'get    /api/me'            : 'UsersController.me',
