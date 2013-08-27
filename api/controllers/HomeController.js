@@ -20,15 +20,15 @@ module.exports = {
     // We only show the login page if the user is not login
     // If the user is login, we will redirect to the home page
     if (req.session.fb_id == 0) {
-        redirect_url = req.protocol + "://" + req.get('host') + '/home'
+        redirect_url = req.protocol + "://" + req.get('host') + '/'
         url = req.facebook.getLoginUrl({'redirect_uri': redirect_url});
 
-        res.view({
-            'fb_login_url': url
-        }); 
+        // res.view({
+        //     'fb_login_url': url
+        // }); 
     }
     else {
-        res.redirect('/home');
+        res.redirect('/');
     }
   },
 
