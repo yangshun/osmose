@@ -20,7 +20,6 @@ module.exports.policies = {
     'index': ['facebook']
   }
 
-
   /*
 	// Here's an example of adding some policies to a controller
 	RabbitController: {

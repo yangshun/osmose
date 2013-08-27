@@ -7,20 +7,20 @@
 
 module.exports = {
   index: function(req, res) {
-    res.api.failure();
+    res.api.failure_code(404);
   },
 
   show: function(req, res) {
     var aid = req.param('id');
     Answers.findOne(aid).done(function(err, answer) {
-      if (err || answer === undefined) res.api.failure();
+      if (err || answer === undefined) res.api.failure(err);
       else res.api.success({'answer': answer});
     });
   },
 
   create: function(req, res) {
     Answers.create(req.body, function(err, answer) {
-      if (err || answer === undefined) res.api.failure();
+      if (err || answer === undefined) res.api.failure(err);
       else res.api.success({'answer': answer});
     });
   },
@@ -28,7 +28,7 @@ module.exports = {
   update: function(req, res) {
     var aid = req.param('id');
     Answers.update(aid, req.body, function(err, answers) {
-      if (err || answers === undefined) res.api.failure();
+      if (err || answers === undefined) res.api.failure(err);
       else res.api.success({'answer': answers[0]});
     });
   },
@@ -36,7 +36,7 @@ module.exports = {
 	remove: function(req, res) {
 		var aid = req.param('id');
 		Answers.deleteAnswer(aid, function(err, answer) {
-			if (err) res.api.failure();
+			if (err) res.api.failure(err);
 			else res.api.success({'answer': answer});
 		});
 	}
