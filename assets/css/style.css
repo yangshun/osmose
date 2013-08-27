@@ -1,8 +1,9 @@
 .main-container {  margin: 0 auto; }
 html { background-color: #333; }
-body { font-family: 'freight-sans-pro', sans-serif; background-color: #eee; }
-h1, h2, h3, h4, h5, h6 { font-family: 'freight-sans-pro', sans-serif; font-weight: 500; color: #666; }
-p { font-size: 14px; }
+body { font-family: "museo-sans", 'helvetica-neue-light', sans-serif; background-color: #eee; }
+h1, h2, h3, h4, h5, h6 { font-family: "museo-sans", 'helvetica-neue-light', sans-serif; font-weight: 500; color: #666; }
+p { font-size: 16px; font-weight: 100;}
+a:hover { color: #ccc;}
 .button { background-color: #07569a; border: none; font-weight: 500; }
 .button:hover { background-color: #0977d5; }
 
@@ -30,6 +31,29 @@ p { font-size: 14px; }
 
 /* Content */
 .content-container { background-color: #fff; min-height: 600px; }
+
+.thumbnail-small { width: 30px; height: 30px; border-radius: 3px; float: left; margin-right: 10px; margin-top: 5px; }
+
+/* Feed */
+.posts-list { list-style-type: none; }
+.post-container { margin-left: 50px; margin-bottom: 30px; }
+.post-summary-column { width: 40px; float: left; }
+.post-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
+.thumbnail { width: 40px; height: 40px; border-radius: 5px; margin-bottom: 5px; }
+.post-score { font-size: 10px; line-height: 13px; font-weight: 500; text-align: center; color: #666; }
+.post-score-action { opacity: 0; }
+.post-score-action > i:hover { color: #0977d5; cursor: pointer;}
+.post-item:hover .post-score-action { opacity: 1; }
+.post-details { font-size: 12px; line-height: 14px; color: #bbb;}
+.post-unanswered { font-weight: 400; color: rgb(233, 52, 81); }
+.post-unanswered:before { content: 'Unanswered'; }
+.post-answered { font-weight: 400; color: rgb(75, 212, 75); }
+.post-answered:before { content: 'Answered';}
+.post-section-title { text-transform: uppercase; font-size: 11px; color: #666; }
+.post-section-text { color: #333; font-size: 14px; }
+.post-action-container { text-align: right; }
+.post-action-button { font-size: 12px; }
+
 
 /* Profile */
 .profile-container { padding-top: 10px; }
