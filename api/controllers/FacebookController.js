@@ -19,5 +19,19 @@ module.exports = {
             }
         });
     }
+  },
+
+  friends: function(req, res) {
+    req.facebook.api('/me/friends?fields=installed,name', function(err, data) {
+        if (err) {
+            res.api.failure(err);
+        }
+        else {
+            installed = data.data.filter(function(friend) { return "installed" in friend });
+            not_installed = data.data.filter(function(friend) { return !("installed" in friend)});
+
+            res.api.success({'installed': installed, 'not_installed': not_installed});
+        }
+    });
   }
 };
