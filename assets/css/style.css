@@ -15,7 +15,7 @@ p { font-size: 14px; }
 .top-bar-section li a:not(.button):hover { background: #07569a; }
 
 /* Landing */
-.landing-page { height: 100%; width: 100%; background-image: url('../img/background.jpg'); background-repeat: no-repeat; background-size: cover;}
+.landing-page { height: 100%; width: 100%; background-image: url('../img/background2.jpg'); background-repeat: no-repeat; background-size: cover;}
 .login-box-container { background-color: #f0f0f0; text-align: center; margin-top: 10%; padding: 0; }
 .login-box { padding: 50px 20px 0 20px; }
 .login-box h1 { font-size: 24px; }
