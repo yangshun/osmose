@@ -17,7 +17,6 @@ function facebook_middleware(req, res, next) {
     // Determine if the user is login to Facebook
     facebook.getUser(function(err, fb_id) {
         req.session.fb_id = fb_id;
-
         if (fb_id == 0) {
             next();
             return;

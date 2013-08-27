@@ -33,7 +33,7 @@ module.exports = {
 	}
   },
 
-  deleteComment: function(comid, cb) {
+  deleteComment: function(comid, options, cb) {
   	Comments.update({id: comid}, {deleted: true}, cb);
   }
 };

@@ -32,11 +32,8 @@ module.exports.routes = {
   // located at `views/home/index.ejs`
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
-  '/': {
-    controller: 'HomeController',
-    action: 'landing'
-    // view: 'home/sails'
-  },
+  '/': 'RootController',
+  '/feed': 'RootController.feed',
 
   // '/home': 'HomeController.index',
   'get    /api/me'            : 'UsersController.me',
@@ -75,6 +72,9 @@ module.exports.routes = {
   'post   /api/votes'           : 'VotesController.create',
   'put    /api/votes/:id'       : 'VotesController.update',
   'delete /api/votes/:id'       : 'VotesController.remove',
+
+  // FB Post Routes
+  'post   /api/facebook/feed'   : 'FacebookController.feed',
 
 
   // View routes

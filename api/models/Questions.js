@@ -29,7 +29,7 @@ module.exports = {
   	}
   },
 
-  getQuestionsOfCourse: function(cid, cb) {
+  getQuestionsOfCourse: function(cid, options, cb) {
     Questions.find({course_id: cid, deleted: false}).done(function(err, questions) {
       if (err || questions === undefined) return cb(err,undefined);
       var next = function(err) {
@@ -40,7 +40,7 @@ module.exports = {
 
       async.eachSeries(questions,
         function(question, next) {
-          Questions.getQuestionWithDetails(question.id, function(err, details) {
+          Questions.getQuestionWithDetails(question.id, options, function(err, details) {
             if (!err) result.push(details);
             next(err);
           });
@@ -51,7 +51,7 @@ module.exports = {
     });
   },
 
- getQuestionWithDetails: function(qid, cb) {
+ getQuestionWithDetails: function(qid, options, cb) {
     Questions.findOne({id: qid, deleted: false}).done(function(err, question) {
       if (err || question === undefined) return cb(err, undefined);
       var next = function(err) {
@@ -60,11 +60,13 @@ module.exports = {
 
       async.parallel([
         function(next) {
+          question.voted = false;
           Votes.find({post_id: question.id, post_type: 'QUESTION', deleted: false}).done(function(err, votes) {
             if (!err) {
               var score = 0;
               votes.forEach(function(vote) {
                 score += vote.score;
+                if (vote.voter_id == options.user) { question.voted = true; }
               });
               question.score = score;
             }
@@ -78,7 +80,7 @@ module.exports = {
           });
         },
         function(next) {
-          Answers.getAnswersWithComments(question.id, function(err, answers){
+          Answers.getAnswersWithComments(question.id, options, function(err, answers){
             if (!err) question.answers = answers;
             next(err);
           });
@@ -89,7 +91,7 @@ module.exports = {
     });
   },
 
-  deleteQuestion: function(qid, cb) {
+  deleteQuestion: function(qid, options, cb) {
       this.update({id: qid},{deleted: true}).done(function(err, questions) {
       if (err || questions === undefined) return cb(err, undefined);
         var question = questions[0];
@@ -108,7 +110,7 @@ module.exports = {
 
               async.each(answers,
                 function(answer, nextEach) {
-                  Answers.deleteAnswer(answer.id, function(err, result) {
+                  Answers.deleteAnswer(answer.id, options, function(err, result) {
                     if (!err) changed.push(result);
                     nextEach();
                   })

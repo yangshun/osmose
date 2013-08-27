@@ -16,11 +16,9 @@ module.exports.policies = {
   // (`true` allows public access) 
   '*': ['facebook', 'fb_auth', 'api_helper'],
 
-  HomeController: {
-  	'login': 'facebook',
-  	'landing': 'facebook'
-  },
-
+  RootController: {
+    'index': ['facebook']
+  }
 
   /*
 	// Here's an example of adding some policies to a controller
