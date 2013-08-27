@@ -1,19 +1,31 @@
 <div class="row">
-	<div class="large-12 columns">
-	  <h1>Hello {{ name }},</h1>
-	  <img ng-src="{{ picturelink }}"/> 
-	  <hr/>
-	</div>
-	<div ng-controller="CourseController">
-		{{ course }}
-		<h2>{{ course.course_name }}</h2>
-		<ul>
-			<li ng-repeat="question in course.questions">
-			{{ question.title }}
-			<p ng-repeat="comment in question.comments">{{ comment.content }}</p>
-			<hr />
-			<p ng-repeat="answer in question.answers">{{ answer.content }}</p>
-			</li>
-		</ul>
-	</div>
+	<div class="large-12 columns index-container">
+    <div class="row">
+  		<div class="large-3 columns profile-container">
+        <div class="profile-box">
+          <div class="profile-name-container">
+  		      <img class="profile-thumbnail" ng-src="{{ picturelink }}"/>
+            <h5 class="profile-name">{{ name }}</h5>
+          </div>
+          <div class="profile-status-container">
+            <p>Just attended my first CS1010S lecture. It was AWESOME! Can't wait to get my hands on Python!</p>
+          </div>
+        </div>
+  		  <hr/>
+      </div>
+      <div class="large-9 columns content-container">
+    	  <div ng-controller="CourseController">
+      		<h2>{{ course.course_name }}</h2>
+      		<ul>
+      			<li ng-repeat="question in course.questions">
+      			{{ question.title }}
+      			<p ng-repeat="comment in question.comments">{{ comment.content }}</p>
+      			<hr />
+      			<p ng-repeat="answer in question.answers">{{ answer.content }}</p>
+      			</li>
+      		</ul> 
+        </div>
+      </div>
+  	</div>
+  </div>
 </div>
