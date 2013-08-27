@@ -17,8 +17,7 @@ module.exports = {
         return res.api.failure();
       }
 
-      console.log(course);
-      Questions.getQuestionsOfCourse(id, function(err, questions) {
+      Questions.getQuestionsOfCourse(id, {user: req.session.user.id}, function(err, questions) {
         if (err || questions == undefined) {
           console.log('1' + err)
           return res.api.failure();

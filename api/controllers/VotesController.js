@@ -30,7 +30,7 @@ module.exports = {
     Votes.findOne(vid).done(function(err, vote) {
       if (err || vote === undefined) res.api.failure();
       vote.deleted = true;
-      vote.save(function(err) {
+      vote.destroy.done(function (err) {
         if (err) res.api.failure();
         else res.api.success({'vote': vote});
       });

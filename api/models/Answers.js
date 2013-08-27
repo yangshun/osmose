@@ -27,7 +27,7 @@ module.exports = {
 	}
   },
 
-  getAnswersWithComments: function(qid, cb) {
+  getAnswersWithComments: function(qid, options, cb) {
   	Answers.find({question_id: qid, deleted: false} , function(err, answers) {
   		if (err || answers === undefined) cb(err, undefined);
   		var next = function(err) {
@@ -38,7 +38,7 @@ module.exports = {
 
   		async.eachSeries(answers,
   			function(answer, next) {
-	  			Answers.getAnswerWithComments(answer.id, function(err, details) {
+	  			Answers.getAnswerWithComments(answer.id, options, function(err, details) {
 	  				if (!err) result.push(details);
 	  				next(err);
 	  			});
@@ -49,7 +49,7 @@ module.exports = {
 	});
   },
 
-  getAnswerWithComments: function(aid, cb) {
+  getAnswerWithComments: function(aid, options, cb) {
     Answers.findOne({id: aid, deleted: false}).done(function(err, answer) {
       if (err || answer === undefined) return cb(err, undefined);
       var next = function(err) {
@@ -58,11 +58,13 @@ module.exports = {
 
       async.parallel([
         function(next) {
+          answer.voted = false;
           Votes.find({post_id: answer.id, post_type: 'ANSWER', deleted: false}).done(function(err, votes) {
             if (!err) {
               var score = 0;
               votes.forEach(function(vote) {
                 score += vote.score;
+                if (vote.voter_id == options.user) { answer.voted = true; }
               });
               answer.score = score;
             }
@@ -81,7 +83,7 @@ module.exports = {
     });
   },
   
-  deleteAnswer: function(aid, cb) {
+  deleteAnswer: function(aid, options, cb) {
   	this.update({id: aid},{deleted: true}).done(function(err, answer) {
   		if (err || answer === undefined) cb(err, undefined);
 
