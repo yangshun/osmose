@@ -72,8 +72,14 @@ module.exports = {
           });
         },
         function(next) {
-          Comments.find({parent_id:answer.id, parent_type:'ANSWER', deleted: false}).done(function(err, comments) {
+          Comments.getComments({parent_id:answer.id, parent_type:'ANSWER', deleted: false}, function(err, comments) {
             if (!err) answer.comments = comments;
+            next(err);
+          });
+        },
+        function(next) {
+          Users.findOne(answer.user_id).done(function(err, user) {
+            if (!err) answer.user = user;
             next(err);
           });
         }],
