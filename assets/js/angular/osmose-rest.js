@@ -64,7 +64,7 @@ var AppController =  function($scope) {
 	$scope.formatThumbnail = function(id) {
 		return osm_user.getFacebookProfilePicture(id);
 	}
-});
+};
 
 var CourseController = function($scope, Courses) {
 	Courses.get({id: 1}, function(res) {
