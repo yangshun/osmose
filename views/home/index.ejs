@@ -39,20 +39,20 @@
                 <div class="post-action-container" ng-init="question.action_open = false" ng-show="question.action_open">
                   <textarea></textarea><a href="#" class="button post-action-button">{{ question.action_type }}</a>
                 </div>
-                <div class="post-comments-container" ng-show="question.comments.length">
-                  <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></h5>
-                  <div ng-repeat="comment in question.comments">
-                    <img class="thumbnail-small" ng-src="{{ picturelink }}" />
-                    <div class="post-comment-container">
-                      <p class="post-section-text" >{{ comment.content }}</p>
-                      <p class="post-details">
-                        {{ formatDate(comment.createdAt) }} &middot; {{ comment.user.name }}
-                      </p>
-                    </div>
+              </div>
+              <div class="post-comments-container" ng-show="question.comments.length">
+                <h5 class="post-answers-title">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></h5>
+                <div ng-repeat="comment in question.comments">
+                  <img class="thumbnail-small" ng-src="{{ picturelink }}" />
+                  <div class="post-comment-container">
+                    <p class="post-section-text" >{{ comment.content }}</p>
+                    <p class="post-details">
+                      {{ formatDate(comment.createdAt) }} &middot; {{ comment.user.name }}
+                    </p>
                   </div>
                 </div>
-                <hr/ ng-show="question.answers.length">
               </div>
+              <hr/ ng-show="question.answers.length">
               <div class="post-answers-container" ng-show="question.answers.length">
                 <h5 class="post-answers-title">{{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></h5>
                 <div ng-repeat="answer in question.answers">
