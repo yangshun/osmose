@@ -19,48 +19,56 @@
           {{ console.log(course) }}
           <ul class="posts-list">
             <li class="post-item" ng-repeat="question in course.questions">
-              <div class="post-summary-column">
-                <img class="thumbnail" ng-src="{{ formatThumbnail(question.user.facebook_id) }}" />
-                <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p>
-                <p class="post-score">{{ question.score }} </p>
-                <p class="post-score-action"><i class="icon-chevron-sign-down"></i></p>
-              </div>
               <div class="post-question-container">
-                <h4 class="post-title"><a href="#">{{ question.title }}</a></h4>
-                <p>{{ question.content }}</p>
-                <p class="post-details">{{ formatDate(question.createdAt) }} &middot; 
-                  <span class="post-user-reply">{{ question.user.name }}</span> &middot;
-                  <span class="post-answered"></span> &middot; 
-                  <a ng-click="question.action_type = 'Comment'; question.action_open = true;">Comment</a> &middot;
-                  <a ng-click="question.action_type = 'Answer'; question.action_open = true">Answer</a>
-                  <span ng-show="question.action_open"> &middot;
-                    <a ng-click="question.action_open = false">Cancel reply</a>
-                  </span>
-                </p>
-                <div class="post-action-container" ng-init="question.action_open = false" ng-show="question.action_open">
-                  <textarea></textarea><a href="#" class="button post-action-button">{{ question.action_type }}</a>
+                <div class="post-summary-column">
+                  <img class="thumbnail" ng-src="{{ formatThumbnail(question.user.facebook_id) }}" />
+                  <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p>
+                  <p class="post-score">{{ question.score }} </p>
+                  <p class="post-score-action"><i class="icon-chevron-sign-down"></i></p>
                 </div>
-                <div class="post-comments-container" ng-show="question.comments.length">
-                  <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></h5>
-                  <div ng-repeat="comment in question.comments">
-                    <img class="thumbnail-small" ng-src="{{ formatThumbnail(comment.user.facebook_id) }}" />
-                    <div class="post-comment-container">
-                      <p class="post-section-text" >{{ comment.content }}</p>
-                      <p class="post-details">
-                        {{ formatDate(comment.createdAt) }} &middot; <span class="post-user-reply">{{ comment.user.name }}</span>
-                      </p>
+                <div class="post-question-content">
+                  <h4 class="post-title"><a href="#">{{ question.title }}</a></h4>
+                  <p>{{ question.content }}</p>
+                  <p class="post-details">{{ formatDate(question.createdAt) }} &middot; 
+                    <span class="post-user-reply">{{ question.user.name }}</span> &middot;
+                    <span class="post-answered"></span> &middot; 
+                    <a ng-init="question.comment_open = false" ng-click="question.comment_open = !question.comment_open;">
+                      {{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span>
+                    </a> &middot;
+                    <a ng-init="question.answer_open = false" ng-click="question.answer_open = !question.answer_open">
+                      {{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></a>
+                    <span ng-show="question.action_open"> &middot;
+                      <a ng-click="question.action_open = false">Cancel reply</a>
+                    </span>
+                  </p>
+                  <div class="post-action-container" ng-init="question.action_open = false">
+                    <textarea></textarea><a href="#" class="button post-action-button">Answer</a>
+                  </div>
+                  <div class="post-comments-container" ng-show="question.comments.length && question.comment_open">
+                    <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></h5>
+                    <div ng-repeat="comment in question.comments">
+                      <img class="thumbnail-small" ng-src="{{ formatThumbnail(comment.user.facebook_id) }}" />
+                      <div class="post-comment-container">
+                        <p class="post-section-text" >{{ comment.content }}</p>
+                        <p class="post-details">
+                          {{ formatDate(comment.createdAt) }} &middot; <span class="post-user-reply">{{ comment.user.name }}</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <!-- <hr/ ng-show="question.answers.length"> -->
                 </div>
-                <hr/ ng-show="question.answers.length">
               </div>
-              <div class="post-answers-container" ng-show="question.answers.length">
+              <div class="post-answers-container" ng-show="question.answers.length && question.answer_open">
                 <h5 class="post-answers-title">{{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></h5>
-                <div ng-repeat="answer in question.answers">
+                <div class="post-answer-container" ng-repeat="answer in question.answers">
                   <div class="post-answer-summary-column">
                     <img class="thumbnail-small" ng-src="{{ formatThumbnail(answer.user.facebook_id) }}" />
+                    <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p>
+                    <p class="post-score">{{ answer.score }} </p>
+                    <p class="post-score-action"><i class="icon-chevron-sign-down"></i></p>
                   </div>
-                  <div class="post-answer-container">
+                  <div class="post-answer-content">
                     <p>{{ answer.content }}</p>
                     <p class="post-details">
                       {{ formatDate(answer.createdAt) }} &middot; <span class="post-user-reply">{{ answer.user.name }}</span>

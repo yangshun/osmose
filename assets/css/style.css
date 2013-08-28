@@ -38,25 +38,26 @@ a:hover { color: #ccc;}
 .posts-list { list-style-type: none; }
 .post-title a { color: #0977d5;}
 .post-title a:hover { text-decoration: underline; }
-.post-question-container { margin-left: 50px; margin-bottom: 10px; }
+.post-question-content { margin-left: 50px; margin-bottom: 10px; }
 .post-summary-column { width: 40px; float: left; }
-.post-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
+.post-summary-column p, .post-answer-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
 .thumbnail { width: 40px; height: 40px; border-radius: 5px; margin-bottom: 5px; }
 .post-score { font-size: 10px; line-height: 13px; font-weight: 500; text-align: center; color: #666; }
 .post-score-action { opacity: 0; }
 .post-score-action > i:hover { color: #0977d5; cursor: pointer;}
-.post-item:hover .post-score-action { opacity: 1; }
+.post-question-container:hover .post-score-action { opacity: 1; }
 .post-details { font-size: 12px; line-height: 14px; color: #bbb;}
 .post-unanswered { font-weight: 400; color: rgb(233, 52, 81); }
 .post-unanswered:before { content: 'Unanswered'; }
 .post-answered { font-weight: 400; color: rgb(75, 212, 75); }
 .post-answered:before { content: 'Answered';}
+.post-answer-container:hover .post-score-action { opacity: 1; }
 .post-section-title { font-size: 11px; color: #666; }
 .post-section-text { color: #333; font-size: 14px; }
 .post-answers-title { font-size: 14px; color: #666; padding-left: 10px; }
-.post-answer-summary-column { width: 40px; float:left; text-align: right; }
-.post-answer-summary-column .thumbnail-small { margin-right: 0; float: right; }
-.post-answer-container { padding-left: 50px;}
+.post-answer-summary-column { width: 30px; margin-left: 10px; float:left; text-align: right; }
+.post-answer-summary-column .thumbnail-small { margin-right: 0; margin-bottom: 5px; float: right; }
+.post-answer-content { padding-left: 50px;}
 .post-action-container { text-align: right; }
 .post-action-button { font-size: 12px; }
 .post-user-reply { color: #999; font-weight: 500; }
