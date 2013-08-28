@@ -49,7 +49,7 @@ a:hover { color: #ccc;}
 .post-unanswered:before { content: 'Unanswered'; }
 .post-answered { font-weight: 400; color: rgb(75, 212, 75); }
 .post-answered:before { content: 'Answered';}
-.post-section-title { text-transform: uppercase; font-size: 11px; color: #666; }
+.post-section-title { font-size: 11px; color: #666; }
 .post-section-text { color: #333; font-size: 14px; }
 .post-answers-title { font-size: 14px; color: #666; padding-left: 10px; }
 .post-answer-summary-column { width: 40px; float:left; text-align: right; }

@@ -45,6 +45,9 @@
                     <img class="thumbnail-small" ng-src="{{ picturelink }}" />
                     <div class="post-comment-container">
                       <p class="post-section-text" >{{ comment.content }}</p>
+                      <p class="post-details">
+                        {{ formatDate(comment.createdAt) }} &middot; {{ comment.user.name }}
+                      </p>
                     </div>
                   </div>
                 </div>

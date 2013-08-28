@@ -19,7 +19,6 @@ var osm_dates = {
 	timeAgo: function(time_string){
 		// Facebook style of time ago string
 		var new_time_string = (time_string || "").replace(/-/g,"/").replace(/[TZ]/g," ");
-		console.log(new_time_string);
 		var date = new Date(new_time_string),
 		    diff = (((new Date()).getTime() - date.getTime()) / 1000),
 		    day_diff = Math.floor(diff / 86400);
