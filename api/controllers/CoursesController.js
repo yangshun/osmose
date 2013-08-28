@@ -12,10 +12,12 @@ module.exports = {
   
   show: function(req, res) {
     var id = req.param('id');
+
     Courses.subscribe(req.socket);
     Questions.subscribe(req.socket);
     Answers.subscribe(req.socket);
     Comments.subscribe(req.socket);
+    Votes.subscribe(req.socket);
 
     Courses.findOne({id: id, deleted: false}).done(function(err, course) {
       if (err || course == undefined) {

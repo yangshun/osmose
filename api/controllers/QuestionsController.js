@@ -35,6 +35,7 @@ module.exports = {
   		else {
   			res.api.success({'question': questions[0]});
   			Questions.publishUpdate(questions[0].id, questions[0]);
+  		}
   	});
   },
 
