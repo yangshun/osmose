@@ -41,4 +41,10 @@ var osm_dates = {
 		    day_diff < 7 && day_diff + " days ago" ||
 		    day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
 	}
-}
+};
+
+var osm_user = {
+	getFacebookProfilePicture: function(fb_id) {
+		return 'https://graph.facebook.com/' + fb_id + '/picture';
+	}
+};

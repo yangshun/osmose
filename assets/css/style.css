@@ -36,7 +36,9 @@ a:hover { color: #ccc;}
 
 /* Feed */
 .posts-list { list-style-type: none; }
-.post-container { margin-left: 50px; margin-bottom: 30px; }
+.post-title a { color: #0977d5;}
+.post-title a:hover { text-decoration: underline; }
+.post-question-container { margin-left: 50px; margin-bottom: 10px; }
 .post-summary-column { width: 40px; float: left; }
 .post-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
 .thumbnail { width: 40px; height: 40px; border-radius: 5px; margin-bottom: 5px; }
@@ -57,7 +59,7 @@ a:hover { color: #ccc;}
 .post-answer-container { padding-left: 50px;}
 .post-action-container { text-align: right; }
 .post-action-button { font-size: 12px; }
-
+.post-user-reply { color: #999; font-weight: 500; }
 
 /* Profile */
 .profile-container { padding-top: 10px; }

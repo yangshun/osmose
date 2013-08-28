@@ -53,6 +53,10 @@ OsmoseREST.controller('AppController', function($scope) {
 	$scope.formatDate = function(date_string) {
 		return osm_dates.timeAgo(date_string);
 	}
+
+	$scope.formatThumbnail = function(id) {
+		return osm_user.getFacebookProfilePicture(id);
+	}
 });
 
 OsmoseREST.controller('CourseController', function($scope, Courses) {
