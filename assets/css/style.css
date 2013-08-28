@@ -51,6 +51,10 @@ a:hover { color: #ccc;}
 .post-answered:before { content: 'Answered';}
 .post-section-title { text-transform: uppercase; font-size: 11px; color: #666; }
 .post-section-text { color: #333; font-size: 14px; }
+.post-answers-title { font-size: 14px; color: #666; padding-left: 10px; }
+.post-answer-summary-column { width: 40px; float:left; text-align: right; }
+.post-answer-summary-column .thumbnail-small { margin-right: 0; float: right; }
+.post-answer-container { padding-left: 50px;}
 .post-action-container { text-align: right; }
 .post-action-button { font-size: 12px; }
 
