@@ -74,7 +74,7 @@ module.exports = {
           });
         },
         function(next) {
-          Comments.find({parent_id: question.id, parent_type: 'QUESTION', deleted: false}).done(function(err, comments) {
+          Comments.getComments({parent_id: question.id, parent_type: 'QUESTION', deleted: false}, function(err, comments) {
             if (!err) question.comments = comments;
             next(err);
           });
@@ -82,6 +82,12 @@ module.exports = {
         function(next) {
           Answers.getAnswersWithComments(question.id, options, function(err, answers){
             if (!err) question.answers = answers;
+            next(err);
+          });
+        },
+        function(next) {
+          Users.findOne(question.user_id).done(function(err, user) {
+            if (!err) question.user = user;
             next(err);
           });
         }],
