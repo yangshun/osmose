@@ -25,6 +25,7 @@ module.exports = {
       if (err) {
         return res.api.failure(err);
       }
+      Comments.publishCreate(comment);
       return res.api.success({'comment': comment});
     });
   },
@@ -34,6 +35,7 @@ module.exports = {
       if (err || comments == undefined) {
         return res.api.failure(err);
       }
+      Comments.publishUpdate(comments[0].id, comments[0]);
       return res.api.success({'comment': comments[0]});
     });
   },
@@ -43,6 +45,7 @@ module.exports = {
       if (err) {
         return res.api.failure(err);
       }
+      Comments.publishDestroy(req.param('id'));
       return res.api.success({'comment': comments[0]});
     });
   }
