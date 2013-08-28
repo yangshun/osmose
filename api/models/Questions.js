@@ -51,7 +51,7 @@ module.exports = {
     });
   },
 
- getQuestionWithDetails: function(qid, options, cb) {
+  getQuestionWithDetails: function(qid, options, cb) {
     Questions.findOne({id: qid, deleted: false}).done(function(err, question) {
       if (err || question === undefined) return cb(err, undefined);
       var next = function(err) {

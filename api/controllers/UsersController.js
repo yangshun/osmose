@@ -14,7 +14,7 @@ module.exports = {
   */
   me: function(req, res) {
   	req.facebook.api('/me', function(err, data) {
-  		if (!err) res.api.success(data);
+  		if (!err) res.api.success(data + {user_id: req.session.user.id});
   		else res.api.failure(404);
   	});
   }

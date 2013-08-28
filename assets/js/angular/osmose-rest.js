@@ -36,7 +36,7 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 			};
 		});
 	});
-})(['$Courses', '$Users', '$Questions', '$Answers', '$Comments']);
+})(['Courses', 'Users', 'Questions', 'Answers', 'Comments']);
 
 var AppController =  function($scope) {
 	$scope.fb_id = '';
@@ -60,9 +60,10 @@ var AppController =  function($scope) {
 	}
 };
 
-var CourseController = function($scope, $Courses, $Comments) {
+var CourseController = function($scope, Courses, Answers) {
 	$scope.updateCourse = function(){
-		$Courses.get({id: 1}, function(res) {
+		Courses.get({id: 1}, function(res) {
+			console.log(res)
 			var course = res.data.course;
 			$scope.$apply(function(){
 				console.log(course);
@@ -72,11 +73,20 @@ var CourseController = function($scope, $Courses, $Comments) {
 	}
 	$scope.updateCourse();
 
-	$scope.addComment = function(obj) {
-		Comments.post(comment_obj, function(){});
+	$scope.addAnswer = function(question, text) {
+		console.log(question);
+		var answer = {
+			question_id: question.id,
+			user_id: 1,
+			content: text
+		};
+		Answers.post(answer, function(data){
+			$scope.updateCourse();
+		});
 	};
 
 	socket.on('message', function(msg) {
+		console.log(msg);
 		$scope.updateCourse();
 	});
 }
