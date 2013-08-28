@@ -1,18 +1,36 @@
 <div class="row">
   <div class="large-12 columns index-container">
     <div class="row">
-      <div class="large-3 columns profile-container">
-        <div class="profile-box">
-          <div class="profile-name-container">
-            <img class="profile-thumbnail" ng-src="{{ picturelink }}"/>
-            <h5 class="profile-name">{{ name }}</h5>
-          </div>
-          <div class="profile-status-container">
-            <p>Just attended my first CS1010S lecture. It was AWESOME! Can't wait to get my hands on Python!</p>
-          </div>
-        </div>
+      <div class="large-2 columns menu-container">
+        <ul>
+          <li>
+            <h6 class="menu-title">Favourites</h6>
+            <ul>
+              <li><a href="#"><span class="icon-container"><i class="icon-list-ul"></i></span> Feed</a></li>
+              <li><a href="#"><span class="icon-container"><i class="icon-question-sign"></i></span> My Questions</a></li>
+              <li><a href="#"><span class="icon-container"><i class="icon-tag"></i></span> Followed</a></li>
+              <li><a href="#"><span class="icon-container"><i class="icon-comments"></i></span> Chat</a></li>
+              <li><a href="#"><span class="icon-container"><i class="icon-briefcase"></i></span> Organizer</a></li>
+            </ul>
+          <li>
+            <h6 class="menu-title">Modules</h6>
+            <ul>
+              <li><a href="#">CS1010S</a></li>
+              <li><a href="#">CS3216</a></li>
+            </ul>
+          </li>
+          <li class="others">
+            <h6 class="menu-title">Others</h6>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Invite Friends</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <div class="large-9 columns content-container">
+      <div class="large-10 columns content-container">
         <div ng-controller="CourseController">
           <h3>Feed</h3>
           <hr/>
@@ -30,8 +48,8 @@
                   <h4 class="post-title"><a href="#">{{ question.title }}</a></h4>
                   <p>{{ question.content }}</p>
                   <p class="post-details">{{ formatDate(question.createdAt) }} &middot; 
-                    <span class="post-user-reply">{{ question.user.name }}</span> &middot;
-                    <span class="post-answered"></span> &middot; 
+                    <span class="post-user-reply">Asked by {{ question.user.name }}</span> &middot;
+                    <span class="post-unanswered"></span> &middot; 
                     <a ng-init="question.comment_open = false" ng-click="question.comment_open = !question.comment_open;">
                       {{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span>
                     </a> &middot;
@@ -41,9 +59,10 @@
                       <a ng-click="question.action_open = false">Cancel reply</a>
                     </span>
                   </p>
-                  <div class="post-action-container" ng-init="question.action_open = false">
-                    <textarea></textarea><a href="#" class="button post-action-button">Answer</a>
-                  </div>
+                  <!-- <div class="post-action-container" ng-init="question.action_open = false">
+                    <textarea ng-model="user_answer"></textarea>
+                    <a href="#" class="button post-action-button" ng-click="addAnswer(question, user_answer)">Answer</a>
+                  </div> -->
                   <div class="post-comments-container" ng-show="question.comments.length && question.comment_open">
                     <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></h5>
                     <div ng-repeat="comment in question.comments">
