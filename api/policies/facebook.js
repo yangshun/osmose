@@ -7,7 +7,7 @@
  
 function facebook_middleware(req, res, next) {
     var Facebook = require('facebook-node-sdk');
-    var facebook = new Facebook({ appId: '355786224555024', 
+    var facebook = new Facebook({   appId: '355786224555024', 
                                     secret: '6c70714fbc91767bf88edf756f3233d9',
                                     request: req,
                                     response: res });

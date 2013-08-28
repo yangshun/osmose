@@ -21,7 +21,10 @@ module.exports = {
   create: function(req, res) {
     Answers.create(req.body, function(err, answer) {
       if (err || answer === undefined) res.api.failure(err);
-      else res.api.success({'answer': answer});
+      else {
+        res.api.success({'answer': answer});
+        Answers.publishCreate(answer);
+      }
     });
   },
 
@@ -29,7 +32,10 @@ module.exports = {
     var aid = req.param('id');
     Answers.update(aid, req.body, function(err, answers) {
       if (err || answers === undefined) res.api.failure(err);
-      else res.api.success({'answer': answers[0]});
+      else {
+        res.api.success({'answer': answers[0]});
+        Answers.publishUpdate(answers[0].id, answers[0]);
+      }
     });
   },
 
@@ -37,7 +43,10 @@ module.exports = {
 		var aid = req.param('id');
 		Answers.deleteAnswer(aid, function(err, answer) {
 			if (err) res.api.failure(err);
-			else res.api.success({'answer': answer});
+			else {
+        res.api.success({'answer': answer});
+        Answers.publishDestory(req.param('id'));
+      }
 		});
 	}
 

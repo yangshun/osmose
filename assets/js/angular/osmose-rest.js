@@ -17,10 +17,16 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 				});		
 			};
 
-			this.post = function(model, cb) {
-				socket.post(baseUrl +'/'+ model.id, function(data) {
+			this.postOne = function(model, cb) {
+				socket.post(baseUrl +'/'+ model.id, model, function(data) {
 					return cb(data);
 				});		
+			};
+
+			this.post = function(model, cb) {
+				socket.post(baseUrl, model, function(data) {
+					return cb(data);
+				});
 			};
 
 			this.delete = function(model, cb) {
@@ -30,7 +36,7 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 			};
 			
 			this.put = function(model, cb) {
-				socket.put(baseUrl +'/'+ model.id, function(data) {
+				socket.put(baseUrl +'/'+ model.id, model, function(data) {
 					return cb(data);
 				});
 			};
@@ -38,7 +44,7 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 	});
 })(['Courses', 'Users', 'Questions', 'Answers', 'Comments']);
 
-OsmoseREST.controller('AppController', function($scope) {
+var AppController =  function($scope) {
 	$scope.fb_id = '';
 	socket.get('/api/me', function(fb) {
 		if(fb.success) {
@@ -53,9 +59,9 @@ OsmoseREST.controller('AppController', function($scope) {
 	$scope.formatDate = function(date_string) {
 		return osm_dates.timeAgo(date_string);
 	}
-});
+}
 
-OsmoseREST.controller('CourseController', function($scope, Courses) {
+var CourseController = function($scope, Courses) {
 	Courses.get({id: 1}, function(res) {
 		var course = res.data.course;
 		$scope.$apply(function(){
@@ -63,4 +69,68 @@ OsmoseREST.controller('CourseController', function($scope, Courses) {
 			$scope.course = course;
 		});
 	})
-});
+}
+
+var User = function($scope, Users) {
+	console.log('RUNNING NOW');
+}
+
+var generateRandomWords = function(length) {
+	var text = [];
+	var wordLength = 10;
+
+	for(var i=Math.floor(Math.random()*Math.min(wordLength,length-wordLength));length > wordLength;) {
+		text.push(Math.random().toString(36).substring(i) + ' ');
+		length -= i+1;
+	}
+	return text.join('');
+}
+
+var trythis = function() {
+	console.log('start');
+	var question = {
+		user_id: 1,
+		title: generateRandomWords(50),
+		content: generateRandomWords(300),
+		course_id: 1
+	};
+	console.log(question);
+
+	socket.post('/api/questions', question, function(data) {
+		console.log('questions post: '+data);
+		var answer = {
+			question_id: data.id,
+			user_id: 1,
+			content: generateRandomWords(50)
+		};
+
+		var qs_comment = {
+			parent_id: data.id,
+			parent_type: 'QUESTION',
+			content: generateRandomWords(50),
+			user_id: 1
+		};
+		socket.post('/api/comments', qs_comment, function(data) {console.log('q_comment: '+data);});
+		socket.post('/api/answers', answer, function(data) {
+			console.log('answer: '+data);
+			var ans_comment = {
+				parent_id: data.id,
+				parent_type: 'ANSWER',
+				content: generateRandomWords(300),
+				user_id: 1
+			};
+			socket.post('/api/comments', ans_comment, function(data) {
+				console.log('a_comments: ' + data);
+				console.log('done');
+			});
+		});
+	});
+}
+
+var controllers = {
+	'CourseController' : CourseController,
+	'AppController' : AppController,
+	'User': User
+};
+
+OsmoseREST.controller(controllers);

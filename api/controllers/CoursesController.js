@@ -12,6 +12,11 @@ module.exports = {
   
   show: function(req, res) {
     var id = req.param('id');
+    Courses.subscribe(req.socket);
+    Questions.subscribe(req.socket);
+    Answers.subscribe(req.socket);
+    Comments.subscribe(req.socket);
+
     Courses.findOne({id: id, deleted: false}).done(function(err, course) {
       if (err || course == undefined) {
         return res.api.failure(err);
@@ -33,6 +38,8 @@ module.exports = {
       if (err) {
         return res.api.failure(err);
       }
+
+      Courses.publishCreate(course);
       return res.api.success({'course': course});
     });
   },
@@ -42,6 +49,8 @@ module.exports = {
       if (err || courses == undefined) {
         return res.api.failure(err);
       }
+
+      Courses.publishUpdate(courses[0].id, courses[0]);
       return res.api.success({'course': courses[0]});
     });
   },
@@ -51,6 +60,8 @@ module.exports = {
       if (err) {
         return res.api.failure(err);
       }
+
+      Courses.publishDestroy(req.param('id'));
       return res.api.success({});
     });
   }
