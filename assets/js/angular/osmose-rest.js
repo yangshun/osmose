@@ -38,7 +38,7 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 	});
 })(['Courses', 'Users', 'Questions', 'Answers', 'Comments']);
 
-OsmoseREST.controller('LandingController', function($scope) {
+OsmoseREST.controller('AppController', function($scope) {
 	$scope.fb_id = '';
 	socket.get('/api/me', function(fb) {
 		if(fb.success) {
@@ -49,6 +49,10 @@ OsmoseREST.controller('LandingController', function($scope) {
 			});
 		}
 	});
+
+	$scope.formatDate = function(date_string) {
+		return osm_dates.timeAgo(date_string);
+	}
 });
 
 OsmoseREST.controller('CourseController', function($scope, Courses) {
