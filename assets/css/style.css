@@ -69,7 +69,6 @@ a:hover { color: #ccc;}
 .menu-container { padding: 10px 0;}
 .menu-container ul { list-style-type: none; }
 .menu-container ul li ul { margin-left: 0; }
-
 .menu-container a { padding: 0.3em 1em; font-weight: 400; font-size: 14px; color: #fff; width: 100%; height: 100%; display: inline-block; }
 .menu-container ul li ul li a { padding-left: 1.2em; }
 .menu-container .menu-title { color: #888; padding-left: 0.8em; text-transform: uppercase; font-size: 12px; margin-top: 10px; margin-bottom: 0; }
@@ -78,6 +77,9 @@ a:hover { color: #ccc;}
 .menu-container .icon-container { width: 20px; display: inline-block; }
 .menu-container .others a { font-weight: 100; }
 
+.menu-container .profile-container { padding: 0 10px; margin-bottom: 20px;}
+.menu-container .profile-container .thumbnail { border-radius: 5px; float: left; }
+.menu-container .profile-container .profile-details-container { margin-left: 40px; }
 /* Footer */
 .footer-container { background-color: #333; }
 .landing-page .footer-container { position: fixed; bottom: 0; top: initial;}
