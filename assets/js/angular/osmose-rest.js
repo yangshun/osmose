@@ -4,12 +4,6 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 	services.map(function(name){
 		OsmoseREST.service(name, function() {
 			var baseUrl = '/api/'+name.toLowerCase();
-			this.getAll = function(course, cb) {
-				console.log(baseUrl);
-				socket.get(baseUrl, function(data) {
-					return cb(data);
-				});
-			};
 
 			this.get = function(model, cb) {
 				socket.get(baseUrl +'/'+ model.id, function(data) {
@@ -42,7 +36,7 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 			};
 		});
 	});
-})(['Courses', 'Users', 'Questions', 'Answers', 'Comments']);
+})(['$Courses', '$Users', '$Questions', '$Answers', '$Comments']);
 
 var AppController =  function($scope) {
 	$scope.fb_id = '';
@@ -66,14 +60,25 @@ var AppController =  function($scope) {
 	}
 };
 
-var CourseController = function($scope, Courses) {
-	Courses.get({id: 1}, function(res) {
-		var course = res.data.course;
-		$scope.$apply(function(){
-			console.log(course);
-			$scope.course = course;
-		});
-	})
+var CourseController = function($scope, $Courses, $Comments) {
+	$scope.updateCourse = function(){
+		$Courses.get({id: 1}, function(res) {
+			var course = res.data.course;
+			$scope.$apply(function(){
+				console.log(course);
+				$scope.course = course;
+			});
+		})
+	}
+	$scope.updateCourse();
+
+	$scope.addComment = function(obj) {
+		Comments.post(comment_obj, function(){});
+	};
+
+	socket.on('message', function(msg) {
+		$scope.updateCourse();
+	});
 }
 
 var User = function($scope, Users) {
