@@ -154,7 +154,15 @@ var CourseController = function($scope, Courses, Answers) {
 		var updateExistingQuestion = function() {
 			$scope.course.questions.forEach(function(q) {
 				if (q.id === question.data.id) {
-					return q = question;			
+					// Only updating the static fields
+					// Adding an answer to this question does not count as an update
+					for (prop in question.data) {
+						if (typeof(prop) !== 'object' &&
+									prop !== 'answer_open' &&
+									prop !== 'comment_open'){
+							q[prop]	= question.data[prop];
+						}
+					}
 				}
 			})
 		}
