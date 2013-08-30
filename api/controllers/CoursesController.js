@@ -7,7 +7,10 @@
 
 module.exports = {
   index: function(req, res) {
-    return res.api.failure_code(404);
+    // Might want to return list of courses that this user attends
+    // When we add the users-courses model in the future
+    var user_id = req.session.user.id;
+    return res.api.failure(404);
   },
   
   show: function(req, res) {

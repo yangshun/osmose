@@ -6,9 +6,15 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 			var baseUrl = '/api/'+name.toLowerCase();
 
 			this.get = function(model, cb) {
-				socket.get(baseUrl +'/'+ model.id, function(data) {
-					return cb(data);
-				});		
+				if (model.id !== undefined) {
+					socket.get(baseUrl +'/'+ model.id, function(data) {
+						return cb(data);
+					});		
+				} else {
+					socket.get(baseUrl, function(data) {
+						return cb(data);
+					});		
+				}
 			};
 
 			this.postOne = function(model, cb) {
@@ -42,6 +48,8 @@ var AppController =  function($scope) {
 	$scope.fb_id = '';
 	socket.get('/api/me', function(fb) {
 		if(fb.success) {
+			console.log('Welcome to Osmose, '+fb.data.name);
+			console.log(fb.data);
 			$scope.$apply(function() {
 				$scope.fb_id = fb.data.id;
 				$scope.name = fb.data.name;
@@ -61,17 +69,145 @@ var AppController =  function($scope) {
 };
 
 var CourseController = function($scope, Courses, Answers) {
-	$scope.updateCourse = function(){
-		Courses.get({id: 1}, function(res) {
-			console.log(res)
-			var course = res.data.course;
-			$scope.$apply(function(){
-				console.log(course);
-				$scope.course = course;
-			});
+	$scope.getCourse = function(course_id){
+		Courses.get({id: course_id}, function(res) {
+			if (res.success) {
+				$scope.$apply(function(){
+					console.log('Course loaded: ');
+					console.log(res);
+					$scope.course = res.data.course;
+				});
+			}
 		})
 	}
-	$scope.updateCourse();
+
+	// TODO: Support multiple courses
+	$scope.updateCourse = function(course) {
+		$scope.$apply(function(){
+		});
+	}
+
+	$scope.updateAnswer = function(answer) {
+		var updateExistingAnswer = function() {
+			$scope.course.questions.forEach(function(q) {
+				q.answers.forEach(function(a) {
+					if (a.id === answer.data.id) {
+						return a = answer;			
+					}
+				});
+			})
+		}
+
+		var createNewAnswer = function() {
+			$scope.course.questions.forEach(function(q) {
+				if (q.id === answer.data.question_id) {
+					q.answers.push(answer.data);
+					return
+				}
+			})
+		}
+
+		var createNewComment = function() {
+			$scope.course.questions.forEach(function(q) {
+				q.answers.forEach(function(a) {
+					if (a.id === answer.data.parent_id) {
+						a.comments.push(answer.data);	
+					}
+				})
+			})		
+		}
+
+		var updateExistingComment = function() {
+			$scope.course.questions.forEach(function(q) {
+				q.answers.forEach(function(a) {
+					if (a.id === answer.data.parent_id) {
+						a.comments.forEach(function(c) {
+							if (c.id === answer.data.id) {
+								c = answer.data;
+								return;
+							}
+						});
+					}
+				})
+			})
+		}
+
+		$scope.$apply(function(){
+			if (answer.model === 'answers') {
+				if (answer.verb === 'create') {
+					createNewAnswer();
+				} else {
+					updateExistingAnswer();
+				}
+			} else {
+				// Update the comments	
+				if (answer.verb === 'create') {
+					createNewComment();
+				} else {
+					updateExistingComment();
+				}
+			}
+		});
+	}
+
+	$scope.updateQuestion = function(question) {
+		var updateExistingQuestion = function() {
+			$scope.course.questions.forEach(function(q) {
+				if (q.id === question.data.id) {
+					return q = question;			
+				}
+			})
+		}
+
+		var createNewQuestion = function() {
+			$scope.course.questions.push(question.data);
+		}
+
+		var createNewComment = function() {
+			$scope.course.questions.forEach(function(q) {
+				if (q.id === question.data.parent_id) {
+					q.comments.push(question.data);	
+				}
+			})		
+		}
+
+		var updateExistingComment = function() {
+			$scope.course.questions.forEach(function(q) {
+				q.comments.forEach(function(c) {
+					if (c.id === question.data.parent_id) {
+						c = question.data;
+					}
+				})
+			})
+		}
+
+		$scope.$apply(function(){
+			if (question.model === 'questions') {
+				if (question.verb === 'create') {
+					createNewQuestion();
+				} else {
+					updateExistingQuestion();
+				}
+			} else {
+				// Update the comments	
+				if (question.verb === 'create') {
+					createNewComment();
+				} else {
+					updateExistingComment();
+				}
+			}
+		});
+	}
+
+	// TODO : Support multiple courses
+	$scope.getCourse(1);
+
+	(function(){
+		Courses.get({}, function(res) {
+			console.log('Just for me');
+			console.log(res);
+		})
+	})()
 
 	$scope.addAnswer = function(question, text) {
 		console.log(question);
@@ -81,18 +217,29 @@ var CourseController = function($scope, Courses, Answers) {
 			content: text
 		};
 		Answers.post(answer, function(data){
-			$scope.updateCourse();
+			$scope.updateAnswer(data);
 		});
 	};
 
+	// Controls the message dispatching
 	socket.on('message', function(msg) {
-		console.log(msg);
-		$scope.updateCourse();
-	});
-}
+		// Only update the $scope course
+		switch(msg.model){
+			case 'courses':
+				return $scope.updateCourse(msg);
+			case 'questions':
+				return $scope.updateQuestion(msg);
+			case 'answers':
+				return $scope.updateAnswer(msg);
+			case 'comments':
+				if (msg.data.parent_type === 'QUESTION') {
+					return $scope.updateQuestion(msg);
+				} else {
+					return $scope.updateAnswer(msg);
+				}
+		}
 
-var User = function($scope, Users) {
-	console.log('RUNNING NOW');
+	});
 }
 
 var generateRandomWords = function(length) {
@@ -114,11 +261,8 @@ var trythis = function() {
 		content: generateRandomWords(300),
 		course_id: 1
 	};
-	console.log(question);
 
 	socket.post('/api/questions', question, function(data) {
-		console.log('questions post: ');
-		console.log(data);
 		var answer = {
 			question_id: data.data.question.id,
 			user_id: 1,
@@ -131,10 +275,8 @@ var trythis = function() {
 			content: generateRandomWords(50),
 			user_id: 1
 		};
-		socket.post('/api/comments', qs_comment, function(data) {console.log('q_comment: ');console.log(data);});
+		socket.post('/api/comments', qs_comment, function(data) {});
 		socket.post('/api/answers', answer, function(data) {
-			console.log('answer: ');
-			console.log(data);
 			var ans_comment = {
 				parent_id: data.data.answer.id,
 				parent_type: 'ANSWER',
@@ -142,8 +284,6 @@ var trythis = function() {
 				user_id: 1
 			};
 			socket.post('/api/comments', ans_comment, function(data) {
-				console.log('a_comments: ');
-				console.log(data);
 				console.log('done');
 			});
 		});
@@ -153,7 +293,6 @@ var trythis = function() {
 var controllers = {
 	'CourseController' : CourseController,
 	'AppController' : AppController,
-	'User': User
 };
 
 OsmoseREST.controller(controllers);

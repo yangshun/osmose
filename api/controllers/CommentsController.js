@@ -12,7 +12,7 @@ module.exports = {
   
   show: function(req, res) {
     var id = req.param('id');
-    Comments.findOne({id: id, deleted: false}).done(function(err, comment) {
+    Comments.getComment(id, {}, function(err, comment) {
       if (err || comment == undefined) {
         return res.api.failure(err);
       }
@@ -25,8 +25,10 @@ module.exports = {
       if (err) {
         return res.api.failure(err);
       }
-      Comments.publishCreate(comment);
-      return res.api.success({'comment': comment});
+      Comments.getComment(comment.id, {}, function(err, comment) {
+        Comments.publishCreate(comment);
+        return res.api.success({'comment': comment});
+      })
     });
   },
 
@@ -35,8 +37,10 @@ module.exports = {
       if (err || comments == undefined) {
         return res.api.failure(err);
       }
-      Comments.publishUpdate(comments[0].id, comments[0]);
-      return res.api.success({'comment': comments[0]});
+      Comments.getComment(comment.id, {}, function(err, comment) {
+        Comments.publishUpdate(comments[0].id, comments[0]);
+        return res.api.success({'comment': comments[0]});
+      })
     });
   },
 

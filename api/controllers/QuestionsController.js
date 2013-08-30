@@ -12,7 +12,7 @@ module.exports = {
 
 	show: function(req, res) {
 		var qid = req.param('id');
-		Questions.getQuestionWithDetails(qid, function(err, question) {
+		Questions.getQuestionWithDetails(qid, {user: req.session.user_id}, function(err, question) {
 			if (err || question === undefined) return res.api.failure(err);
 			else res.api.success({'question': question});
 		});
@@ -22,8 +22,10 @@ module.exports = {
   	Questions.create(req.body, function(err, question) {
   		if (err || question === undefined) res.api.failure(err);
   		else {
-  			res.api.success({'question': question});
-  			Questions.publishCreate(question);
+  			Questions.getQuestionWithDetails(question.id, {user: req.session.user_id}, function(err, question){
+	  			res.api.success({'question': question});
+	  			Questions.publishCreate(question);
+  			})
   		}
   	});
   },
@@ -33,8 +35,10 @@ module.exports = {
   	Questions.update(id, req.body, function(err, questions) {
   		if (err || questions === undefined) res.api.failure(err);
   		else {
-  			res.api.success({'question': questions[0]});
-  			Questions.publishUpdate(questions[0].id, questions[0]);
+  			Questions.getQuestionWithDetails(questions[0].id, {user: req.session.user_id}, function(err, question){
+	  			res.api.success({'question': question});
+	  			Questions.publishUpdate(question.id, question);
+  			})
   		}
   	});
   },

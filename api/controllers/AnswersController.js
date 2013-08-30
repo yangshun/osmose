@@ -22,8 +22,10 @@ module.exports = {
     Answers.create(req.body, function(err, answer) {
       if (err || answer === undefined) res.api.failure(err);
       else {
-        res.api.success({'answer': answer});
-        Answers.publishCreate(answer);
+        Answers.getAnswerWithComments(answer.id, {user: req.session.user_id},function(err, answer) {
+          res.api.success({'answer': answer});
+          Answers.publishCreate(answer);
+        })
       }
     });
   },
@@ -33,8 +35,10 @@ module.exports = {
     Answers.update(aid, req.body, function(err, answers) {
       if (err || answers === undefined) res.api.failure(err);
       else {
-        res.api.success({'answer': answers[0]});
-        Answers.publishUpdate(answers[0].id, answers[0]);
+        Answers.getAnswerWithComments(answers[0].id, {user: req.session.user_id}, function(err, answer) {
+          res.api.success({'answer': answer});
+          Answers.publishUpdate(answer.id, answer);
+        })
       }
     });
   },
