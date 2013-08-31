@@ -20,5 +20,16 @@ module.exports = {
       }
   		else res.api.failure(404);
   	});
+  },
+
+  profile: function(req, res) {
+    var uid = req.param('id');
+    Users.getUserProfile(uid, {}, function(err, user) {
+      if (err || user === undefined) {
+        return res.view(404);
+      } 
+      res.view({user: user,
+        _layoutFile: '../layout.ejs'});
+    });
   }
 };
