@@ -26,7 +26,7 @@ module.exports = {
     var uid = req.param('id');
     Users.getUserProfile(uid, {}, function(err, user) {
       if (err || user === undefined) {
-        return res.view(404);
+        return res.render(404);
       } 
       res.view({user: user,
         _layoutFile: '../layout.ejs'});
