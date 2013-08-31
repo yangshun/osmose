@@ -78,6 +78,7 @@ module.exports.routes = {
 
 
   // View routes
+  'get    /users/:id'           : 'UsersController.profile'
 
 
   /*
