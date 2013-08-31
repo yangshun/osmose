@@ -92,7 +92,13 @@ var CourseController = function($scope, Courses, Answers) {
 			$scope.course.questions.forEach(function(q) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.id) {
-						return a = answer;			
+						// Only update the static fields
+						for (prop in a.data) {
+							if (typeof(prop) !== 'object'){
+								a[prop]	= answer.data[prop];
+							}
+						}
+						return;
 					}
 				});
 			})
@@ -112,6 +118,7 @@ var CourseController = function($scope, Courses, Answers) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.parent_id) {
 						a.comments.push(answer.data);	
+						return;
 					}
 				})
 			})		
@@ -163,6 +170,7 @@ var CourseController = function($scope, Courses, Answers) {
 							q[prop]	= question.data[prop];
 						}
 					}
+					return;
 				}
 			})
 		}
@@ -175,6 +183,7 @@ var CourseController = function($scope, Courses, Answers) {
 			$scope.course.questions.forEach(function(q) {
 				if (q.id === question.data.parent_id) {
 					q.comments.push(question.data);	
+					return;
 				}
 			})		
 		}
@@ -184,6 +193,7 @@ var CourseController = function($scope, Courses, Answers) {
 				q.comments.forEach(function(c) {
 					if (c.id === question.data.parent_id) {
 						c = question.data;
+						return;
 					}
 				})
 			})
