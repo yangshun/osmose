@@ -17,7 +17,10 @@ module.exports = {
   create: function(req, res) {
     Votes.create(req.body, function(err, vote) {
       if (err || vote === undefined) res.api.failure(err);
-      else res.api.success({'vote': vote});
+      else {
+        res.api.success({'vote': vote});
+        Votes.publishCreate(vote);
+      }
     });
   },
 
@@ -32,7 +35,10 @@ module.exports = {
       vote.deleted = true;
       vote.destroy.done(function (err) {
         if (err) res.api.failure(err);
-        else res.api.success({'vote': vote});
+        else {
+          res.api.success({'vote': vote});
+          Votes.publishDestroy(req.param('id'));
+        }
       });
     });
   }

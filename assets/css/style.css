@@ -6,6 +6,8 @@ p { font-size: 16px; font-weight: 100;}
 a:hover { color: #ccc;}
 .button { background-color: #07569a; border: none; font-weight: 500; }
 .button:hover { background-color: #0977d5; }
+.contain-to-grid { background-color: #0977d5; }
+.contain-to-grid .top-bar { margin-bottom: 0; }
 
 /* Navigation */
 .navigation .nav-bar-logo { padding-bottom: 3px; }
@@ -14,6 +16,7 @@ a:hover { color: #ccc;}
 .top-bar-section ul { background: #0977d5;}
 .top-bar-section li a:not(.button) { background: #0977d5; }
 .top-bar-section li a:not(.button):hover { background: #07569a; }
+.thumbnail-navigation { width: 25px; height: 25px; margin-right: 10px; border-radius: 2px; }
 
 /* Landing */
 .landing-page { height: 100%; width: 100%; background-image: url('../img/background2.jpg'); background-repeat: no-repeat; background-size: cover;}
@@ -36,36 +39,47 @@ a:hover { color: #ccc;}
 
 /* Feed */
 .posts-list { list-style-type: none; }
-.post-container { margin-left: 50px; margin-bottom: 30px; }
+.post-title a { color: #0977d5;}
+.post-title a:hover { text-decoration: underline; }
+.post-question-content { margin-left: 50px; margin-bottom: 10px; }
 .post-summary-column { width: 40px; float: left; }
-.post-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
+.post-summary-column p, .post-answer-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
 .thumbnail { width: 40px; height: 40px; border-radius: 5px; margin-bottom: 5px; }
 .post-score { font-size: 10px; line-height: 13px; font-weight: 500; text-align: center; color: #666; }
 .post-score-action { opacity: 0; }
 .post-score-action > i:hover { color: #0977d5; cursor: pointer;}
-.post-item:hover .post-score-action { opacity: 1; }
+.post-question-container:hover .post-score-action { opacity: 1; }
 .post-details { font-size: 12px; line-height: 14px; color: #bbb;}
 .post-unanswered { font-weight: 400; color: rgb(233, 52, 81); }
 .post-unanswered:before { content: 'Unanswered'; }
 .post-answered { font-weight: 400; color: rgb(75, 212, 75); }
 .post-answered:before { content: 'Answered';}
-.post-section-title { text-transform: uppercase; font-size: 11px; color: #666; }
+.post-answer-container:hover .post-score-action { opacity: 1; }
+.post-section-title { font-size: 11px; color: #666; }
 .post-section-text { color: #333; font-size: 14px; }
+.post-answers-title { font-size: 14px; color: #666; padding-left: 10px; }
+.post-answer-summary-column { width: 30px; margin-left: 10px; float:left; text-align: right; }
+.post-answer-summary-column .thumbnail-small { margin-right: 0; margin-bottom: 5px; float: right; }
+.post-answer-content { padding-left: 50px;}
 .post-action-container { text-align: right; }
 .post-action-button { font-size: 12px; }
+.post-user-reply { color: #999; font-weight: 500; }
 
+/* Menu */
+.menu-container { padding: 10px 0;}
+.menu-container ul { list-style-type: none; }
+.menu-container ul li ul { margin-left: 0; }
+.menu-container a { padding: 0.3em 1em; font-weight: 400; font-size: 14px; color: #fff; width: 100%; height: 100%; display: inline-block; }
+.menu-container ul li ul li a { padding-left: 1.2em; }
+.menu-container .menu-title { color: #888; padding-left: 0.8em; text-transform: uppercase; font-size: 12px; margin-top: 10px; margin-bottom: 0; }
+.menu-container ul li ul a { font-size: 12px; }
+.menu-container ul li ul li:hover { background-color: #444; }
+.menu-container .icon-container { width: 20px; display: inline-block; }
+.menu-container .others a { font-weight: 100; }
 
-/* Profile */
-.profile-container { padding-top: 10px; }
-.profile-container h1, h2, h3, h4, h5, h6, p { color: #eee; /* 676979 */ }
-.profile-box { background-color: #fff; }
-.profile-box h1, h2, h3, h4, h5, h6, p { color: #000; }
-.profile-box .profile-name-container { background-color: #eee; min-height: 50px;}
-.profile-box .profile-status-container { clear: both; padding: 10px;}
-.profile-box .profile-status-container p { color: #666; margin-top: 0;}
-.profile-name { margin-left: 60px; padding-top: 10px; }
-.profile-thumbnail { width: 50px; height: 50px; float: left; }
-
+.menu-container .profile-container { padding: 0 10px; margin-bottom: 20px;}
+.menu-container .profile-container .thumbnail { border-radius: 5px; float: left; }
+.menu-container .profile-container .profile-details-container { margin-left: 40px; }
 /* Footer */
 .footer-container { background-color: #333; }
 .landing-page .footer-container { position: fixed; bottom: 0; top: initial;}
