@@ -3,9 +3,9 @@
     <div class="row">
       <div class="large-2 columns menu-container">
         <div class="profile-container">
-          <img class="thumbnail" src="https://graph.facebook.com/yangshun/picture"/>
+          <img class="thumbnail" src="<%= 'https://graph.facebook.com/' + fb_user.username + '/picture' %>"/>
           <div class="profile-details-container">
-            <a href="#">Tay Yang Shun</a>
+            <a href="#"><%= fb_user.name %></a>
           </div>
         </div>
         <ul>

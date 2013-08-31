@@ -46,17 +46,16 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 
 var AppController =  function($scope) {
 	$scope.fb_id = '';
-	socket.get('/api/me', function(fb) {
-		if(fb.success) {
-			console.log('Welcome to Osmose, '+fb.data.name);
-			console.log(fb.data);
-			$scope.$apply(function() {
-				$scope.fb_id = fb.data.id;
-				$scope.name = fb.data.name;
-				$scope.picturelink = 'http://graph.facebook.com/'+fb.data.id+'/picture?type=large';
-			});
-		}
-	});
+	// socket.get('/api/me', function(fb) {
+	// 	if(fb.success) {
+	// 		console.log('Welcome to Osmose, '+fb.data.name);
+	// 		console.log(fb.data);
+	// 		$scope.$apply(function() {
+	// 			$scope.fb_user = fb.data;
+	// 			$scope.fb_user.picture_url = 'http://graph.facebook.com/' + fb.data.id + '/picture/';
+	// 		});
+	// 	}
+	// });
 
 	$scope.formatDate = function(date_string) {
 		return osm_dates.timeAgo(date_string);

@@ -13,13 +13,15 @@
     <!-- Left Nav Section -->
     <ul class="right">
       <!-- <li><a href="#">Home</a></li> -->
-      <li><a href="#/posts"><img class="thumbnail-navigation" src="https://graph.facebook.com/yangshun/picture" />Yang Shun</a></li>
-      <li class="has-dropdown"><a href="#">Settings</a>
-        <ul class="dropdown">
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
-      </li>
+      <% if (typeof fb_user !== 'undefined') { %>
+        <li><a href="#/posts"><img class="thumbnail-navigation" src="<%= 'https://graph.facebook.com/' + fb_user.username + '/picture' %>" /><%= fb_user.first_name %></a></li>
+        <li class="has-dropdown"><a href="#">Settings</a>
+          <ul class="dropdown">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Log Out</a></li>
+          </ul>
+        </li>
+      <% } %>
       <!-- <li><a href="#/about">About</a></li>
       <li class="divider"></li>
 
