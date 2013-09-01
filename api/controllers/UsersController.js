@@ -31,14 +31,5 @@ module.exports = {
       res.view({user: user,
         _layoutFile: '../layout.ejs'});
     });
-  },
-
-  logout: function(req, res) {
-    req.facebook.getLoginUrl({next: '/'}, function(err, url) {
-      if (err) {
-        res.api.failure(404);
-      }
-      res.api.success({logout: url});
-    });
-  } 
+  }
 };

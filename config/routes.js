@@ -38,7 +38,6 @@ module.exports.routes = {
 
   // '/home': 'HomeController.index',
   'get    /api/me'                  : 'UsersController.me',
-  'get    /api/logout'              : 'UsersController.logout',
 
    // Courses routes
   'get    /api/courses'             : 'CoursesController.index',
