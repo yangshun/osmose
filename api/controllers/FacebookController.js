@@ -33,7 +33,7 @@ module.exports = {
             res.api.success({'installed': installed, 'not_installed': not_installed});
         }
     });
-  }
+  },
   
   ask_question: function(req, res) {
     var fbActionName = 'osmosetest:ask';
