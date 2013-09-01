@@ -23,7 +23,7 @@ module.exports = {
 
   ask_question: function(req, res) {
     var fbActionName = 'osmosetest:ask';
-    var objectToLike = 'http://local.osmose.soedar.com:1337/questions/' + req.param('id');
+    var objectToLike = 'http://osmose.soedar.com/questions/' + req.param('id');
     console.log(objectToLike);
     req.facebook.api(
        'https://graph.facebook.com/me/'.concat(fbActionName),
