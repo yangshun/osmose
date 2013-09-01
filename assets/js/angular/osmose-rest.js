@@ -307,9 +307,19 @@ var trythis = function() {
 	});
 }
 
+var FriendController = function($scope) {
+	socket.get('/facebook/friends', function(res) {
+		console.log(res.data);
+		$scope.$apply(function() {
+			$scope.fb_friends = res.data;
+		});
+	});
+}
+
 var controllers = {
 	'CourseController' : CourseController,
 	'AppController' : AppController,
+	'FriendController' : FriendController
 };
 
 OsmoseREST.controller(controllers);

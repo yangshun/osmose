@@ -1,2 +1,17 @@
-<h1><%- user.name %></h1>
-<h1><%- user.score %></h1>
+<h1><%= user.name %></h1>
+<h1><%= user.score %></h1>
+<div ng-controller="FriendController">
+	<ul>
+		<h2>Installed</h2>
+		<li ng-repeat="friend in fb_friends.installed">
+			{{ friend.name }}
+			<img ng-src="{{ formatThumbnail(friend.id) }}"> 
+		</li>
+	</ul>
+	<ul>
+		<h2>Not Installed</h2>
+		<li ng-repeat="friend in fb_friends.not_installed">
+			{{ friend.name }}
+			<img ng-src="{{ formatThumbnail(friend.id) }}">
+	</ul>
+</div>
