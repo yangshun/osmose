@@ -63,7 +63,7 @@ module.exports = {
 			res.view({
 				_layoutFile: '../layout.ejs',
 				question: question,
-				og_type: 'osmosetest:question'
+				og_type: 'question'
 			});
 		});
 	}
