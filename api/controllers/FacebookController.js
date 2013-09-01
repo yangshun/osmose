@@ -22,7 +22,7 @@ module.exports = {
   },
 
   friends: function(req, res) {
-    req.facebook.api('/me/friends?fields=installed,name', function(err, data) {
+    req.facebook.api('/me/friends?fields=installed,name,username', function(err, data) {
         if (err) {
             res.api.failure(err);
         }
