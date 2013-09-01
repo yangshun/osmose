@@ -42,7 +42,7 @@ module.exports = {
     req.facebook.api(
        'https://graph.facebook.com/me/'.concat(fbActionName),
        'post',
-       { webpage: objectToLike,
+       { question: objectToLike,
          privacy: {'value': 'SELF'} },
        function(response) {
         res.send(response);
