@@ -34,6 +34,7 @@ module.exports.routes = {
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': 'RootController',
   '/feed': 'RootController.feed',
+  '/logout': 'RootController.logout',
 
   // '/home': 'HomeController.index',
   'get    /api/me'                  : 'UsersController.me',

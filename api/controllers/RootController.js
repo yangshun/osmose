@@ -13,7 +13,7 @@ module.exports = {
         url = req.facebook.getLoginUrl({'redirect_uri': redirect_url, 'scope': 'publish_actions'});
 
         res.view({
-            'fb_login_url': url,
+            fb_login_url: url,
             _layoutFile: 'index.ejs',
             fb_user: undefined,
             title: 'Osmose'
@@ -24,9 +24,14 @@ module.exports = {
   },
 
   feed: function (req, res) {
-    console.log(res.fb_user);
-    res.view({
+    return res.view({
+      fb_user: req.session.fb_user,
       _layoutFile: '../layout.ejs'
     });
+  },
+
+  logout: function(req, res) {
+    req.session.destroy();
+    res.redirect('/');
   }
 };

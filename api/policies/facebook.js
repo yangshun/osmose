@@ -28,28 +28,53 @@ function facebook_middleware(req, res, next) {
                 return res.send(500);
             }
 
-            req.facebook.api('/me', function(err, data) {
-                // User does not exist, we create a new user
-                if (users.length === 0) {
+            var populateSession = function(user, fb_user) {
+                req.session.user = user;
+                req.session.fb_user = fb_user;
+                next();
+            }
+
+            if (users.length == 0) {
+                req.facebook.api('/me', function(err, data) {
                     if (err) {
-                        console.log(err);
                         return res.send(500);
                     }
 
-                    Users.create({facebook_id: fb_id, name: data.name}).done(function(err, user){
+                    Users.create({facebook_id: fb_id, name: data.name}).done(function(err, user) {
                         if (err) {
                             return res.send(500);
                         }
-                        req.session.user = user;
-                        res.locals = {fb_user : data};
-                        next();
+
+                        fb_data = {facebook_id: fb_id, 
+                                          name: data.name, 
+                                    first_name: data.first_name, 
+                                     last_name: data.last_name, 
+                                      username: data.username};
+
+                        Facebook_users.create(fb_data).done(function(err, fb_user) {
+                            if (err) {
+                                return res.send(500);
+                            }
+                            populateSession(user, fb_user);
+                        });
                     });
-                } else {
-                    req.session.user = users[0];
-                    res.locals = {fb_user : data};
-                    next();
-                }
-            });
+                });
+            }
+
+            else {
+                Facebook_users.find({facebook_id: fb_id}).done(function(err, fb_users) {
+                    if (err) {
+                        return res.send(500);
+                    }
+
+                    if (fb_users.length == 0) {
+                        // This is a regression; should not happen
+                        res.send(500);
+                    }
+
+                    populateSession(users[0], fb_users[0]);
+                });
+            }
         });
     });
 }
