@@ -39,8 +39,17 @@
 	}(document, 'script', 'facebook-jssdk'));
 	
 	function inviteFbFriends() {
+		/* If we can use the canvas redirect version */
+		/*
 		FB.ui({method: 'apprequests',
 			message: 'Enlighten your friends with Osmose'
+		}, function(data) {
+			console.log(data);
+		});
+		*/
+		
+		FB.ui({method: 'send',
+			link: 'http://osmose.soedar.com'
 		}, function(data) {
 			console.log(data);
 		});
