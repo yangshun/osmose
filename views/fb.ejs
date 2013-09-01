@@ -47,9 +47,11 @@
 			console.log(data);
 		});
 		*/
-		
+
 		FB.ui({method: 'send',
-			link: 'http://osmose.soedar.com'
+			link: 'http://osmose.soedar.com',
+	    	description: 'Enlighten your friends with Osmose',
+	        picture: 'http://osmose.soedar.com/img/logo-75.png'
 		}, function(data) {
 			console.log(data);
 		});
