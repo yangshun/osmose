@@ -46,17 +46,16 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 
 var AppController =  function($scope) {
 	$scope.fb_id = '';
-	socket.get('/api/me', function(fb) {
-		if(fb.success) {
-			console.log('Welcome to Osmose, '+fb.data.name);
-			console.log(fb.data);
-			$scope.$apply(function() {
-				$scope.fb_id = fb.data.id;
-				$scope.name = fb.data.name;
-				$scope.picturelink = 'http://graph.facebook.com/'+fb.data.id+'/picture?type=large';
-			});
-		}
-	});
+	// socket.get('/api/me', function(fb) {
+	// 	if(fb.success) {
+	// 		console.log('Welcome to Osmose, '+fb.data.name);
+	// 		console.log(fb.data);
+	// 		$scope.$apply(function() {
+	// 			$scope.fb_user = fb.data;
+	// 			$scope.fb_user.picture_url = 'http://graph.facebook.com/' + fb.data.id + '/picture/';
+	// 		});
+	// 	}
+	// });
 
 	$scope.formatDate = function(date_string) {
 		return osm_dates.timeAgo(date_string);
@@ -92,7 +91,13 @@ var CourseController = function($scope, Courses, Answers) {
 			$scope.course.questions.forEach(function(q) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.id) {
-						return a = answer;			
+						// Only update the static fields
+						for (prop in a.data) {
+							if (typeof(prop) !== 'object'){
+								a[prop]	= answer.data[prop];
+							}
+						}
+						return;
 					}
 				});
 			})
@@ -112,6 +117,7 @@ var CourseController = function($scope, Courses, Answers) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.parent_id) {
 						a.comments.push(answer.data);	
+						return;
 					}
 				})
 			})		
@@ -163,6 +169,7 @@ var CourseController = function($scope, Courses, Answers) {
 							q[prop]	= question.data[prop];
 						}
 					}
+					return;
 				}
 			})
 		}
@@ -175,6 +182,7 @@ var CourseController = function($scope, Courses, Answers) {
 			$scope.course.questions.forEach(function(q) {
 				if (q.id === question.data.parent_id) {
 					q.comments.push(question.data);	
+					return;
 				}
 			})		
 		}
@@ -184,6 +192,7 @@ var CourseController = function($scope, Courses, Answers) {
 				q.comments.forEach(function(c) {
 					if (c.id === question.data.parent_id) {
 						c = question.data;
+						return;
 					}
 				})
 			})

@@ -14,17 +14,20 @@ module.exports = {
 
         res.view({
             'fb_login_url': url,
-            _layoutFile: 'index.ejs'
+            _layoutFile: 'index.ejs',
+            fb_user: undefined
         }); 
-    }
-    else {
+    } else {
         res.redirect('/feed');
     }
   },
 
   feed: function (req, res) {
-    res.view({
+    req.facebook.api('/me', function(err, data) {
+      res.view({
+        fb_user: data,
         _layoutFile: '../layout.ejs'
-    });
+      });
+    })
   }
 };

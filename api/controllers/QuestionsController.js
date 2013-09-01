@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+	// CRUD API
 	index: function(req, res) {
 		res.api.failure_code(404);
 	},
@@ -51,6 +52,19 @@ module.exports = {
 				res.api.success({'question': question});
 				Questions.publishDestroy(req.param('id'));
 			}
+		});
+	},
+
+	// VIEW ROUTES
+	details: function(req, res) {
+		var qid = req.param('id');
+		Questions.getQuestionWithDetails(qid, {user: req.session.user_id}, function(err, question) {
+			if (err || question === undefined) return res.render(404);
+			res.view({
+				_layoutFile: '../layout.ejs',
+				question: question,
+				og_type: 'osmosetest:question'
+			});
 		});
 	}
 };

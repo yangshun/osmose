@@ -34,4 +34,18 @@ module.exports = {
         }
     });
   }
+  
+  ask_question: function(req, res) {
+    var fbActionName = 'osmosetest:ask';
+    var objectToLike = 'http://local.osmose.soedar.com:1337/questions/' + req.param('id');
+    console.log(objectToLike);
+    req.facebook.api(
+       'https://graph.facebook.com/me/'.concat(fbActionName),
+       'post',
+       { webpage: objectToLike,
+         privacy: {'value': 'SELF'} },
+       function(response) {
+        res.send(response);
+       });
+  }
 };
