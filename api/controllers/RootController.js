@@ -15,7 +15,8 @@ module.exports = {
         res.view({
             'fb_login_url': url,
             _layoutFile: 'index.ejs',
-            fb_user: undefined
+            fb_user: undefined,
+            title: 'Osmose'
         }); 
     } else {
         res.redirect('/feed');
@@ -23,11 +24,8 @@ module.exports = {
   },
 
   feed: function (req, res) {
-    req.facebook.api('/me', function(err, data) {
-      res.view({
-        fb_user: data,
-        _layoutFile: '../layout.ejs'
-      });
-    })
+    res.view({
+      _layoutFile: '../layout.ejs'
+    });
   }
 };
