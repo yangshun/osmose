@@ -41,12 +41,12 @@ function facebook_middleware(req, res, next) {
                             return res.send(500);
                         }
                         req.session.user = user;
-                        res.fb_user = data;
+                        res.locals = {fb_user : data};
                         next();
                     });
                 } else {
                     req.session.user = users[0];
-                    res.fb_user = data;
+                    res.locals = {fb_user : data};
                     next();
                 }
             });

@@ -24,6 +24,7 @@ module.exports = {
   },
 
   feed: function (req, res) {
+    console.log(res.fb_user);
     res.view({
       _layoutFile: '../layout.ejs'
     });
