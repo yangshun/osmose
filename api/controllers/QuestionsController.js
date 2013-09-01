@@ -64,7 +64,7 @@ module.exports = {
 				_layoutFile: '../layout.ejs',
 				question: question,
 				og_type: 'question',
-				og_url: 'osmose.soedar.com/questions/' + qid
+				og_url: 'http://osmose.soedar.com/questions/' + qid
 			});
 		});
 	}
