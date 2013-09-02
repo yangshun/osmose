@@ -26,6 +26,7 @@
     </head>
 
     <body class="landing-page">
+        <%- partial('../fb.ejs') %>
         <%- partial('../navigation.ejs') %>
         <div class="main-container">
             <div class="row">
@@ -33,10 +34,11 @@
                     <div class="login-box-container large-8 columns large-centered">
                         <div class="login-box">
                             <img class="landing-logo" src="img/logo-large.png" />
-                            <h1>Make discussions meaningful.</h1>
+                            <h1>Make discussions meaningful!</h1>
                             <p class="definition">os·mose /ˈäzmōsˈäs-/: The process of gradual or unconscious assimilation of ideas and knowledge.</p>
                             <hr/>
                             <a href="<%= fb_login_url %>" class="button">Sign In With Facebook</a>
+                            <div class="fb-like" data-href="http://osmose.soedar.com" data-width="390" data-show-faces="false" data-send="true"></div>
                         </div>
                         <p class="login-bottom"><a href="#">About</a> &middot; <a href="#">Help</a> &middot; <a href="#">Contact Us</a> &middot; <a href="#">Terms & Conditions</a></p>
                     </div>

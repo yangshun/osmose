@@ -28,6 +28,7 @@ a:hover { color: #ccc;}
 .login-box-container .login-bottom { background-color: #ccc; padding: 10px 0; margin-bottom: 0; }
 .login-box-container .login-bottom a { margin: 0 10px; color: #333; font-weight: 600; }
 .login-box-container .login-bottom a:hover { color: #0977d5; }
+.fb-like { margin-bottom: 10px; height: 35px; }
 
 /* Main */
 .index-container { background-color: #222; }
@@ -43,13 +44,17 @@ a:hover { color: #ccc;}
 .post-title a:hover { text-decoration: underline; }
 .post-question-content { margin-left: 50px; margin-bottom: 10px; }
 .post-summary-column { width: 40px; float: left; }
-.post-summary-column p, .post-answer-summary-column p { margin-top: 0; margin-bottom: 0; text-align: center; color: #666;}
+.post-summary-column p, .post-answer-summary-column p { margin-top: 5px; margin-bottom: 0; text-align: center; color: #666;}
 .thumbnail { width: 40px; height: 40px; border-radius: 5px; margin-bottom: 5px; }
-.post-score { font-size: 10px; line-height: 13px; font-weight: 500; text-align: center; color: #666; }
-.post-score-action { opacity: 0; }
-.post-score-action > i:hover { color: #0977d5; cursor: pointer;}
+.post-score { font-size: 12px; line-height: 13px; font-weight: 500; text-align: center; color: #666; }
 .post-question-container:hover .post-score-action { opacity: 1; }
-.post-details { font-size: 12px; line-height: 14px; color: #bbb;}
+.post-details { font-size: 12px; line-height: 14px; color: #bbb; }
+.post-details [class*='post-action-']:hover { cursor: pointer; }
+.post-details .post-action-upvote:hover { color: rgb(75, 212, 75); }
+.post-details .post-action-downvote:hover { color: rgb(233, 52, 81); }
+.post-details a:hover { text-decoration: underline; }
+.post-text { margin-bottom: 10px; }
+.post-main-text { font-weight: 300; }
 .post-unanswered { font-weight: 400; color: rgb(233, 52, 81); }
 .post-unanswered:before { content: 'Unanswered'; }
 .post-answered { font-weight: 400; color: rgb(75, 212, 75); }
