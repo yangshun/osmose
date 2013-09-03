@@ -245,9 +245,12 @@ var CourseController = function($scope, Courses, Answers, Users) {
 				console.log(res);
 
 				$scope.questions = [];
-				res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
+				res.data.map(function(course) {
+					$scope.questions = $scope.questions.concat(course.question);
+				});
 				console.log('Questions');
 				console.log($scope.questions);
+				$scope.$apply();
 				// Subscribe to changes
 				Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
 			} else {
