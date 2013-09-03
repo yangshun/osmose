@@ -61,6 +61,7 @@ module.exports = {
       var next = function(err) {
         // console.log(err);
       };     
+      
       async.parallel([
         function(next) {
           Users.findOne(comment.user_id).done(function(err, user) {

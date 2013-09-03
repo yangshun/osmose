@@ -10,31 +10,22 @@ module.exports = {
     // Might want to return list of courses that this user attends
     // When we add the users-courses model in the future
     var user_id = req.session.user.id;
-    return res.api.failure(404);
+    Courses.getCoursesWithDetails(user_id, function(err, data){
+      if (err || data == undefined) {
+        return res.api.failure(err);
+      }
+      return res.api.success(data);
+    });
   },
   
   show: function(req, res) {
     var id = req.param('id');
-
-    Courses.subscribe(req.socket);
-    Questions.subscribe(req.socket);
-    Answers.subscribe(req.socket);
-    Comments.subscribe(req.socket);
-    Votes.subscribe(req.socket);
-
-    Courses.findOne({id: id, deleted: false}).done(function(err, course) {
-      if (err || course == undefined) {
+    Courses.getCourseWithDetails(id, function(err, data) {
+      if (err || data == undefined) {
         return res.api.failure(err);
       }
+      return res.api.success(data);
 
-      Questions.getQuestionsOfCourse(id, {user: req.session.user.id}, function(err, questions) {
-        if (err || questions == undefined) {
-          console.log('1' + err)
-          return res.api.failure(err);
-        }
-        course.questions = questions;
-        return res.api.success({'course': course});
-      })
     });
   },
 
@@ -69,5 +60,6 @@ module.exports = {
       Courses.publishDestroy(req.param('id'));
       return res.api.success({});
     });
-  }
+  },
+
 };

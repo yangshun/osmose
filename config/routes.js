@@ -39,7 +39,10 @@ module.exports.routes = {
   // '/home': 'HomeController.index',
   'get    /api/me'                  : 'UsersController.me',
 
-   // Courses routes
+  // Users routes
+  'get    /api/users/subscribe'     : 'UsersController.subscribe',
+
+  // Courses routes
   'get    /api/courses'             : 'CoursesController.index',
   'get    /api/courses/:id'         : 'CoursesController.show',
   'post   /api/courses'             : 'CoursesController.create',

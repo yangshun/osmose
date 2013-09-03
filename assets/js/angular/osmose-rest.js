@@ -46,16 +46,6 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 
 var AppController =  function($scope) {
 	$scope.fb_id = '';
-	// socket.get('/api/me', function(fb) {
-	// 	if(fb.success) {
-	// 		console.log('Welcome to Osmose, '+fb.data.name);
-	// 		console.log(fb.data);
-	// 		$scope.$apply(function() {
-	// 			$scope.fb_user = fb.data;
-	// 			$scope.fb_user.picture_url = 'http://graph.facebook.com/' + fb.data.id + '/picture/';
-	// 		});
-	// 	}
-	// });
 
 	$scope.formatDate = function(date_string) {
 		return osm_dates.timeAgo(date_string);
@@ -67,7 +57,7 @@ var AppController =  function($scope) {
 	}
 };
 
-var CourseController = function($scope, Courses, Answers) {
+var CourseController = function($scope, Courses, Answers, Users) {
 	$scope.getCourse = function(course_id){
 		Courses.get({id: course_id}, function(res) {
 			if (res.success) {
@@ -77,7 +67,7 @@ var CourseController = function($scope, Courses, Answers) {
 					$scope.course = res.data.course;
 				});
 			}
-		})
+		});
 	}
 
 	// TODO: Support multiple courses
@@ -216,18 +206,7 @@ var CourseController = function($scope, Courses, Answers) {
 		});
 	}
 
-	// TODO : Support multiple courses
-	$scope.getCourse(1);
-
-	(function(){
-		Courses.get({}, function(res) {
-			console.log('Just for me');
-			console.log(res);
-		})
-	})()
-
 	$scope.addAnswer = function(question, text) {
-		console.log(question);
 		var answer = {
 			question_id: question.id,
 			user_id: 1,
@@ -257,6 +236,23 @@ var CourseController = function($scope, Courses, Answers) {
 		}
 
 	});
+
+	// TODO : Support multiple courses
+	(function(){
+		// $scope.getCourse(1);
+		Courses.get({}, function(res) {
+			if (res.success) {
+				$scope.courses = res.data;
+				// Subscribe to changes
+				Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
+				console.log('Courses');
+				console.log(res);
+			} else {
+				console.log('Error retrieving courses');
+				console.log(res);
+			}
+		})
+	})()
 }
 
 var generateRandomWords = function(length) {

@@ -31,5 +31,15 @@ module.exports = {
       res.view({user: user,
         _layoutFile: '../layout.ejs'});
     });
+  },
+
+  subscribe: function(req, res) {
+    // TODO: Subscribe to the correct courses and questions
+    Courses.subscribe(req.socket);
+    Questions.subscribe(req.socket);
+    Answers.subscribe(req.socket);
+    Comments.subscribe(req.socket);
+    Votes.subscribe(req.socket);
   }
+
 };
