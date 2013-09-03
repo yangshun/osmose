@@ -1,0 +1,28 @@
+<div class="post-answer-container" ng-repeat="answer in question.answers">
+  <div class="post-answer-summary-column">
+    <img class="thumbnail-small" ng-src="{{ formatThumbnail(answer.user.facebook_id) }}" />
+    <!-- <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p> -->
+    <p class="post-score">{{ answer.score }} </p>
+    <!-- <p class="post-score-action"><i class="icon-chevron-sign-down"></i></p> -->
+  </div>
+  <div class="post-answer-content">
+    <p class="post-text post-main-text">{{ answer.content }}</p>
+    <p class="post-details">
+      <i class="icon-thumbs-up-alt post-action-upvote"></i> &middot; 
+      <i class="icon-thumbs-down-alt post-action-downvote"></i> &middot;
+      <span class="post-user-reply">Answered by {{ answer.user.name }}</span> &middot; {{ formatDate(answer.createdAt) }} 
+    </p>
+    <div class="post-comments-container" ng-show="answer.comments.length">
+      <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="answer.comments.length != 1">s</span></h5>
+      <div ng-repeat="comment in answer.comments">
+        <img class="thumbnail-small" ng-src="{{ formatThumbnail(comment.user.facebook_id) }}" />
+        <div class="post-comment-container">
+          <p class="post-text post-section-text" >{{ comment.content }}</p>
+          <p class="post-details">
+            <span class="post-user-reply">{{ comment.user.name }}</span> &middot; {{ formatDate(comment.createdAt) }} 
+          </p>                        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

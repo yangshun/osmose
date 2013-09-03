@@ -1,0 +1,45 @@
+<div class="post-question-container">
+  <div class="post-summary-column">
+    <img class="thumbnail" ng-src="{{ formatThumbnail(question.user.facebook_id) }}" />
+    <!-- <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p> -->
+    <p class="post-score">{{ question.score }} </p>
+    <!-- <p class="post-score-action"><i class="icon-chevron-sign-down"></i></p> -->
+  </div>
+  <div class="post-question-content">
+    <h4 class="post-title"><a href="questions/{{ question.id }}">{{ question.title }}</a></h4>
+    <p class="post-text post-main-text">{{ question.content }}</p>
+    <p class="post-details">
+      <i class="icon-thumbs-up-alt post-action-upvote"></i> &middot; 
+      <i class="icon-thumbs-down-alt post-action-downvote"></i> &middot; 
+      <span class="post-user-reply">Asked by {{ question.user.name }}</span> &middot;
+      <span class="post-unanswered"></span> &middot; 
+      <a ng-init="question.comment_open = false" ng-click="question.comment_open = !question.comment_open;">
+        {{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span>
+      </a> &middot;
+      <a ng-init="question.answer_open = false" ng-click="question.answer_open = !question.answer_open">
+        {{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span>
+      </a> &middot;
+      {{ formatDate(question.createdAt) }}
+      <span ng-show="question.action_open"> &middot;
+        <a ng-click="question.action_open = false">Cancel reply</a>
+      </span>
+    </p>
+    <!-- <div class="post-action-container" ng-init="question.action_open = false">
+      <textarea ng-model="user_answer"></textarea>
+      <a href="#" class="button post-action-button" ng-click="addAnswer(question, user_answer)">Answer</a>
+    </div> -->
+    <div class="post-comments-container" ng-show="question.comments.length && question.comment_open">
+      <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></h5>
+      <div ng-repeat="comment in question.comments">
+        <img class="thumbnail-small" ng-src="{{ formatThumbnail(comment.user.facebook_id) }}" />
+        <div class="post-comment-container">
+          <p class="post-text post-section-text">{{ comment.content }}</p>
+          <p class="post-details">
+            <span class="post-user-reply">{{ comment.user.name }}</span> &middot; {{ formatDate(comment.createdAt) }} 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <hr/ ng-show="question.answers.length"> -->
+  </div>
+</div>

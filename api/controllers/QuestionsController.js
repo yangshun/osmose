@@ -62,7 +62,7 @@ module.exports = {
 			if (err || question === undefined) return res.render(404);
 			res.view({
 				_layoutFile: '../layout.ejs',
-				question: question,
+				question_id: question.id,
 				og_type: 'osmosetest:question',
 				og_url: 'http://osmose.soedar.com/questions/' + qid,
 				og_title: question.title
