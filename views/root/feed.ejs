@@ -1,12 +1,11 @@
-<div class="row">
-  <div class="large-12 columns index-container">
+<div class="row" ng-init="display_type = '<%= display_type %>'">
+  <div class="large-12 columns index-container" ng-controller="CourseController">
     <div class="row">
       <%- partial('../sidebar.ejs') %>
       <div class="large-10 columns content-container">
-        <div ng-controller="CourseController">
+        <div>
           <h3>Feed</h3>
           <hr/>
-          {{ console.log(course) }}
           <%- partial('../questions.ejs') %>
         </div>
       </div>

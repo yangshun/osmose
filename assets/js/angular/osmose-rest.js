@@ -59,6 +59,25 @@ var AppController =  function($scope) {
 
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions) {
+
+	$scope.display_state = {
+		title_is_link: true,
+		question: {
+			display_comments: false,
+			display_answers: false,
+		},
+		answers: {
+			display_comments: false,
+		}
+	};
+
+	if ($scope.display_type == 'question') {
+		$scope.display_state.title_is_link = false;
+		$scope.display_state.question.display_comments = false;
+		$scope.display_state.question.display_answers = true;
+		$scope.display_state.answers.display_comments = false;
+	}
+
 	$scope.getCourse = function(course_id){
 		Courses.get({id: course_id}, function(res) {
 			if (res.success) {
@@ -79,7 +98,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 	$scope.updateAnswer = function(answer) {
 		var updateExistingAnswer = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.id) {
 						// Only update the static fields
@@ -95,7 +114,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 
 		var createNewAnswer = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				if (q.id === answer.data.question_id) {
 					q.answers.push(answer.data);
 					return
@@ -104,7 +123,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 
 		var createNewComment = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.parent_id) {
 						a.comments.push(answer.data);	
@@ -115,7 +134,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 
 		var updateExistingComment = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				q.answers.forEach(function(a) {
 					if (a.id === answer.data.parent_id) {
 						a.comments.forEach(function(c) {
@@ -240,42 +259,42 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 	var path = window.location.pathname.split('/');
 	(function(){
 		switch (path[1]) {
-		case 'courses':
-		case 'feed':
-			var params = {};
-			if (path[1] === 'courses') {
-				params = {id: path[2]};
-			}
-			Courses.get(params, function(res) {
-				if (res.success) {
-					$scope.courses = res.data;
-					console.log('Courses loaded');
-					console.log(res);
+			case 'courses':
+			case 'feed':
+				var params = {};
+				if (path[1] === 'courses') {
+					params = {id: path[2]};
+				}
+				Courses.get(params, function(res) {
+					if (res.success) {
+						$scope.courses = res.data;
+						console.log('Courses loaded');
+						console.log(res);
 
-					$scope.questions = [];
-					res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
-					console.log('Questions');
-					console.log($scope.questions);
-					// Subscribe to changes
-					$scope.$apply();
-					Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
-				} else {
-					console.log('Error retrieving courses');
-					console.log(res);
-				}
-			});
-			break;
-		case 'questions':
-			Questions.get({id: path[2]}, function(res) {
-				if (res.success) {
-					$scope.questions = [res.data.question];
-					$scope.$apply();
-				} else {
-					console.log('Error retrieving question');
-					console.log(res);
-				}
-			});
-			break;
+						$scope.questions = [];
+						res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
+						console.log('Questions');
+						console.log($scope.questions);
+						// Subscribe to changes
+						$scope.$apply();
+						Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
+					} else {
+						console.log('Error retrieving courses');
+						console.log(res);
+					}
+				});
+				break;
+			case 'questions':
+				Questions.get({id: path[2]}, function(res) {
+					if (res.success) {
+						$scope.questions = [res.data.question];
+						$scope.$apply();
+					} else {
+						console.log('Error retrieving question');
+						console.log(res);
+					}
+				});
+				break;
 		}
 	})()
 }

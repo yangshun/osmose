@@ -26,6 +26,7 @@ module.exports = {
   feed: function (req, res) {
     return res.view({
       fb_user: req.session.fb_user,
+      display_type: 'feed',
       _layoutFile: '../layout.ejs'
     });
   },

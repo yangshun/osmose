@@ -1,4 +1,4 @@
-<div class="post-answer-container" ng-repeat="answer in question.answers">
+<div class="post-answer-container clearfix" ng-repeat="answer in question.answers">
   <div class="post-answer-summary-column">
     <img class="thumbnail-small" ng-src="{{ formatThumbnail(answer.user.facebook_id) }}" />
     <!-- <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p> -->
@@ -10,10 +10,24 @@
     <p class="post-details">
       <i class="icon-thumbs-up-alt post-action-upvote"></i> &middot; 
       <i class="icon-thumbs-down-alt post-action-downvote"></i> &middot;
-      <span class="post-user-reply">Answered by {{ answer.user.name }}</span> &middot; {{ formatDate(answer.createdAt) }} 
+      <span class="post-user-reply">Answered by {{ answer.user.name }}</span> &middot; 
+      <a ng-init="answer.comment_open = false" ng-click="answer.comment_open = !answer.comment_open;">
+        <span ng-show="!answer.comment_open">
+          <span ng-show="answer.comments.length">{{ answer.comments.length }} Comment<span ng-show="answer.comments.length != 1">s</span></span>
+          <span ng-show="!answer.comments.length">Write a Comment</span>
+        </span>
+        <span ng-show="answer.comment_open">Hide comments</span>
+      </a> &middot;
+      {{ formatDate(answer.createdAt) }} 
     </p>
-    <div class="post-comments-container" ng-show="answer.comments.length">
-      <h5 class="post-section-title">{{ question.comments.length }} Comment<span ng-show="answer.comments.length != 1">s</span></h5>
+    <div class="post-comments-container" ng-show="answer.comment_open">
+      <div class="post-action-container">
+        <a class="button post-action-button" ng-click="addComment(question, user_comment)">Comment</a>
+        <div class="post-action-textarea">
+          <textarea ng-model="user_comment"></textarea>
+        </div>
+      </div>
+      <h5 class="post-section-title" ng-show="answer.comments.length">{{ answer.comments.length }} Comment<span ng-show="answer.comments.length != 1">s</span></h5>
       <div ng-repeat="comment in answer.comments">
         <img class="thumbnail-small" ng-src="{{ formatThumbnail(comment.user.facebook_id) }}" />
         <div class="post-comment-container">
