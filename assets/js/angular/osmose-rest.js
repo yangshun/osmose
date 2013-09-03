@@ -57,7 +57,8 @@ var AppController =  function($scope) {
 	}
 };
 
-var CourseController = function($scope, Courses, Answers, Users) {
+
+var CourseController = function($route, $scope, Courses, Answers, Users, Questions) {
 	$scope.getCourse = function(course_id){
 		Courses.get({id: course_id}, function(res) {
 			if (res.success) {
@@ -234,30 +235,48 @@ var CourseController = function($scope, Courses, Answers, Users) {
 					return $scope.updateAnswer(msg);
 				}
 		}
-
 	});
 
+	var path = window.location.pathname.split('/');
 	(function(){
-		Courses.get({}, function(res) {
-			if (res.success) {
-				$scope.courses = res.data;
-				console.log('Courses');
-				console.log(res);
-
-				$scope.questions = [];
-				res.data.map(function(course) {
-					$scope.questions = $scope.questions.concat(course.question);
-				});
-				console.log('Questions');
-				console.log($scope.questions);
-				$scope.$apply();
-				// Subscribe to changes
-				Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
-			} else {
-				console.log('Error retrieving courses');
-				console.log(res);
+		switch (path[1]) {
+		case 'courses':
+		case 'feed':
+			var params = {};
+			if (path[1] === 'courses') {
+				params = {id: path[2]};
 			}
-		})
+			Courses.get(params, function(res) {
+				if (res.success) {
+					$scope.courses = res.data;
+					console.log('Courses loaded');
+					console.log(res);
+
+					$scope.questions = [];
+					res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
+					console.log('Questions');
+					console.log($scope.questions);
+					// Subscribe to changes
+					$scope.$apply();
+					Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
+				} else {
+					console.log('Error retrieving courses');
+					console.log(res);
+				}
+			});
+			break;
+		case 'questions':
+			Questions.get({id: path[2]}, function(res) {
+				if (res.success) {
+					$scope.questions = [res.data.question];
+					$scope.$apply();
+				} else {
+					console.log('Error retrieving question');
+					console.log(res);
+				}
+			});
+			break;
+		}
 	})()
 }
 

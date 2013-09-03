@@ -20,8 +20,7 @@
     <li>
       <h6 class="menu-title">Modules</h6>
       <ul>
-        <li><a href="#">CS1010S</a></li>
-        <li><a href="#">CS3216</a></li>
+        <li ng-repeat="course in courses"><a href="courses/{{ course.id }}">{{ course.name }}</a></li>
       </ul>
     </li>
     <li class="others">

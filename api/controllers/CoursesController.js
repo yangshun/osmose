@@ -62,4 +62,14 @@ module.exports = {
     });
   },
 
+  details: function(req, res) {
+    var cid = req.param('id');
+    Courses.getCourseWithDetails(cid, {}, function(err, course) {
+    if (err || course === undefined) return res.render(404);
+    res.view({
+      _layoutFile: '../layout.ejs',
+      question_id: course.id
+    });
+  }
+
 };
