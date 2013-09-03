@@ -20,7 +20,7 @@ module.exports = {
   
   show: function(req, res) {
     var id = req.param('id');
-    Courses.getCourseWithDetails(id, function(err, data) {
+    Courses.getCourseWithDetails(id, {}, function(err, data) {
       if (err || data == undefined) {
         return res.api.failure(err);
       }

@@ -237,16 +237,19 @@ var CourseController = function($scope, Courses, Answers, Users) {
 
 	});
 
-	// TODO : Support multiple courses
 	(function(){
-		// $scope.getCourse(1);
 		Courses.get({}, function(res) {
 			if (res.success) {
 				$scope.courses = res.data;
-				// Subscribe to changes
-				Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
 				console.log('Courses');
 				console.log(res);
+
+				$scope.questions = [];
+				res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
+				console.log('Questions');
+				console.log($scope.questions);
+				// Subscribe to changes
+				Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
 			} else {
 				console.log('Error retrieving courses');
 				console.log(res);
