@@ -1,11 +1,13 @@
 <ul class="posts-list">
   <li class="post-item" ng-repeat="question in questions">
     <%- partial('question.ejs') %>
-    <div class="post-answers-container" ng-show="question.answers.length && display_state.question.display_answers">
-      <h5 class="post-answers-title">{{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></h5>
-      <%- partial('answer.ejs') %>
+    <div class="post-answers-container" ng-show="display_state.question.display_answers">
+      <div ng-show="question.answers.length">
+        <h5 class="post-answers-title">{{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></h5>
+        <%- partial('answer.ejs') %>
+      </div>
       <h5>Add Your Answer</h5>
-      <div class="post-action-container" ng-show="!question.comment_open && display_state.question.display_answers">
+      <div class="post-action-container" ng-show="display_state.question.display_answers">
         <a class="button post-action-button" ng-click="addAnswer(question, user_answer); user_answer = '';">Answer</a>
         <div class="post-action-textarea">
           <textarea ng-model="user_answer"></textarea>
