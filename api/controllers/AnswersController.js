@@ -29,6 +29,15 @@ module.exports = {
         Answers.getAnswerWithComments(answer.id, {user: req.session.user.id},function(err, answer) {
           res.api.success({'answer': answer});
           Answers.publishCreate(answer);
+
+          var fbActionName = 'osmosetest:answer';
+          var objectToLike = "htpp://" + "osmose.soedar.com:" + req.port + '/questions/' + answer.question_id;
+          req.facebook.api( 'https://graph.facebook.com/me/'.concat(fbActionName),
+                            'post',
+                            { question: objectToLike,
+                              privacy: {'value': 'SELF'} },
+                            function(response) {
+                            });
         })
       }
     });
