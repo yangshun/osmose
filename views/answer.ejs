@@ -22,7 +22,7 @@
     </p>
     <div class="post-comments-container" ng-show="answer.comment_open">
       <div class="post-action-container">
-        <a class="button post-action-button" ng-click="addComment(question, user_comment)">Comment</a>
+        <a class="button post-action-button" ng-click="addCommentInAnswer(answer, user_comment)">Comment</a>
         <div class="post-action-textarea">
           <textarea ng-model="user_comment"></textarea>
         </div>

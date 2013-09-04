@@ -21,6 +21,10 @@ module.exports = {
   },
 
   create: function(req, res) {
+    if (req.body.user_id === undefined) {
+      req.body.user_id = req.session.user.id;
+    }
+
     Comments.create(req.body).done(function(err, comment) {
       if (err) {
         return res.api.failure(err);
