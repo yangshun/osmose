@@ -37,6 +37,8 @@ module.exports = {
                             { question: objectToLike,
                               privacy: {'value': 'SELF'} },
                             function(response) {
+                              console.log(objectToLike);
+                              console.log(response);
                             });
         })
       }
