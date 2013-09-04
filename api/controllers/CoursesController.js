@@ -69,7 +69,8 @@ module.exports = {
       res.view({
         _layoutFile: '../layout.ejs',
         display_type: 'course',
-        course: course
+        course: course,
+        fb_user: req.session.fb_user
       });
     });
   },
