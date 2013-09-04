@@ -71,5 +71,18 @@ module.exports = {
         question_id: course.id
       });
     });
-  }
+  },
+
+  stub: function(req, res) {
+    // Might want to return list of courses that this user attends
+    // When we add the users-courses model in the future
+    var user_id = req.session.user.id;
+    Courses.find({}).done(function(err, data){
+      if (err || data == undefined) {
+        return res.api.failure(err);
+      }
+      return res.api.success(data);
+    });
+  },
+  
 };
