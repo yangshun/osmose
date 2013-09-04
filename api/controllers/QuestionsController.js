@@ -20,6 +20,9 @@ module.exports = {
     },
 
     create: function(req, res) {
+        if (req.body.user_id === undefined) {
+          req.body.user_id = req.session.user.id;
+        }
         Questions.create(req.body, function(err, question) {
             if (err || question === undefined) res.api.failure(err);
             else {

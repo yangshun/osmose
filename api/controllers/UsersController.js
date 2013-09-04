@@ -35,6 +35,7 @@ module.exports = {
 
   subscribe: function(req, res) {
     // TODO: Subscribe to the correct courses and questions
+    console.log('subscribed');
     Courses.subscribe(req.socket);
     Questions.subscribe(req.socket);
     Answers.subscribe(req.socket);

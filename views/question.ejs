@@ -28,7 +28,7 @@
       &middot; {{ formatDate(question.createdAt) }}
     </p>
     <div class="post-action-container" ng-show="question.comment_open">
-      <a href="#" class="button post-action-button" ng-click="addComment(question, user_comment)">Comment</a>
+      <a href="#" class="button post-action-button" ng-click="addCommentInQuestion(question, user_comment)">Comment</a>
       <div class="post-action-textarea">
         <textarea ng-model="user_comment"></textarea>
       </div>

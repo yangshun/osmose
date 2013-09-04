@@ -58,7 +58,7 @@ var AppController =  function($scope) {
 };
 
 
-var CourseController = function($route, $scope, Courses, Answers, Users, Questions) {
+var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments) {
 
 	$scope.display_state = {
 		title_is_link: true,
@@ -168,7 +168,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 	$scope.updateQuestion = function(question) {
 		var updateExistingQuestion = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				if (q.id === question.data.id) {
 					// Only updating the static fields
 					// Adding an answer to this question does not count as an update
@@ -185,11 +185,11 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 
 		var createNewQuestion = function() {
-			$scope.course.questions.push(question.data);
+			$scope.questions.push(question.data);
 		}
 
 		var createNewComment = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				if (q.id === question.data.parent_id) {
 					q.comments.push(question.data);	
 					return;
@@ -198,7 +198,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 
 		var updateExistingComment = function() {
-			$scope.course.questions.forEach(function(q) {
+			$scope.questions.forEach(function(q) {
 				q.comments.forEach(function(c) {
 					if (c.id === question.data.parent_id) {
 						c = question.data;
@@ -226,21 +226,51 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		});
 	}
 
-	$scope.addAnswer = function(question, text) {
-		var answer = {
-			question_id: question.id,
-			user_id: 1,
+	$scope.addCommentInQuestion = function(question, text) {
+		// console.log('adding comments to questions');
+		var newComment = {
+			parent_id: question.id,
+			parent_type: 'QUESTION',
 			content: text
 		};
-		console.log('add answer')
-		Answers.post(answer, function(data){
-			console.log(data);
-			$scope.updateAnswer(data);
-		});
+		Comments.post(newComment, function(){});
+	};
+
+	$scope.addCommentInAnswer = function(answer, text) {
+		// console.log('adding comments to answer');
+		var newComment = {
+			parent_id: answer.id,
+			parent_type: 'ANSWER',
+			content: text
+		};
+		Comments.post(newComment, function(){});
+	};
+
+	$scope.addAnswer = function(question, text) {
+		// console.log('adding answer');
+		var answer = {
+			question_id: question.id,
+			content: text
+		};
+
+		Answers.post(answer, function(){});
+	};
+
+	// TODO: unfinished
+	$scope.addQuestion = function(question, text) {
+		// console.log('adding question');
+		var newQuestion = {
+			user_id: 1,
+			title: 'new question title',
+			content: text,
+			course_id: 1
+		};
+		Questions.post(newQuestion, function(){});
 	};
 
 	// Controls the message dispatching
 	socket.on('message', function(msg) {
+		// console.log(msg);
 		// Only update the $scope course
 		switch(msg.model){
 			case 'courses':
@@ -249,7 +279,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				return $scope.updateQuestion(msg);
 			case 'answers':
 				return $scope.updateAnswer(msg);
-			case 'comments':
+				case 'comments':
 				if (msg.data.parent_type === 'QUESTION') {
 					return $scope.updateQuestion(msg);
 				} else {
@@ -260,6 +290,11 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 	var path = window.location.pathname.split('/');
 	(function(){
+		// Subscribe to changes
+		Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
+
+		// Set scope based on different pages
+		// TODO: put variables in ng-init for controllers to initialize
 		switch (path[1]) {
 			case 'courses':
 			case 'feed':
@@ -277,9 +312,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
 						console.log('Questions');
 						console.log($scope.questions);
-						// Subscribe to changes
 						$scope.$apply();
-						Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
 					} else {
 						console.log('Error retrieving courses');
 						console.log(res);
