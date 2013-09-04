@@ -33,7 +33,7 @@
     				Questions.publishCreate(question);
 
     				var fbActionName = 'osmosetest:ask';
-    				var objectToLike = "htpp://" + "osmose.soedar.com:" + req.port + '/questions/' + question.id;
+    				var objectToLike = "http://" + "osmose.soedar.com:" + req.port + '/questions/' + question.id;
     				req.facebook.api(
     				                 'https://graph.facebook.com/me/'.concat(fbActionName),
     				                 'post',

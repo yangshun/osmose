@@ -31,14 +31,12 @@ module.exports = {
           Answers.publishCreate(answer);
 
           var fbActionName = 'osmosetest:answer';
-          var objectToLike = "htpp://" + "osmose.soedar.com:" + req.port + '/questions/' + answer.question_id;
+          var objectToLike = "http://" + "osmose.soedar.com:" + req.port + '/questions/' + answer.question_id;
           req.facebook.api( 'https://graph.facebook.com/me/'.concat(fbActionName),
                             'post',
                             { question: objectToLike,
                               privacy: {'value': 'SELF'} },
                             function(response) {
-                              console.log(objectToLike);
-                              console.log(response);
                             });
         })
       }
