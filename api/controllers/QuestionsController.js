@@ -13,9 +13,10 @@
 
     show: function(req, res) {
     	var qid = req.param('id');
-    	Questions.getQuestionWithDetails(qid, {user: req.session.user_id}, function(err, question) {
+    	Questions.getQuestionWithDetails(qid, {user: req.session.user.id}, function(err, question) {
     		if (err || question === undefined) return res.api.failure(err);
-    		else res.api.success({'question': question});
+            console.log(req.session);
+    		res.api.success({'question': question});
     	});
     },
 
@@ -26,7 +27,7 @@
     	Questions.create(req.body, function(err, question) {
     		if (err || question === undefined) res.api.failure(err);
     		else {
-    			Questions.getQuestionWithDetails(question.id, {user: req.session.user_id}, function(err, question){
+    			Questions.getQuestionWithDetails(question.id, {user: req.session.user.id}, function(err, question){
     				res.api.success({'question': question});
     				Questions.publishCreate(question);
 
@@ -49,7 +50,7 @@
     	Questions.update(id, req.body, function(err, questions) {
     		if (err || questions === undefined) res.api.failure(err);
     		else {
-    			Questions.getQuestionWithDetails(questions[0].id, {user: req.session.user_id}, function(err, question){
+    			Questions.getQuestionWithDetails(questions[0].id, {user: req.session.user.id}, function(err, question){
     				res.api.success({'question': question});
     				Questions.publishUpdate(question.id, question);
     			})
@@ -71,7 +72,7 @@
     // VIEW ROUTES
     details: function(req, res) {
     	var qid = req.param('id');
-    	Questions.getQuestionWithDetails(qid, {user: req.session.user_id}, function(err, question) {
+    	Questions.getQuestionWithDetails(qid, {user: req.session.user.id}, function(err, question) {
     		if (err || question === undefined) return res.render(404);
     		console.log(question);
             var url = req.protocol + "://" + req.get('host') + '/questions/' + qid;
