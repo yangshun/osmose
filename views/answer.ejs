@@ -8,8 +8,10 @@
   <div class="post-answer-content">
     <p class="post-text post-main-text" ng-bind-html-unsafe="formatText(answer.content)"></p>
     <p class="post-details">
-      <i class="icon-thumbs-up-alt post-action-upvote" ng-click="voteAnswer(answer, 1)"></i> &middot; 
-      <i class="icon-thumbs-down-alt post-action-downvote" ng-click="voteAnswer(answer, -1)"></i> &middot;
+      <i ng-class="generateVoteClass(answer, 'up')" ng-click="voteAnswer(answer, 1)"></i> &middot; 
+      <i ng-class="generateVoteClass(answer, 'down')" ng-click="voteAnswer(answer, -1)"></i> &middot; 
+      <!-- <i class="icon-thumbs-up-alt post-action-upvote" ng-click="voteAnswer(answer, 1)"></i> &middot;  -->
+      <!-- <i class="icon-thumbs-down-alt post-action-downvote" ng-click="voteAnswer(answer, -1)"></i> &middot; -->
       <span class="post-user-reply">Answered by {{ answer.user.name }}</span> &middot; 
       <a ng-init="answer.comment_open = false" ng-click="answer.comment_open = !answer.comment_open;">
         <span ng-show="!answer.comment_open">

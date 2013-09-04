@@ -54,7 +54,7 @@ var osmose_markdowns = {
 		{ 	regex: /\(Y\)/g  , icon: 'thumbs-up' },
 		// { 	regex: '\(:', icon: 'smile' },
 	],
-	convert_to_markup: function(text) {
+	convert_to_markdown: function(text) {
 		text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>');
 		text = text.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>');
 		text = text.replace(/\(:/g, '<i class="icon-smile"></i>');

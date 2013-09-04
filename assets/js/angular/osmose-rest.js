@@ -237,6 +237,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 	}
 
 	$scope.addQuestion = function(title, content) {
+		if (title.trim() == '' || content.trim() == '') {
+			return;
+		} 
 		var newQuestion = {
 			user_id: 1, // TODO: Change to actual user!!!
 			course_id: $scope.course_id,
@@ -248,7 +251,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 	}
 
 	$scope.addCommentInQuestion = function(question, content) {
-		// console.log('adding comments to questions');
+		if (content.trim() == '') {
+			return;
+		} 
 		var newComment = {
 			parent_id: question.id,
 			parent_type: 'QUESTION',
@@ -258,7 +263,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 	};
 
 	$scope.addCommentInAnswer = function(answer, content) {
-		// console.log('adding comments to answer');
+		if (content.trim() == '') {
+			return;
+		} 
 		var newComment = {
 			parent_id: answer.id,
 			parent_type: 'ANSWER',
@@ -268,7 +275,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 	};
 
 	$scope.addAnswer = function(question, content) {
-		// console.log('adding answer');
+		if (content.trim() == '') {
+			return;
+		} 
 		var answer = {
 			question_id: question.id,
 			content: content
@@ -276,6 +285,26 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 		Answers.post(answer, function(){});
 	};
+
+	$scope.generateVoteClass = function(question, type) {
+		switch (type) {
+			case 'up':
+				question.vote_class = { 'icon-thumbs-up-alt': true, 'post-action-upvote': true, 'post-action-upvoted': false };
+				if (question.voted > 0) {
+					question.vote_class['post-action-upvoted'] = true;
+					question.vote_class['post-action-upvote'] = false;
+				}
+				break;
+			case 'down':
+				question.vote_class = { 'icon-thumbs-down-alt': true, 'post-action-downvote': true, 'post-action-downvoted': false };
+				if (question.voted < 0) {
+					question.vote_class['post-action-downvoted'] = true;
+					question.vote_class['post-action-downvote'] = false;
+				}
+				break;
+		}
+		return question.vote_class;
+	}
 
 	$scope.voteAnswer = function(answer, score) {
 

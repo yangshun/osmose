@@ -14,8 +14,10 @@
     </h4>
     <p class="post-text post-main-text" ng-bind-html-unsafe="formatText(question.content)"></p>
     <p class="post-details">
-      <i class="icon-thumbs-up-alt post-action-upvote" ng-click="voteQuestion(question, 1)"></i> &middot; 
-      <i class="icon-thumbs-down-alt post-action-downvote" ng-click="voteQuestion(question, -1)"></i> &middot; 
+      <i ng-class="generateVoteClass(question, 'up')" ng-click="voteQuestion(question, 1)"></i> &middot; 
+      <!-- <i ng-class="icon-thumbs-up-alt post-action-upvote" ng-click="voteQuestion(question, 1)"></i> &middot;  -->
+      <i ng-class="generateVoteClass(question, 'down')" ng-click="voteQuestion(question, -1)"></i> &middot; 
+      <!-- <i class="icon-thumbs-down-alt post-action-downvote" ng-click="voteQuestion(question, -1)"></i> &middot;  -->
       <span class="post-user-reply">Asked by {{ question.user.name }}</span> &middot;
       <span class="post-unanswered"></span> &middot; 
       <a ng-init="question.comment_open = false" ng-click="question.comment_open = !question.comment_open;">

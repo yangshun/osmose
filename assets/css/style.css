@@ -79,8 +79,9 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .post-question-container:hover .post-score-action { opacity: 1; }
 .post-details { font-size: 12px; line-height: 14px; color: #bbb; }
 .post-details [class*='post-action-']:hover { cursor: pointer; }
-.post-details .post-action-upvote:hover { color: rgb(75, 212, 75); }
-.post-details .post-action-downvote:hover { color: rgb(233, 52, 81); }
+.post-details .post-action-upvoted:hover, .post-details .post-action-downvoted:hover { color: #bbb; }
+.post-details .post-action-upvote:hover, .post-details .post-action-upvoted { color: rgb(75, 212, 75); }
+.post-details .post-action-downvote:hover, .post-details .post-action-downvoted { color: rgb(233, 52, 81); }
 .post-details a:hover { text-decoration: underline; }
 .post-text { margin-bottom: 10px; }
 .post-main-text { font-weight: 300; }
