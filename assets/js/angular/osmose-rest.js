@@ -82,8 +82,6 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		Courses.get({id: course_id}, function(res) {
 			if (res.success) {
 				$scope.$apply(function(){
-					console.log('Course loaded: ');
-					console.log(res);
 					$scope.course = res.data.course;
 				});
 			}
@@ -305,7 +303,6 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						if (!Array.isArray(res.data)) {
 							res.data = [res.data];
 						}
-
 						$scope.courses = res.data;
 						console.log('Courses loaded');
 
@@ -324,6 +321,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				break;
 			case 'questions':
 				Questions.get({id: path[2]}, function(res) {
+					console.log('therehere');
+					console.log(res);
 					if (res.success) {
 						$scope.questions = [res.data.question];
 						$scope.$apply();
