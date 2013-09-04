@@ -48,6 +48,7 @@ module.exports.routes = {
   'post   /api/courses'             : 'CoursesController.create',
   'put    /api/courses/:id'         : 'CoursesController.update',
   'delete /api/courses/:id'         : 'CoursesController.remove',
+  'get    /api/courses/stub'        : 'CoursesController.stub',
 
   // Questions routes
   'get    /api/questions'           : 'QuestionsController.index',
