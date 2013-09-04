@@ -83,6 +83,7 @@ module.exports.routes = {
   'delete /api/votes/:id'           : 'VotesController.remove',
 
   // FB Post Routes
+  'get    /api/facebook/friends'    : 'FacebookController.friends',
   'post   /api/facebook/feed'       : 'FacebookController.feed',
   'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
 
