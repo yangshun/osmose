@@ -59,7 +59,7 @@ var AppController =  function($scope) {
 		if (!text) {
 			return '';
 		}
-		text = osmose_markups.convert_to_markup(text);
+		text = osmose_markdowns.convert_to_markdown(text);
 		return text;
 	}
 };

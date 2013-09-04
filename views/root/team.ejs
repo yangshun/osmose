@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" style="height: 100%"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <!-- Viewport mobile tag for sensible mobile support -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title><%- title %></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <%- partial('../stylesheets.ejs') %>
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <!-- Bring in the socket.io client -->
+        <script type="text/javascript" src="/js/socket.io.js"></script>
+        
+        <!-- then beef it up with some convenience logic for talking to Sails.js -->
+        <script type="text/javascript" src="/js/sails.io.js"></script>
+
+        <!-- listen on socket.io for incoming messages -->
+        <script type="text/javascript" src="/js/app.js"></script>
+    </head>
+
+    <body class="main-page about-page">
+        <%- partial('../fb.ejs') %>
+        <%- partial('../navigation.ejs') %>
+        <div class="main-container">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="main-box-container large-8 columns large-centered about-container">
+                        <div class="main-box">
+                          <h1>Meet the Team</h1>
+                          <hr/>
+                          <div class="group-profile">
+                            <div class="info-container" id="chunmun">
+                              <img src="https://graph.facebook.com/soonchunmun/picture" />
+                              <div class="info">
+                                <h5>Soon Chun Mun</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <a onclick="_gaq.push(['_trackEvent', 'Chun Mun', 'Facebook']);" href="https://www.facebook.com/soonchunmun" target="_blank"><i class="icon-facebook-sign icon-large"></i></a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Chun Mun', 'LinkedIn']);" href="#" target="_blank"><i class="icon-linkedin-sign icon-large"></i></a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Chun Mun', 'Github']);" href="https://www.github.com/chunmun" target="_blank"><i class="icon-github-sign icon-large"></i></a>
+                              </div>
+                            </div>
+                            <div class="info-container" id="viettien">
+                              <img src="https://graph.facebook.com/viet.tien.93/picture" />
+                              <div class="info">
+                                <h5>Le Viet Tien</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <a onclick="_gaq.push(['_trackEvent', 'Viet Tien', 'Facebook']);" href="https://www.facebook.com/viet.tien.93" target="_blank">
+                                  <i class="icon-facebook-sign icon-large"></i>
+                                </a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Viet Tien', 'LinkedIn']);" href="#" target="_blank">
+                                  <i class="icon-linkedin-sign icon-large"></i>
+                                </a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Viet Tien', 'Github']);" href="https://www.github.com/lvtiendev" target="_blank"><i class="icon-github-sign icon-large"></i></a>
+                              </div>
+                            </div>
+                            <div class="info-container" id="yangshun">
+                              <img src="https://graph.facebook.com/yangshun/picture" />
+                              <div class="info">
+                                <h5>Tay Yang Shun</h5>
+                                <p>A driven and creative person, Yang Shun's two main passions lie in coding and designing. He has developed a few apps for the iOS platform and has extensive experience in graphic designing having performed freelance design tasks and winning design competitions. He spent a year in Silicon Valley as a Software Engineering intern at a bay area startup, exploring front-end web development technologies and is currently building beautiful kickass sites.</p>
+                                <a onclick="_gaq.push(['_trackEvent', 'Yang Shun', 'Facebook']);" href="https://www.facebook.com/yangshun" target="_blank"><i class="icon-facebook-sign icon-large"></i></a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Yang Shun', 'LinkedIn']);" href="http://www.linkedin.com/profile/view?id=95566039&trk=nav_responsive_tab_profile" target="_blank"><i class="icon-linkedin-sign icon-large"></i></a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Yang Shun', 'Github']);" href="https://www.github.com/yangshun" target="_blank"><i class="icon-github-sign icon-large"></i></a>
+                              </div>
+                            </div>
+                            <div class="info-container" id="soedar">
+                              <img src="https://graph.facebook.com/soedarsono/picture" />
+                              <div class="info">
+                                <h5>Soedarsono Lim</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <a onclick="_gaq.push(['_trackEvent', 'Soedar', 'Facebook']);" href="https://www.facebook.com/soedarsono" target="_blank"><i class="icon-facebook-sign icon-large"></i></a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Soedar', 'LinkedIn']);" href="http://www.linkedin.com/profile/view?id=120747398&locale=en_US&trk=tyah" target="_blank"><i class="icon-linkedin-sign icon-large"></i></a>
+                                <a onclick="_gaq.push(['_trackEvent', 'Soedar', 'Github']);" href="https://www.github.com/soedar" target="_blank"><i class="icon-github-sign icon-large"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="login-bottom">
+                          <a href="/about">About</a> &middot; 
+                          <a href="/team">The Team</a> &middot; 
+                          <a href="/help">Help</a> &middot; 
+                          <a href="mailto:tay.yang.shun@gmail.com?subject=Osmose">Contact Us</a>
+                          <!-- <a href="/terms">Terms & Conditions</a> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-container">
+            <%- partial('../footer.ejs') %>
+        </div>
+        <%- partial('../html5-boilerplate.ejs') %>
+    </body>
+</html>
