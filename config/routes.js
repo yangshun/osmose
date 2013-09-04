@@ -48,6 +48,7 @@ module.exports.routes = {
   'post   /api/courses'             : 'CoursesController.create',
   'put    /api/courses/:id'         : 'CoursesController.update',
   'delete /api/courses/:id'         : 'CoursesController.remove',
+  'get    /api/courses/stub'        : 'CoursesController.stub',
 
   // Questions routes
   'get    /api/questions'           : 'QuestionsController.index',
@@ -80,6 +81,9 @@ module.exports.routes = {
   // FB Post Routes
   'post   /api/facebook/feed'       : 'FacebookController.feed',
   'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
+
+  // FB User Routes
+  'delete /api/facebook/:fb_id'     : 'FacebookController.remove',
 
 
   // View routes

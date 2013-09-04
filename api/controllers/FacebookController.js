@@ -47,5 +47,34 @@ module.exports = {
        function(response) {
         res.send(response);
        });
+  },
+
+  remove: function(req, res) {
+    var fb_userid = req.params.fb_id;
+    if (fb_userid != req.session.fb_id) {
+      return res.api.failure_message('User to delete must be the current user');
+    }
+
+    user = req.session.user;
+    fb_user = req.session.fb_user;
+    req.session.destroy();
+
+    fb_user.destroy(function(err) {
+      if (err) {
+        return res.api.failure(err);
+      }
+
+      user.facebook_id = -1;
+      user.name = "";
+      user.deleted = true;
+
+      user.save(function(err) {
+        if (err) {
+          return res.api.failure(err);
+        }
+        return res.api.success({});
+      });
+    });
+
   }
 };

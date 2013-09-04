@@ -42,7 +42,7 @@ var OsmoseREST = angular.module('OsmoseREST', ['ngResource']);
 			};
 		});
 	});
-})(['Courses', 'Users', 'Questions', 'Answers', 'Comments']);
+})(['Courses', 'Users', 'Questions', 'Answers', 'Comments', 'Votes']);
 
 var AppController =  function($scope) {
 	$scope.fb_id = '';
@@ -295,13 +295,11 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 		// Set scope based on different pages
 		// TODO: put variables in ng-init for controllers to initialize
+		var params = {};
 		switch (path[1]) {
 			case 'courses':
+				params.id = path[2];
 			case 'feed':
-				var params = {};
-				if (path[1] === 'courses') {
-					params = {id: path[2]};
-				}
 				Courses.get(params, function(res) {
 					if (res.success) {
 						$scope.courses = res.data;
@@ -326,6 +324,15 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving question');
+						console.log(res);
+					}
+				});
+				Courses.get({}, function(res) {
+					if (res.success) {
+						$scope.courses = res.data;
+						$scope.$apply();
+					} else {
+						console.log('Error retrieving course stub');
 						console.log(res);
 					}
 				});
