@@ -58,15 +58,17 @@ module.exports = {
 
       async.parallel([
         function(next) {
-          answer.voted = false;
+          answer.voted = 0;
           Votes.find({post_id: answer.id, post_type: 'ANSWER', deleted: false}).done(function(err, votes) {
             if (!err) {
               var score = 0;
+              var my_vote = 0;
               votes.forEach(function(vote) {
                 score += vote.score;
-                if (vote.voter_id == options.user) { answer.voted = true; }
+                if (vote.voter_id == options.user) { my_vote += vote.score; }
               });
               answer.score = score;
+              answer.voted = my_vote;
             }
             next(err);
           });
