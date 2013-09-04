@@ -31,7 +31,7 @@
     				Questions.publishCreate(question);
 
     				var fbActionName = 'osmosetest:ask';
-    				var objectToLike = 'http://osmose.soedar.com/questions/' + req.param('id');
+    				var objectToLike = req.protocol + "://" + req.get('host') + '/questions/' + question.id;
     				req.facebook.api(
     				                 'https://graph.facebook.com/me/'.concat(fbActionName),
     				                 'post',
@@ -74,13 +74,14 @@
     	Questions.getQuestionWithDetails(qid, {user: req.session.user_id}, function(err, question) {
     		if (err || question === undefined) return res.render(404);
     		console.log(question);
+            var url = req.protocol + "://" + req.get('host') + '/questions/' + qid;
     		res.view({
     			_layoutFile: '../layout.ejs',
     			fb_user: req.session.fb_user,
     			question_id: question.id,
     			display_type: 'question',
     			og_type: 'osmosetest:question',
-    			og_url: 'http://osmose.soedar.com/questions/' + qid,
+    			og_url: url,
     			og_title: question.title
     		});
     	});
