@@ -302,12 +302,17 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			case 'feed':
 				Courses.get(params, function(res) {
 					if (res.success) {
+						if (!Array.isArray(res.data)) {
+							res.data = [res.data];
+						}
+
 						$scope.courses = res.data;
 						console.log('Courses loaded');
-						console.log(res);
 
 						$scope.questions = [];
-						res.data.map(function(course) {return $scope.questions = $scope.questions.concat(course.question);});
+						res.data.map(function(course) {
+							return $scope.questions = $scope.questions.concat(course.questions);
+						});
 						console.log('Questions');
 						console.log($scope.questions);
 						$scope.$apply();

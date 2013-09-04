@@ -3,16 +3,18 @@ html { background-color: #333; }
 body { font-family: "museo-sans", 'helvetica-neue-light', sans-serif; background-color: #eee; }
 h1, h2, h3, h4, h5, h6 { font-family: "museo-sans", 'helvetica-neue-light', sans-serif; font-weight: 500; color: #666; }
 p { font-size: 16px; font-weight: 100;}
+a { color: #0977d5;}
 a:hover { color: #ccc;}
 .button { background-color: #07569a; border: none; font-weight: 500; }
 .button:hover { background-color: #0977d5; }
 .contain-to-grid { background-color: #0977d5; }
 .contain-to-grid .top-bar { margin-bottom: 0; }
+textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -webkit-box-shadow: none;}
 
 /* Navigation */
 .navigation .nav-bar-logo { padding-bottom: 3px; }
 .top-bar { background: #0977d5; margin-bottom: 0; }
-.top-bar-section ul li>a { font-weight: 400; }
+.top-bar-section ul li > a { font-weight: 400; }
 .top-bar-section ul { background: #0977d5;}
 .top-bar-section li a:not(.button) { background: #0977d5; }
 .top-bar-section li a:not(.button):hover { background: #07569a; }
@@ -69,7 +71,7 @@ a:hover { color: #ccc;}
 .post-answer-content { padding-left: 50px;}
 .post-action-container { text-align: right;  }
 .post-action-container .post-action-textarea { padding-right: 100px;}
-.post-action-button { float: right; font-size: 12px; }
+.post-action-button { float: right; font-size: 12px; width: 92px; }
 .post-user-reply { color: #999; font-weight: 500; }
 
 /* Menu */
