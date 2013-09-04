@@ -35,6 +35,7 @@ module.exports.routes = {
   '/': 'RootController',
   '/feed': 'RootController.feed',
   '/logout': 'RootController.logout',
+  '/invite': 'RootController.invite',
 
   // '/home': 'HomeController.index',
   'get    /api/me'                  : 'UsersController.me',

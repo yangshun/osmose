@@ -31,6 +31,13 @@ module.exports = {
     });
   },
 
+  invite: function (req, res) {
+    return res.view({
+      fb_user: req.session.fb_user,
+      _layoutFile: '../layout.ejs'
+    });
+  },
+
   logout: function(req, res) {
     req.session.destroy();
     res.redirect('/');
