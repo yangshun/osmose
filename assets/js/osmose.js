@@ -48,3 +48,20 @@ var osm_user = {
 		return 'https://graph.facebook.com/' + fb_id + '/picture';
 	}
 };
+
+var osmose_markups = {
+	available_markups: [
+		{ 	regex: /\(Y\)/g  , icon: 'thumbs-up' },
+		// { 	regex: '\(:', icon: 'smile' },
+	],
+	convert_to_markup: function(text) {
+		text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>');
+		text = text.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>');
+		text = text.replace(/\(:/g, '<i class="icon-smile"></i>');
+		text = text.replace(/\[star\]/g, '<i class="icon-star"></i>');
+		text = text.replace(/\[star2\]/g, '<i class="icon-star-empty"></i>');
+		text = text.replace(/\[tick\]/g, '<i class="icon-ok"></i>');
+		text = text.replace(/<3/g, '<i class="icon-heart"></i>');
+		return text;
+	}
+}

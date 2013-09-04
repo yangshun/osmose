@@ -7,10 +7,12 @@
   </div>
   <div class="post-question-content">
     <h4 class="post-title">
-      <span ng-show="display_state.title_is_link"><a href="/questions/{{ question.id }}">{{ question.title }}</a></span>
-      <span ng-show="!display_state.title_is_link">{{ question.title }}</span>
+      <span ng-show="display_state.title_is_link">
+        <a href="/questions/{{ question.id }}" ng-bind-html-unsafe="formatText(question.title)"></a>
+      </span>
+      <span ng-show="!display_state.title_is_link" ng-bind-html-unsafe="formatText(question.title)"></span>
     </h4>
-    <p class="post-text post-main-text">{{ question.content }}</p>
+    <p class="post-text post-main-text" ng-bind-html-unsafe="formatText(question.content)"></p>
     <p class="post-details">
       <i class="icon-thumbs-up-alt post-action-upvote" ng-click="voteQuestion(question, 1)"></i> &middot; 
       <i class="icon-thumbs-down-alt post-action-downvote" ng-click="voteQuestion(question, -1)"></i> &middot; 
@@ -35,7 +37,7 @@
       <div ng-repeat="comment in question.comments">
         <img class="thumbnail-small" ng-src="{{ formatThumbnail(comment.user.facebook_id) }}" />
         <div class="post-comment-container">
-          <p class="post-text post-section-text">{{ comment.content }}</p>
+          <p class="post-text post-section-text" ng-bind-html-unsafe="formatText(comment.content)"></p>
           <p class="post-details">
             <span class="post-user-reply">{{ comment.user.name }}</span> &middot; {{ formatDate(comment.createdAt) }} 
           </p>

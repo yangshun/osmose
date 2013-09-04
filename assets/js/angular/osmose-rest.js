@@ -54,6 +54,14 @@ var AppController =  function($scope) {
 	$scope.formatThumbnail = function(id) {
 		return osm_user.getFacebookProfilePicture(id);
 	}
+
+	$scope.formatText = function(text) {
+		if (!text) {
+			return '';
+		}
+		text = osmose_markups.convert_to_markup(text);
+		return text;
+	}
 };
 
 
