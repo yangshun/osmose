@@ -9,7 +9,9 @@ a:hover { color: #ccc;}
 .button:hover { background-color: #0977d5; }
 .contain-to-grid { background-color: #0977d5; }
 .contain-to-grid .top-bar { margin-bottom: 0; }
-textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -webkit-box-shadow: none;}
+input, textarea { font-weight: 300; }
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -webkit-box-shadow: none; }
+fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 
 /* Navigation */
 .navigation .nav-bar-logo { padding-bottom: 3px; }
@@ -34,11 +36,16 @@ textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -web
 
 /* Main */
 .index-container { background-color: #222; }
+.loading-container { text-align: center; padding-top: 20px; }
+.loading-container img { margin-bottom: 20px; }
 
 /* Content */
 .content-container { background-color: #fff; min-height: 600px; padding-top: 20px; }
-
 .thumbnail-small { width: 30px; height: 30px; border-radius: 3px; float: left; margin-right: 10px; margin-top: 5px; }
+
+/* Course */
+.course-container h2 { margin-bottom: 10px; }
+.course-container .course-ask-container legend { color: #0977d5; }
 
 /* Feed */
 .posts-list { list-style-type: none; }
@@ -61,11 +68,12 @@ textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -web
 .post-unanswered:before { content: 'Unanswered'; }
 .post-answered { font-weight: 400; color: rgb(75, 212, 75); }
 .post-answered:before { content: 'Answered';}
-.post-answer-container { margin-bottom: 30px; }
+/*.post-answer-container { margin-bottom: 30px; }*/
 /*.post-answer-container:hover .post-score-action { opacity: 1; }*/
 .post-section-title { font-size: 11px; color: #666; }
 .post-section-text { color: #333; font-size: 14px; }
-.post-answers-title { font-size: 14px; color: #666; padding-left: 10px; }
+.post-answers-title { font-size: 16px; color: #0977d5;; padding-left: 10px; margin-top: 30px; }
+.post-answers-divider { margin-top: 10px;}
 .post-answer-summary-column { width: 30px; margin-left: 10px; float:left; text-align: right; }
 .post-answer-summary-column .thumbnail-small { margin-right: 0; margin-bottom: 5px; float: right; }
 .post-answer-content { padding-left: 50px;}
@@ -85,10 +93,10 @@ textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -web
 .menu-container ul li ul li:hover { background-color: #444; }
 .menu-container .icon-container { width: 20px; display: inline-block; }
 .menu-container .others a { font-weight: 100; }
-
 .menu-container .profile-container { padding: 0 10px; margin-bottom: 20px;}
 .menu-container .profile-container .thumbnail { border-radius: 5px; float: left; }
 .menu-container .profile-container .profile-details-container { margin-left: 40px; }
+
 /* Footer */
 .footer-container { background-color: #333; }
 .landing-page .footer-container { position: fixed; bottom: 0; top: initial;}

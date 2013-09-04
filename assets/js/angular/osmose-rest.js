@@ -51,7 +51,6 @@ var AppController =  function($scope) {
 		return osm_dates.timeAgo(date_string);
 	}
 
-
 	$scope.formatThumbnail = function(id) {
 		return osm_user.getFacebookProfilePicture(id);
 	}
@@ -60,8 +59,10 @@ var AppController =  function($scope) {
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 
+	$scope.page_loaded = false;
 	$scope.display_state = {
 		title_is_link: true,
+		display_ask_question: false,
 		question: {
 			display_comments: false,
 			display_answers: false,
@@ -77,6 +78,10 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		$scope.display_state.question.display_answers = true;
 		$scope.display_state.answers.display_comments = false;
 	}
+	console.log($scope.display_type)
+	if ($scope.display_type == 'course') {
+		$scope.display_state.display_ask_question = true;
+	}
 
 	$scope.getCourse = function(course_id){
 		Courses.get({id: course_id}, function(res) {
@@ -90,8 +95,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 	// TODO: Support multiple courses
 	$scope.updateCourse = function(course) {
-		$scope.$apply(function(){
-		});
+		$scope.$apply(function(){});
 	}
 
 	$scope.updateAnswer = function(answer) {
@@ -224,31 +228,42 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		});
 	}
 
-	$scope.addCommentInQuestion = function(question, text) {
+	$scope.addQuestion = function(title, content) {
+		var newQuestion = {
+			user_id: 1, // TODO: Change to actual user!!!
+			course_id: $scope.course_id,
+			title: title,
+			content: content
+		};
+		console.log(newQuestion)
+		Questions.post(newQuestion, function(){});
+	}
+
+	$scope.addCommentInQuestion = function(question, content) {
 		// console.log('adding comments to questions');
 		var newComment = {
 			parent_id: question.id,
 			parent_type: 'QUESTION',
-			content: text
+			content: content
 		};
 		Comments.post(newComment, function(){});
 	};
 
-	$scope.addCommentInAnswer = function(answer, text) {
+	$scope.addCommentInAnswer = function(answer, content) {
 		// console.log('adding comments to answer');
 		var newComment = {
 			parent_id: answer.id,
 			parent_type: 'ANSWER',
-			content: text
+			content: content
 		};
 		Comments.post(newComment, function(){});
 	};
 
-	$scope.addAnswer = function(question, text) {
+	$scope.addAnswer = function(question, content) {
 		// console.log('adding answer');
 		var answer = {
 			question_id: question.id,
-			content: text
+			content: content
 		};
 
 		Answers.post(answer, function(){});
@@ -286,18 +301,6 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		};
 
 		Votes.post(answer, function(){});
-	};
-
-	// TODO: unfinished
-	$scope.addQuestion = function(question, text) {
-		// console.log('adding question');
-		var newQuestion = {
-			user_id: 1,
-			title: 'new question title',
-			content: text,
-			course_id: 1
-		};
-		Questions.post(newQuestion, function(){});
 	};
 
 	// Controls the message dispatching
@@ -347,6 +350,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						});
 						console.log('Questions');
 						console.log($scope.questions);
+						$scope.page_loaded = true;
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving courses');
@@ -362,6 +366,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.questions = [res.data.question];
 						console.log('Question loaded');
 						console.log($scope.questions);
+						$scope.page_loaded = true;
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving question');
