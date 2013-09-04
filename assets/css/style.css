@@ -36,7 +36,7 @@ textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -web
 .index-container { background-color: #222; }
 
 /* Content */
-.content-container { background-color: #fff; min-height: 600px; }
+.content-container { background-color: #fff; min-height: 600px; padding-top: 20px; }
 
 .thumbnail-small { width: 30px; height: 30px; border-radius: 3px; float: left; margin-right: 10px; margin-top: 5px; }
 

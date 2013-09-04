@@ -15,6 +15,7 @@ module.exports = {
   },
 
   create: function(req, res) {
+    req.body.voter_id = req.session.user.id;
     Votes.create(req.body, function(err, vote) {
       if (err || vote === undefined) res.api.failure(err);
       else {

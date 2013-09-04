@@ -58,7 +58,7 @@ var AppController =  function($scope) {
 };
 
 
-var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments) {
+var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 
 	$scope.display_state = {
 		title_is_link: true,
@@ -256,6 +256,40 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		Answers.post(answer, function(){});
 	};
 
+	$scope.voteAnswer = function(answer, score) {
+
+		var vote = {
+			post_id : answer.id,
+			post_type : 'ANSWER',
+			post_owner_id : answer.user.id,
+			score : score
+		};
+
+		Votes.post(vote, function(){});
+	};
+
+	$scope.voteQuestion = function(question, score) {
+
+		var vote = {
+			post_id : question.id,
+			post_type : 'QUESTION',
+			post_owner_id : question.user.id,
+			score : score
+		};
+
+		Votes.post(vote, function(){});
+	};
+
+	$scope.downvote = function(question, text) {
+
+		var vote = {
+			question_id: question.id,
+			content: text
+		};
+
+		Votes.post(answer, function(){});
+	};
+
 	// TODO: unfinished
 	$scope.addQuestion = function(question, text) {
 		// console.log('adding question');
@@ -308,6 +342,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 						$scope.courses = res.data;
 						console.log('Courses loaded');
+						console.log($scope.courses);
 
 						$scope.questions = [];
 						res.data.map(function(course) {
@@ -326,6 +361,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				Questions.get({id: path[2]}, function(res) {
 					if (res.success) {
 						$scope.questions = [res.data.question];
+						console.log('Question loaded');
+						console.log($scope.questions);
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving question');

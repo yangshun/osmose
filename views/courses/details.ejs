@@ -4,7 +4,8 @@
       <%- partial('../sidebar.ejs') %>
       <div class="large-10 columns content-container">
         <div>
-          <h3>Courses</h3>
+          <h2><%= course.course_name %></h2>
+          <p><%= course.description %></p>
           <hr/>
           <%- partial('../questions.ejs') %>
         </div>
