@@ -32,7 +32,7 @@ module.exports = {
       async.parallel(data.map(function(course) {
           return function(next) {
             Questions.getQuestionsOfCourse(course.id, {}, function(err, res) {
-              course.question = res;
+              course.questions = res;
               next(err);
             });
           }
