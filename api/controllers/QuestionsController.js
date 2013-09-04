@@ -15,7 +15,6 @@
     	var qid = req.param('id');
     	Questions.getQuestionWithDetails(qid, {user: req.session.user.id}, function(err, question) {
     		if (err || question === undefined) return res.api.failure(err);
-            console.log(req.session);
     		res.api.success({'question': question});
     	});
     },

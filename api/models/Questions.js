@@ -67,11 +67,10 @@ module.exports = {
               var my_vote = 0;
               votes.forEach(function(vote) {
                 score += vote.score;
-                if (vote.voter_id == options.user) { console.log("HERE"); my_vote += vote.score; }
+                if (vote.voter_id == options.user) { my_vote += vote.score; }
               });
               question.score = score;
               question.voted = my_vote;
-              console.log(options);
             }
             next(err);
           });
