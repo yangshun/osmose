@@ -13,7 +13,9 @@
 
     show: function(req, res) {
     	var qid = req.param('id');
-    	Questions.getQuestionWithDetails(qid, {user: req.session.user.id}, function(err, question) {
+    	var options = {};
+    	if (typeof(req.session.user) != 'undefined') options = { user: req.session.user.id };
+    	Questions.getQuestionWithDetails(qid, options, function(err, question) {
     		if (err || question === undefined) return res.api.failure(err);
     		res.api.success({'question': question});
     	});
@@ -31,7 +33,7 @@
     				Questions.publishCreate(question);
 
     				var fbActionName = 'osmosetest:ask';
-    				var objectToLike = req.protocol + "://" + req.get('host') + '/questions/' + question.id;
+    				var objectToLike = "http://" + "osmose.soedar.com:" + req.port + '/questions/' + question.id;
     				req.facebook.api(
     				                 'https://graph.facebook.com/me/'.concat(fbActionName),
     				                 'post',
@@ -71,10 +73,11 @@
     // VIEW ROUTES
     details: function(req, res) {
     	var qid = req.param('id');
-    	Questions.getQuestionWithDetails(qid, {user: req.session.user.id}, function(err, question) {
+    	var options = {};
+    	if (typeof(req.session.user) != 'undefined') options = { user: req.session.user.id };
+    	Questions.getQuestionWithDetails(qid, options, function(err, question) {
     		if (err || question === undefined) return res.render(404);
-    		console.log(question);
-            var url = req.protocol + "://" + req.get('host') + '/questions/' + qid;
+        var url = req.protocol + "://" + req.get('host') + '/questions/' + qid;
     		res.view({
     			_layoutFile: '../layout.ejs',
     			fb_user: req.session.fb_user,
