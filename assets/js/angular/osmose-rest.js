@@ -232,7 +232,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			user_id: 1,
 			content: text
 		};
+		console.log('add answer')
 		Answers.post(answer, function(data){
+			console.log(data);
 			$scope.updateAnswer(data);
 		});
 	};
