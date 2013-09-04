@@ -83,7 +83,7 @@ module.exports.routes = {
   'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
 
   // FB User Routes
-  'delete /api/facebook/:fb_id'     : 'FacebookController.remove',
+  'get /api/facebook/:fb_id'     : 'FacebookController.remove',
 
 
   // View routes
