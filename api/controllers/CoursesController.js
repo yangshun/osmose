@@ -68,7 +68,8 @@ module.exports = {
       if (err || course === undefined) { return res.render(404); }
       res.view({
         _layoutFile: '../layout.ejs',
-        question_id: course.id
+        display_type: 'course',
+        course_id  : course.id
       });
     });
   },
