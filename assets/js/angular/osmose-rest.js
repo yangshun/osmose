@@ -51,17 +51,26 @@ var AppController =  function($scope) {
 		return osm_dates.timeAgo(date_string);
 	}
 
-
 	$scope.formatThumbnail = function(id) {
 		return osm_user.getFacebookProfilePicture(id);
+	}
+
+	$scope.formatText = function(text) {
+		if (!text) {
+			return '';
+		}
+		text = osmose_markups.convert_to_markup(text);
+		return text;
 	}
 };
 
 
-var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments) {
+var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 
+	$scope.page_loaded = false;
 	$scope.display_state = {
 		title_is_link: true,
+		display_ask_question: false,
 		question: {
 			display_comments: false,
 			display_answers: false,
@@ -77,13 +86,15 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		$scope.display_state.question.display_answers = true;
 		$scope.display_state.answers.display_comments = false;
 	}
+	console.log($scope.display_type)
+	if ($scope.display_type == 'course') {
+		$scope.display_state.display_ask_question = true;
+	}
 
 	$scope.getCourse = function(course_id){
 		Courses.get({id: course_id}, function(res) {
 			if (res.success) {
 				$scope.$apply(function(){
-					console.log('Course loaded: ');
-					console.log(res);
 					$scope.course = res.data.course;
 				});
 			}
@@ -92,8 +103,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 
 	// TODO: Support multiple courses
 	$scope.updateCourse = function(course) {
-		$scope.$apply(function(){
-		});
+		$scope.$apply(function(){});
 	}
 
 	$scope.updateAnswer = function(answer) {
@@ -226,46 +236,79 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		});
 	}
 
-	$scope.addCommentInQuestion = function(question, text) {
+	$scope.addQuestion = function(title, content) {
+		var newQuestion = {
+			user_id: 1, // TODO: Change to actual user!!!
+			course_id: $scope.course_id,
+			title: title,
+			content: content
+		};
+		console.log(newQuestion)
+		Questions.post(newQuestion, function(){});
+	}
+
+	$scope.addCommentInQuestion = function(question, content) {
 		// console.log('adding comments to questions');
 		var newComment = {
 			parent_id: question.id,
 			parent_type: 'QUESTION',
-			content: text
+			content: content
 		};
 		Comments.post(newComment, function(){});
 	};
 
-	$scope.addCommentInAnswer = function(answer, text) {
+	$scope.addCommentInAnswer = function(answer, content) {
 		// console.log('adding comments to answer');
 		var newComment = {
 			parent_id: answer.id,
 			parent_type: 'ANSWER',
-			content: text
+			content: content
 		};
 		Comments.post(newComment, function(){});
 	};
 
-	$scope.addAnswer = function(question, text) {
+	$scope.addAnswer = function(question, content) {
 		// console.log('adding answer');
 		var answer = {
 			question_id: question.id,
-			content: text
+			content: content
 		};
 
 		Answers.post(answer, function(){});
 	};
 
-	// TODO: unfinished
-	$scope.addQuestion = function(question, text) {
-		// console.log('adding question');
-		var newQuestion = {
-			user_id: 1,
-			title: 'new question title',
-			content: text,
-			course_id: 1
+	$scope.voteAnswer = function(answer, score) {
+
+		var vote = {
+			post_id : answer.id,
+			post_type : 'ANSWER',
+			post_owner_id : answer.user.id,
+			score : score
 		};
-		Questions.post(newQuestion, function(){});
+
+		Votes.post(vote, function(){});
+	};
+
+	$scope.voteQuestion = function(question, score) {
+
+		var vote = {
+			post_id : question.id,
+			post_type : 'QUESTION',
+			post_owner_id : question.user.id,
+			score : score
+		};
+
+		Votes.post(vote, function(){});
+	};
+
+	$scope.downvote = function(question, text) {
+
+		var vote = {
+			question_id: question.id,
+			content: text
+		};
+
+		Votes.post(answer, function(){});
 	};
 
 	// Controls the message dispatching
@@ -305,9 +348,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						if (!Array.isArray(res.data)) {
 							res.data = [res.data];
 						}
-
 						$scope.courses = res.data;
 						console.log('Courses loaded');
+						console.log($scope.courses);
 
 						$scope.questions = [];
 						res.data.map(function(course) {
@@ -315,6 +358,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						});
 						console.log('Questions');
 						console.log($scope.questions);
+						$scope.page_loaded = true;
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving courses');
@@ -324,8 +368,13 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				break;
 			case 'questions':
 				Questions.get({id: path[2]}, function(res) {
+					console.log('therehere');
+					console.log(res);
 					if (res.success) {
 						$scope.questions = [res.data.question];
+						console.log('Question loaded');
+						console.log($scope.questions);
+						$scope.page_loaded = true;
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving question');

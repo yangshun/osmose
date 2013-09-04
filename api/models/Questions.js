@@ -64,11 +64,13 @@ module.exports = {
           Votes.find({post_id: question.id, post_type: 'QUESTION', deleted: false}).done(function(err, votes) {
             if (!err) {
               var score = 0;
+              var my_vote = 0;
               votes.forEach(function(vote) {
                 score += vote.score;
-                if (vote.voter_id == options.user) { question.voted = true; }
+                if (vote.voter_id == options.user) { my_vote += vote.score; }
               });
               question.score = score;
+              question.voted = my_vote;
             }
             next(err);
           });

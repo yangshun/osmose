@@ -48,3 +48,41 @@ var osm_user = {
 		return 'https://graph.facebook.com/' + fb_id + '/picture';
 	}
 };
+
+var osmose_markups = {
+	available_markups: [
+		{ 	regex: /\(Y\)/g  , icon: 'thumbs-up' },
+		// { 	regex: '\(:', icon: 'smile' },
+	],
+	convert_to_markup: function(text) {
+		text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>');
+		text = text.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>');
+		text = text.replace(/\(:/g, '<i class="icon-smile"></i>');
+		text = text.replace(/:\|/g, '<i class="icon-meh"></i>');
+		text = text.replace(/\[male\]/g, '<i class="icon-male"></i>');
+		text = text.replace(/\[female\]/g, '<i class="icon-female"></i>');
+		text = text.replace(/\[bulb\]/g, '<i class="icon-lightbulb"></i>');
+		text = text.replace(/\[music\]/g, '<i class="icon-music"></i>');
+		text = text.replace(/\[star\]/g, '<i class="icon-star"></i>');
+		text = text.replace(/\[star2\]/g, '<i class="icon-star-empty"></i>');
+		text = text.replace(/\[tick\]/g, '<i class="icon-ok"></i>');
+		text = text.replace(/\[cross\]/g, '<i class="icon-remove"></i>');
+		text = text.replace(/\[flag\]/g, '<i class="icon-flag"></i>');
+		text = text.replace(/\[coffee\]/g, '<i class="icon-coffee"></i>');
+		text = text.replace(/\[heart\]/g, '<i class="icon-gittip"></i>');
+		text = text.replace(/\[apple\]/g, '<i class="icon-apple"></i>');
+		text = text.replace(/\[android\]/g, '<i class="icon-android"></i>');
+		text = text.replace(/\[facebook\]/g, '<i class="icon-facebook-sign"></i>');
+		text = text.replace(/\[github\]/g, '<i class="icon-github"></i>');
+		text = text.replace(/\[instagram\]/g, '<i class="icon-instagram"></i>');
+		text = text.replace(/\[skype\]/g, '<i class="icon-skype"></i>');
+		text = text.replace(/\[tumblr\]/g, '<i class="icon-tumblr"></i>');
+		text = text.replace(/\[twitter\]/g, '<i class="icon-twitter"></i>');
+		text = text.replace(/\[youtube\]/g, '<i class="icon-youtube"></i>');
+		text = text.replace(/<3/g, '<i class="icon-heart"></i>');
+
+		text = text.replace(/<script>/g, '&lt;script&gt;');
+		text = text.replace(/<\/script>/g, '&lt;/script&gt;');
+		return text;
+	}
+}
