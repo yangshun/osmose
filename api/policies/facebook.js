@@ -42,7 +42,6 @@ function facebook_middleware(req, res, next) {
                         params.courses = data;
                         params.fb_user = fb_user;
                         params.user = user;
-                        console.log(params);
                         old_view(params);
                     }
                     next();
