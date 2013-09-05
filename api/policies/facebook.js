@@ -15,11 +15,30 @@ function facebook_middleware(req, res, next) {
 
     req.facebook = facebook;
 
+
+    var populateSession = function(user, fb_user) {
+        req.session.user = user;
+        req.session.fb_user = fb_user;
+
+        var old_view = res.view;
+        res.view = function(params) {
+            if (!params) {
+                params = {};
+            }
+
+            params.fb_user = fb_user;
+            params.user = user;
+            old_view(params);
+        }
+        next();
+    }
+
     // Determine if the user is login to Facebook
     facebook.getUser(function(err, fb_id) {
         req.session.fb_id = fb_id;
+        req.session.user = {'id': -1};
         if (fb_id == 0) {
-            next();
+            populateSession({'id': -1}, undefined);
             return;
         }
 
@@ -28,22 +47,6 @@ function facebook_middleware(req, res, next) {
                 return res.send(500);
             }
 
-            var populateSession = function(user, fb_user) {
-                req.session.user = user;
-                req.session.fb_user = fb_user;
-
-                var old_view = res.view;
-                res.view = function(params) {
-                    if (!params) {
-                        params = {};
-                    }
-
-                    params.fb_user = fb_user;
-                    params.user = user;
-                    old_view(params);
-                }
-                next();
-            }
 
             if (users.length == 0) {
                 req.facebook.api('/me', function(err, data) {
