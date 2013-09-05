@@ -12,7 +12,7 @@
       <h6 class="menu-title">Favourites</h6>
       <ul>
         <li><a href="/feed"><span class="icon-container"><i class="icon-list-ul"></i></span> Feed</a></li>
-        <li><a href="/"><span class="icon-container"><i class="icon-question-sign"></i></span> My Questions</a></li>
+        <li><a href="/my-questions"><span class="icon-container"><i class="icon-question-sign"></i></span> My Questions</a></li>
        <!--  <li><a href="/"><span class="icon-container"><i class="icon-tag"></i></span> Followed</a></li>
         <li><a href="/"><span class="icon-container"><i class="icon-comments"></i></span> Chat</a></li>
         <li><a href="/"><span class="icon-container"><i class="icon-briefcase"></i></span> Organizer</a></li> -->
@@ -20,7 +20,9 @@
     <li>
       <h6 class="menu-title">Courses</h6>
       <ul>
-        <li ng-repeat="course in courses"><a href="/courses/{{ course.id }}">{{ course.course_name }}</a></li>
+        <% for (var i = 0; i < courses.length; i++) { %> 
+        <li><a href="/courses/<%= courses[i].id %>"><%= courses[i].course_name %></a></li>
+        <% } %>
       </ul>
     </li>
     <li class="others">

@@ -31,6 +31,17 @@ function facebook_middleware(req, res, next) {
             var populateSession = function(user, fb_user) {
                 req.session.user = user;
                 req.session.fb_user = fb_user;
+
+                var old_view = res.view;
+                res.view = function(params) {
+                    if (!params) {
+                        params = {};
+                    }
+
+                    params.fb_user = fb_user;
+                    params.user = user;
+                    old_view(params);
+                }
                 next();
             }
 

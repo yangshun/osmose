@@ -15,7 +15,6 @@ module.exports = {
         res.view({
             fb_login_url: url,
             _layoutFile: 'index.ejs',
-            fb_user: undefined,
             title: 'Osmose'
         }); 
     } else {
@@ -25,7 +24,6 @@ module.exports = {
 
   feed: function (req, res) {
     return res.view({
-      fb_user: req.session.fb_user,
       display_type: 'feed',
       _layoutFile: '../layout.ejs'
     });
@@ -43,22 +41,26 @@ module.exports = {
 
         return res.view({
           fb_friends: fb_friends,
-          fb_user: req.session.fb_user,
           _layoutFile: '../layout.ejs'
         });
     });
   },
 
+  my_questions: function(req, res) {
+    return res.view({
+      display_type: "my_questions",
+      _layoutFile: '../layout.ejs'
+    });
+  },
+
   about: function (req, res) {
     res.view({
-      fb_user: req.session.fb_user,
       _layoutFile: 'about.ejs'
     });
   },
 
   team: function (req, res) {
     res.view({
-      fb_user: req.session.fb_user,
       _layoutFile: 'team.ejs'
     });
   },
@@ -79,8 +81,16 @@ module.exports = {
         value: 'smile'
       },
       {
+        key: '): or :(',
+        value: 'frown'
+      },
+      {
         key: '|: or :|',
         value: 'meh'
+      },
+      {
+        key: '[warning]',
+        value: 'warning-sign'
       },
       {
         key: '[male]',
@@ -188,7 +198,6 @@ module.exports = {
 
     res.view({
       markdown_table: two_col_table,
-      fb_user: req.session.fb_user,
       _layoutFile: 'help.ejs'
     });
   },

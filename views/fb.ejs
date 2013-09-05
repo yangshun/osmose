@@ -38,7 +38,7 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 	
-	function inviteFbFriends() {
+	function inviteFbFriends(name, fb_id) {
 		/* If we can use the canvas redirect version */
 		/*
 		FB.ui({method: 'apprequests',
@@ -48,10 +48,14 @@
 		});
 		*/
 
-		FB.ui({method: 'send',
+		FB.ui({
+			method: 'feed',
+			name: 'Osmose',
+			caption: 'Enlighten your friends with Osmose',
+			description: 'Hey ' + name + ', come join me and use Osmose! It\'s a really cool platform for learning and sharing knowledge!',
 			link: 'http://osmose.soedar.com',
-	    	description: 'Enlighten your friends with Osmose',
-	        picture: 'http://osmose.soedar.com/img/logo-75.png'
+	        picture: 'http://osmose.soedar.com/img/icon-128.png',
+	        to: fb_id
 		}, function(data) {
 			console.log(data);
 		});
