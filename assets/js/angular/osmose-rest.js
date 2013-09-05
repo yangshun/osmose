@@ -321,7 +321,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			post_id: post.id,
 			post_type: type
 		};
-		Votes.postOne(vote, function(res){console.log(res);});
+		Votes.postOne(post, function(res){console.log(res);});
 	};
 
 	$scope.updateVotesForQuestion = function(msg) {
