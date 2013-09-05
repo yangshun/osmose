@@ -45,3 +45,5 @@ nbproject
 config/local.js
 
 *.pyc
+
+*.rdb
