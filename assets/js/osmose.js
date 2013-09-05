@@ -101,7 +101,7 @@ var osmose_markdowns = {
 	    var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
 
         // www. sans http:// or https://
-        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+        var pseudoUrlPattern = /(?:<img.+>)|(^|[^\/])(www\.[\S]+(\b|$))/gim;
 
         // Email addresses
         var emailAddressPattern = /\w+@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6})+/gim;
