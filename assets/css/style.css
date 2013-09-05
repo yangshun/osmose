@@ -52,11 +52,12 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 /* Help */
 .markup-table { margin: 20px auto; }
 .markup-table td { font-weight: 100; }
-.markup-table td:first-child { text-align: left; }
+.markup-table th:nth-child(even) { text-align: center; }
+.markup-table td:nth-child(odd) { text-align: left; }
 
 /* Main */
 .index-container { background-color: #222; }
-.loading-container { text-align: center; padding-top: 20px; }
+.loading-container { text-align: center; padding-top: 20px; margin-top: 20px; }
 .loading-container img { margin-bottom: 20px; }
 
 /* Content */
@@ -105,8 +106,9 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 
 /* Invite */
 .invite-container { min-height: 500px !important; }
-.invite-container input { padding: 5px; }
-.invite-friends-list li { list-style-type: none; width: 180px; display: inline-block; padding-right: 10px; height: 60px; }
+.invite-container input { padding: 5px !important; }
+.invite-friends-list li { list-style-type: none; width: 180px; display: inline-block; padding: 10px; height: 60px; }
+/*.invite-friends-list li:hover { background-color: #f0f0f0; }*/
 .invite-friends-list li .thumbnail { float: left; }
 .invite-friends-list li p { margin-bottom: 0px; font-size: 12px; text-overflow: ellipsis; height: 15px; line-height: 12px; }
 .invite-friends-list li a { font-size: 10px; }

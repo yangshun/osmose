@@ -240,7 +240,6 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			return;
 		} 
 		var newQuestion = {
-			user_id: 1, // TODO: Change to actual user!!!
 			course_id: $scope.course_id,
 			title: title,
 			content: content
