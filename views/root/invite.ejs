@@ -6,12 +6,45 @@
         <div>
           <h3>Invite</h3>
           <p>Share the love, invite your friends into Osmose!</p>
-
-          <pre>
-          <%= fb_friends %>
-          </pre>
           <hr/>
+          <div class="invite-container section-container tabs" data-section="tabs">
+            <section>
+              <p class="title" data-section-title><a href="#">Friends not using Osmose</a></p>
+              <div class="loading-container" ng-show="!page_loaded">
+                <br/>
+                <img src="/img/loading.gif" />
+                <p>Fetching list of friends...</p>
+              </div>
+              <div class="content" data-section-content ng-show="page_loaded">
+                <input ng-model="friend_name" type="text" placeholder="Search name"/>
+                <ul class="invite-friends-list">
+                  <li ng-repeat="friend in fb_friends.not_installed | filter:friend_name">
+                    <img class="thumbnail" src="https://graph.facebook.com/{{ friend.id }}/picture/" />
+                    <div class="friend-list-item">
+                      <p>{{ friend.name }}</p>
+                      <a href="#">Invite</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+            <section>
+              <p class="title" data-section-title><a href="#">Friends using Osmose </a></p>
+              <div class="content" data-section-content ng-show="page_loaded">
+                <input ng-model="friend_name" type="text" placeholder="Search name"/>
+                <ul class="invite-friends-list">
+                  <li ng-repeat="friend in fb_friends.installed | filter:friend_name">
+                    <img class="thumbnail" src="https://graph.facebook.com/{{ friend.id }}/picture/" />
+                    <div class="friend-list-item">
+                      <p>{{ friend.name }}</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>              
+            </section>
+          </div>
         </div>
+        <hr/>
       </div>
     </div>
   </div>

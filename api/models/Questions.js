@@ -30,7 +30,7 @@ module.exports = {
   },
 
   getQuestionsOfCourse: function(cid, options, cb) {
-    Questions.find({course_id: cid, deleted: false}).done(function(err, questions) {
+    Questions.find({course_id: cid, deleted: false,}).sort('id DESC').done(function(err, questions) {
       if (err || questions === undefined) return cb(err,undefined);
       var next = function(err) {
         // console.log(err);
