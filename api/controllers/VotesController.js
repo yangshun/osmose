@@ -26,7 +26,10 @@ var changeVote = function(req, res, value_change) {
               }).done(function(err, vote) {
                 // console.log(vote);
                 if (err) return res.api.failure(err);
-                else res.api.success({vote: vote});
+                else {
+                  res.api.success({vote: vote});
+                  Votes.publishCreate(vote);
+                }
               });
             }
           });
@@ -43,7 +46,10 @@ var changeVote = function(req, res, value_change) {
                 deleted: false
               }).done(function(err, vote) {
                 if (err) return res.api.failure(err);
-                else res.api.success({vote: vote});
+                else {
+                  res.api.success({vote: vote});
+                  Votes.publishCreate(vote);
+                }
               });
             }
           });
@@ -54,7 +60,10 @@ var changeVote = function(req, res, value_change) {
 
         vote.save(function(err) {
           if (err) res.api.failure(err);
-          else res.api.success({vote: vote});
+          else {
+            res.api.success({vote: vote});
+            Votes.publishUpdate(vote.id, vote);
+          }
         });
       }
     });
