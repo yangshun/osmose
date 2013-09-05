@@ -1,19 +1,56 @@
-<ul class="posts-list">
-  <li class="post-item" ng-repeat="question in questions">
-    <%- partial('question.ejs') %>
-    <div class="post-answers-container" ng-show="display_state.question.display_answers">
-      <div ng-show="question.answers.length">
-        <h5 class="post-answers-title">{{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></h5>
-        <%- partial('answer.ejs') %>
-      </div>
-      <h5>Add Your Answer</h5>
-      <div class="post-action-container" ng-show="display_state.question.display_answers">
-        <a class="button post-action-button" ng-click="addAnswer(question, user_answer); user_answer = '';">Answer</a>
-        <div class="post-action-textarea">
-          <textarea ng-model="user_answer"></textarea>
+<div class="loading-container" ng-show="!page_loaded">
+  <br/>
+  <img src="/img/loading.gif" />
+  <p>Fetching updated data...</p>
+</div>
+<div ng-show="page_loaded" style="display:none">
+  <div class="course-ask-container" ng-show="display_state.display_ask_question">
+    <form>
+      <fieldset>
+        <legend>Ask a Question</legend>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Title</label>
+            <input type="text" placeholder="This should not be too long" ng-model="new_question_title">
+          </div>
         </div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Content</label>
+            <textarea placeholder="Elaborate on your question here." ng-model="new_question_content"></textarea>
+          </div>
+        </div>
+        <a class="button post-action-button" ng-click="addQuestion(new_question_title, new_question_content); new_question_title = ''; new_question_content = '';">Ask</a>
+      </fieldset>
+    </form>
+  </div>
+  <div ng-show="display_state.display_ask_question">
+    <h6>{{ questions.length }} Questions</h6>
+    <hr/>
+  </div>
+  <ul class="posts-list">
+    <li class="post-item" ng-repeat="question in questions">
+      <%- partial('question.ejs') %>
+      <div class="post-answers-container" ng-show="display_state.question.display_answers">
+        <div ng-show="question.answers.length">
+          <h5 class="post-answers-title">{{ question.answers.length }} Answer<span ng-show="question.answers.length != 1">s</span></h5>
+          <hr class="post-answers-divider"/>
+          <%- partial('answer.ejs') %>
+        </div>
+        <form ng-show="display_state.question.display_answers">
+          <fieldset>
+            <legend>Add Your Answer</legend>
+            <div class="row">
+              <div class="large-12 columns">
+                <textarea placeholder="" ng-model="user_answer"></textarea>
+              </div>
+            </div>
+            <a class="button post-action-button" ng-click="addAnswer(question, user_answer); user_answer = '';">Answer</a>
+          </fieldset>
+        </form>
       </div>
-    </div>
-    <hr />
-  </li>
-</ul>
+      <hr />
+    </li>
+  </ul>
+</div>

@@ -35,6 +35,10 @@ module.exports.routes = {
   '/': 'RootController',
   '/feed': 'RootController.feed',
   '/logout': 'RootController.logout',
+  '/invite': 'RootController.invite',
+  '/about': 'RootController.about',
+  '/help': 'RootController.help',
+  '/team': 'RootController.team',
 
   // '/home': 'HomeController.index',
   'get    /api/me'                  : 'UsersController.me',
@@ -79,11 +83,12 @@ module.exports.routes = {
   'delete /api/votes/:id'           : 'VotesController.remove',
 
   // FB Post Routes
+  'get    /api/facebook/friends'    : 'FacebookController.friends',
   'post   /api/facebook/feed'       : 'FacebookController.feed',
   'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
 
   // FB User Routes
-  'get /api/facebook/:fb_id'     : 'FacebookController.remove',
+  'get /api/facebook/remove/:fb_id'     : 'FacebookController.remove',
 
 
   // View routes
