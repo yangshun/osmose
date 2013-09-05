@@ -37,7 +37,7 @@
     <body ng-app="OsmoseREST" ng-controller="AppController">
         <%- partial('fb.ejs') %>
         <%- partial('navigation.ejs') %>
-        <div class="main-container">
+        <div class="main-container" ng-init="user_id = <%= user.id %>">
             <%- body %>
         </div>
         <div class="footer-container">
