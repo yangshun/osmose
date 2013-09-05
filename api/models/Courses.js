@@ -31,7 +31,7 @@ module.exports = {
     Courses.find({deleted: false}).done(function(err, data) {
       async.parallel(data.map(function(course) {
           return function(next) {
-            Questions.getQuestionsOfCourse(course.id, {}, function(err, res) {
+            Questions.getQuestionsOfCourse(course.id, {user: user_id}, function(err, res) {
               course.questions = res;
               next(err);
             });

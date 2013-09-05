@@ -101,6 +101,10 @@ module.exports = {
       {
         key: '<3',
         value: 'heart'
+      }, 
+      {
+        key: '[heart]',
+        value: 'gittip'
       },
       {
         key: '[star]',
@@ -173,6 +177,11 @@ module.exports = {
       if (i < markdown_table.length) {
         pair.push(markdown_table[i]);
       }
+      
+      if (i == markdown_table.length && markdown_table.length % 2 == 1) {
+        pair.push({ key: '', value: ''});
+      }
+
       two_col_table.push(pair);
       i++;
     }

@@ -20,7 +20,7 @@ module.exports = {
   
   show: function(req, res) {
     var id = req.param('id');
-    Courses.getCourseWithDetails(id, {}, function(err, data) {
+    Courses.getCourseWithDetails(id, {user: req.session.user.id}, function(err, data) {
       if (err || data == undefined) {
         return res.api.failure(err);
       }
@@ -64,7 +64,7 @@ module.exports = {
 
   details: function(req, res) {
     var cid = req.param('id');
-    Courses.getCourseWithDetails(cid, {}, function(err, course) {
+    Courses.getCourseWithDetails(cid, {user: req.session.user.id}, function(err, course) {
       if (err || course === undefined) { return res.render(404); }
       res.view({
         _layoutFile: '../layout.ejs',
