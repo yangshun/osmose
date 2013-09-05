@@ -74,8 +74,16 @@ module.exports = {
         value: 'smile'
       },
       {
+        key: '): or :(',
+        value: 'frown'
+      },
+      {
         key: '|: or :|',
         value: 'meh'
+      },
+      {
+        key: '[warning]',
+        value: 'warning-sign'
       },
       {
         key: '[male]',
