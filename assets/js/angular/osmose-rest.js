@@ -366,6 +366,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		// Set scope based on different pages
 		// TODO: put variables in ng-init for controllers to initialize
 		var params = {};
+		console.log(path);
 		switch (path[1]) {
 			case 'courses':
 				params.id = path[2];
@@ -391,6 +392,23 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						console.log('Error retrieving courses');
 						console.log(res);
 					}
+				});
+				break;
+			case 'my-questions':
+				socket.get('/api/my-questions', function(res) {
+					$scope.$apply(function() {
+						if (res.success) {
+							$scope.questions = res.data;
+
+							res.data.map(function(course) {
+								return $scope.questions = $scope.questions.concat(course.questions);
+							});
+							$scope.page_loaded = true;
+						} else {
+							console.log('Error retrieving my questions');
+							console.log(res);
+						}
+					});
 				});
 				break;
 			case 'questions':

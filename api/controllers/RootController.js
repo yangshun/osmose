@@ -48,6 +48,7 @@ module.exports = {
 
   my_questions: function(req, res) {
     return res.view({
+      display_type: "my_questions",
       _layoutFile: '../layout.ejs'
     });
   },

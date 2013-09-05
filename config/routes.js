@@ -39,6 +39,7 @@ module.exports.routes = {
   '/about': 'RootController.about',
   '/help': 'RootController.help',
   '/team': 'RootController.team',
+  '/my-questions': 'RootController.my_questions',
 
   // '/home': 'HomeController.index',
   'get    /api/me'                  : 'UsersController.me',
