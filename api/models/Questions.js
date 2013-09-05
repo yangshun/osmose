@@ -98,6 +98,12 @@ module.exports = {
           });
         },
         function(next) {
+          Courses.find({id: question.course_id}).done(function(err, course) {
+            if (!err) question.course_name = course.course_name;
+            next(err);
+          })
+        },
+        function(next) {
           Comments.getComments({parent_id: question.id, parent_type: 'QUESTION', deleted: false}, function(err, comments) {
             if (!err) question.comments = comments;
             next(err);
