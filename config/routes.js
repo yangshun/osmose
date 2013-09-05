@@ -54,6 +54,7 @@ module.exports.routes = {
   'put    /api/courses/:id'         : 'CoursesController.update',
   'delete /api/courses/:id'         : 'CoursesController.remove',
   'get    /api/courses/stub'        : 'CoursesController.stub',
+  'get    /api/feed'                : 'CoursesController.feed',
 
   // Questions routes
   'get    /api/questions'           : 'QuestionsController.index',
