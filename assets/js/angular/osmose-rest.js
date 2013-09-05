@@ -428,10 +428,6 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 					$scope.$apply(function() {
 						if (res.success) {
 							$scope.questions = res.data;
-
-							res.data.map(function(course) {
-								return $scope.questions = $scope.questions.concat(course.questions);
-							});
 							$scope.page_loaded = true;
 						} else {
 							console.log('Error retrieving my questions');
