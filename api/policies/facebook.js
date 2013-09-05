@@ -40,7 +40,6 @@ function facebook_middleware(req, res, next) {
 
                     params.fb_user = fb_user;
                     params.user = user;
-                    console.log(params);
                     old_view(params);
                 }
                 next();
