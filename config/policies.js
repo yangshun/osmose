@@ -14,10 +14,10 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': ['facebook', 'fb_auth', 'api_helper'],
+  '*': ['facebook', 'fb_auth', 'api_helper', 'courses'],
 
   QuestionsController: {
-  	'details': true,
+  	'details': ['courses'],
   	'show' : ['api_helper']
   },
 
