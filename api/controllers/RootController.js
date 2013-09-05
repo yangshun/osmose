@@ -32,9 +32,20 @@ module.exports = {
   },
 
   invite: function (req, res) {
-    return res.view({
-      fb_user: req.session.fb_user,
-      _layoutFile: '../layout.ejs'
+    req.facebook.api('/me/friends?fields=installed,name,username', function(err, data) {
+        fb_friends = {}
+        if (!err) {
+            installed = data.data.filter(function(friend) { return "installed" in friend });
+            not_installed = data.data.filter(function(friend) { return !("installed" in friend)});
+
+            fb_friends = {'installed': installed, 'not_installed': not_installed};
+        }
+
+        return res.view({
+          fb_friends: fb_friends,
+          fb_user: req.session.fb_user,
+          _layoutFile: '../layout.ejs'
+        });
     });
   },
 
