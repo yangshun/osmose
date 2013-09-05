@@ -4,6 +4,10 @@
  * @module      :: Controller
  * @description :: Contains logic for handling requests.
  */
+ var regescape = function(str) {
+    var regex = /(<([^>]+)>)/ig;
+    return str.replace(regex, '');
+ }
 
  module.exports = {
     // CRUD API
@@ -91,7 +95,7 @@
     			og_type: 'osmosetest:question',
     			og_url: url,
     			og_title: question.title,
-                og_description: question.content
+                og_description: regescape(question.content)
     		});
     	});
     },
