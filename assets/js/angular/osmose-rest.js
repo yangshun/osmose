@@ -65,7 +65,6 @@ var AppController =  function($scope) {
 };
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
-
 	$scope.page_loaded = false;
 	$scope.display_state = {
 		title_is_link: true,
@@ -349,11 +348,17 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				return $scope.updateQuestion(msg);
 			case 'answers':
 				return $scope.updateAnswer(msg);
-				case 'comments':
+			case 'comments':
 				if (msg.data.parent_type === 'QUESTION') {
 					return $scope.updateQuestion(msg);
 				} else {
 					return $scope.updateAnswer(msg);
+				}
+			case 'votes':
+				if (msg.data.post_type === 'QUESTION') {
+					return $scope.updateVotesForQuestion(msg);
+				} else {
+					return $scope.updateVotesForAnswer(msg);
 				}
 		}
 	});
