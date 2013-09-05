@@ -18,7 +18,7 @@ module.exports.policies = {
 
   QuestionsController: {
   	'details': ['courses'],
-  	'show' : ['api_helper']
+  	'show' : ['api_helper', 'facebook']
   },
 
   RootController: {
