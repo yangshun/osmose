@@ -22,7 +22,7 @@
                     <img class="thumbnail" src="https://graph.facebook.com/{{ friend.id }}/picture/" />
                     <div class="friend-list-item">
                       <p>{{ friend.name }}</p>
-                      <a href="#">Invite</a>
+                      <a onclick="inviteFbFriends('{{ friend.name}}', {{ friend.id }})">Invite</a>
                     </div>
                   </li>
                 </ul>
@@ -37,6 +37,7 @@
                     <img class="thumbnail" src="https://graph.facebook.com/{{ friend.id }}/picture/" />
                     <div class="friend-list-item">
                       <p>{{ friend.name }}</p>
+                      <a onclick="inviteFbFriends('{{ friend.name}}', {{ friend.id }})">Invite</a>
                     </div>
                   </li>
                 </ul>
