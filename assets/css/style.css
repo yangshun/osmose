@@ -52,11 +52,12 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 /* Help */
 .markup-table { margin: 20px auto; }
 .markup-table td { font-weight: 100; }
-.markup-table td:first-child { text-align: left; }
+.markup-table th:nth-child(even) { text-align: center; }
+.markup-table td:nth-child(odd) { text-align: left; }
 
 /* Main */
 .index-container { background-color: #222; }
-.loading-container { text-align: center; padding-top: 20px; }
+.loading-container { text-align: center; padding-top: 20px; margin-top: 20px; }
 .loading-container img { margin-bottom: 20px; }
 
 /* Content */

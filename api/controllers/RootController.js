@@ -87,6 +87,10 @@ module.exports = {
         value: 'meh'
       },
       {
+        key: '[warning]',
+        value: 'warning-sign'
+      },
+      {
         key: '[male]',
         value: 'male'
       },

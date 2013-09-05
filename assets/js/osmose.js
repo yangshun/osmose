@@ -66,6 +66,7 @@ var osmose_markdowns = {
 		text = text.replace(/\[male\]/g, '<i class="icon-male"></i>');
 		text = text.replace(/\[female\]/g, '<i class="icon-female"></i>');
 		text = text.replace(/\[bulb\]/g, '<i class="icon-lightbulb"></i>');
+		text = text.replace(/\[warning\]/g, '<i class="icon-warning-sign"></i>');
 		text = text.replace(/\[music\]/g, '<i class="icon-music"></i>');
 		text = text.replace(/<3/g, '<i class="icon-heart"></i>');
 		text = text.replace(/\[heart\]/g, '<i class="icon-gittip"></i>');
