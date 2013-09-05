@@ -58,8 +58,8 @@ var AppController =  function($scope) {
 	$scope.formatText = function(text) {
 		if (!text) {
 			return '';
-		}
-		text = osmose_markdowns.convert_to_markdown(text);
+		}		
+		text = osmose_markdowns.osmosifyContent(text);
 		return text;
 	}
 };

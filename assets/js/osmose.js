@@ -59,39 +59,62 @@ var osmose_markdowns = {
 		{ 	regex: /\(Y\)/g  , icon: 'thumbs-up' },
 		// { 	regex: '\(:', icon: 'smile' },
 	],
-	convert_to_markdown: function(text) {
-		text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>');
-		text = text.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>');
-		text = text.replace(/\(:/g, '<i class="icon-smile"></i>');
-		text = text.replace(/:\)/g, '<i class="icon-smile"></i>');
-		text = text.replace(/:\(/g, '<i class="icon-frown"></i>');
-		text = text.replace(/\):/g, '<i class="icon-frown"></i>');
-		text = text.replace(/:\|/g, '<i class="icon-meh"></i>');
-		text = text.replace(/\|:/g, '<i class="icon-meh"></i>');
-		text = text.replace(/\[male\]/g, '<i class="icon-male"></i>');
-		text = text.replace(/\[female\]/g, '<i class="icon-female"></i>');
-		text = text.replace(/\[bulb\]/g, '<i class="icon-lightbulb"></i>');
-		text = text.replace(/\[warning\]/g, '<i class="icon-warning-sign"></i>');
-		text = text.replace(/\[music\]/g, '<i class="icon-music"></i>');
-		text = text.replace(/<3/g, '<i class="icon-heart"></i>');
-		text = text.replace(/\[heart\]/g, '<i class="icon-gittip"></i>');
-		text = text.replace(/\[star\]/g, '<i class="icon-star"></i>');
-		text = text.replace(/\[star2\]/g, '<i class="icon-star-empty"></i>');
-		text = text.replace(/\[tick\]/g, '<i class="icon-ok"></i>');
-		text = text.replace(/\[cross\]/g, '<i class="icon-remove"></i>');
-		text = text.replace(/\[flag\]/g, '<i class="icon-flag"></i>');
-		text = text.replace(/\[coffee\]/g, '<i class="icon-coffee"></i>');
-		text = text.replace(/\[apple\]/g, '<i class="icon-apple"></i>');
-		text = text.replace(/\[android\]/g, '<i class="icon-android"></i>');
-		text = text.replace(/\[facebook\]/g, '<i class="icon-facebook-sign"></i>');
-		text = text.replace(/\[github\]/g, '<i class="icon-github"></i>');
-		text = text.replace(/\[instagram\]/g, '<i class="icon-instagram"></i>');
-		text = text.replace(/\[skype\]/g, '<i class="icon-skype"></i>');
-		text = text.replace(/\[tumblr\]/g, '<i class="icon-tumblr"></i>');
-		text = text.replace(/\[twitter\]/g, '<i class="icon-twitter"></i>');
-		text = text.replace(/\[youtube\]/g, '<i class="icon-youtube"></i>');
-		text = text.replace(/<script>/g, '&lt;script&gt;');
-		text = text.replace(/<\/script>/g, '&lt;/script&gt;');
+
+	convertToMarkdown: function(text) {
+		
+			text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>')
+			.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>')
+			.replace(/\(:/g, '<i class="icon-smile"></i>')
+			.replace(/:\)/g, '<i class="icon-smile"></i>')
+			.replace(/:\(/g, '<i class="icon-frown"></i>')
+			.replace(/\):/g, '<i class="icon-frown"></i>')
+			.replace(/:\|/g, '<i class="icon-meh"></i>')
+			.replace(/\|:/g, '<i class="icon-meh"></i>')
+			.replace(/\[male\]/g, '<i class="icon-male"></i>')
+			.replace(/\[female\]/g, '<i class="icon-female"></i>')
+			.replace(/\[bulb\]/g, '<i class="icon-lightbulb"></i>')
+			.replace(/\[warning\]/g, '<i class="icon-warning-sign"></i>')
+			.replace(/\[music\]/g, '<i class="icon-music"></i>')
+			.replace(/<3/g, '<i class="icon-heart"></i>')
+			.replace(/\[heart\]/g, '<i class="icon-gittip"></i>')
+			.replace(/\[star\]/g, '<i class="icon-star"></i>')
+			.replace(/\[star2\]/g, '<i class="icon-star-empty"></i>')
+			.replace(/\[tick\]/g, '<i class="icon-ok"></i>')
+			.replace(/\[cross\]/g, '<i class="icon-remove"></i>')
+			.replace(/\[flag\]/g, '<i class="icon-flag"></i>')
+			.replace(/\[coffee\]/g, '<i class="icon-coffee"></i>')
+			.replace(/\[apple\]/g, '<i class="icon-apple"></i>')
+			.replace(/\[android\]/g, '<i class="icon-android"></i>')
+			.replace(/\[facebook\]/g, '<i class="icon-facebook-sign"></i>')
+			.replace(/\[github\]/g, '<i class="icon-github"></i>')
+			.replace(/\[instagram\]/g, '<i class="icon-instagram"></i>')
+			.replace(/\[skype\]/g, '<i class="icon-skype"></i>')
+			.replace(/\[tumblr\]/g, '<i class="icon-tumblr"></i>')
+			.replace(/\[twitter\]/g, '<i class="icon-twitter"></i>')
+			.replace(/\[youtube\]/g, '<i class="icon-youtube"></i>')
+			.replace(/<script>/g, '&lt;script&gt;')
+			.replace(/<\/script>/g, '&lt;/script&gt;');
+			return text;
+	},
+
+	linkify: function(text) {
+	    var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+        // www. sans http:// or https://
+        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+        // Email addresses
+        var emailAddressPattern = /\w+@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6})+/gim;
+
+        return text
+            .replace(urlPattern, '<a href="$&">$&</a>')
+            .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
+            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+	},
+
+	osmosifyContent: function(text) {
+		text = this.linkify(text);
+		text = this.convertToMarkdown(text);
 		return text;
 	}
 }

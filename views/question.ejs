@@ -19,7 +19,7 @@
       <i ng-class="generateVoteClass(question, 'down')" ng-click="downvote(question, 'QUESTION')"></i> &middot; 
       <!-- <i class="icon-thumbs-down-alt post-action-downvote" ng-click="voteQuestion(question, -1)"></i> &middot;  -->
       <span class="post-user-reply">Asked by {{ question.user.name }}</span> &middot;
-      <span class="post-unanswered"></span> &middot; 
+      <!-- <span class="post-unanswered"></span> &middot;  -->
       <a ng-init="question.comment_open = false" ng-click="question.comment_open = !question.comment_open;">
         <span ng-show="!question.comment_open">{{ question.comments.length }} Comment<span ng-show="question.comments.length != 1">s</span></span>
         <span ng-show="question.comment_open">Hide comments</span>

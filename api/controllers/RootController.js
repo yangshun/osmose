@@ -24,6 +24,7 @@ module.exports = {
 
   feed: function (req, res) {
     return res.view({
+      title: 'Osmose Feed',
       display_type: 'feed',
       _layoutFile: '../layout.ejs'
     });
