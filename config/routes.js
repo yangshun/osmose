@@ -54,6 +54,7 @@ module.exports.routes = {
   'put    /api/courses/:id'         : 'CoursesController.update',
   'delete /api/courses/:id'         : 'CoursesController.remove',
   'get    /api/courses/stub'        : 'CoursesController.stub',
+  'get    /api/feed'                : 'CoursesController.feed',
 
   // Questions routes
   'get    /api/questions'           : 'QuestionsController.index',
@@ -87,7 +88,6 @@ module.exports.routes = {
   'post   /api/votes/downvote'      : 'VotesController.downvote',
 
   // FB Post Routes
-  'get    /api/facebook/random-users/:count': 'FacebookController.random_users',
   'get    /api/facebook/friends'    : 'FacebookController.friends',
   'post   /api/facebook/feed'       : 'FacebookController.feed',
   'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
