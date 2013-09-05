@@ -80,7 +80,7 @@ module.exports.routes = {
   // Votes routes
   'get    /api/votes'               : 'VotesController.index',
   'get    /api/votes/:id'           : 'VotesController.show',
-  'post   /api/votes'               : 'VotesController.create',
+  // 'post   /api/votes'               : 'VotesController.create',
   'put    /api/votes/:id'           : 'VotesController.update',
   'delete /api/votes/:id'           : 'VotesController.remove',
   'post   /api/votes/upvote'        : 'VotesController.upvote',

@@ -8,7 +8,7 @@
 var changeVote = function(req, res, value_change) {
     var post_type = req.param('post_type');
     var post_id = req.param('post_id');
-    var voter_id = req.param('voter_id');
+    var voter_id = req.session.user.id;
 
     Votes.findOne({post_type: post_type, post_id: post_id, voter_id: voter_id}).done(function(err, vote) {
       if (err || vote == undefined) {
@@ -27,8 +27,8 @@ var changeVote = function(req, res, value_change) {
                 // console.log(vote);
                 if (err) return res.api.failure(err);
                 else {
-                  res.api.success({vote: vote});
                   Votes.publishCreate(vote);
+                  res.api.success({vote: vote});
                 }
               });
             }
@@ -47,8 +47,8 @@ var changeVote = function(req, res, value_change) {
               }).done(function(err, vote) {
                 if (err) return res.api.failure(err);
                 else {
-                  res.api.success({vote: vote});
                   Votes.publishCreate(vote);
+                  res.api.success({vote: vote});
                 }
               });
             }
@@ -61,8 +61,13 @@ var changeVote = function(req, res, value_change) {
         vote.save(function(err) {
           if (err) res.api.failure(err);
           else {
+            Votes.publish(null, {
+              id: vote.id,
+              model: 'votes',
+              verb: 'update',
+              data: vote 
+            });
             res.api.success({vote: vote});
-            Votes.publishUpdate(vote.id, vote);
           }
         });
       }
