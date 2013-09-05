@@ -97,23 +97,23 @@ var osmose_markdowns = {
 			return text;
 	},
 
-	linkify: function(text) {
-	    var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+	// linkify: function(text) {
+	//     var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
 
-        // www. sans http:// or https://
-        var pseudoUrlPattern = /(?:<img.+>)|(^|[^\/])(www\.[\S]+(\b|$))/gim;
+ //        // www. sans http:// or https://
+ //        var pseudoUrlPattern = /(?:<img.+>)|(^|[^\/])(www\.[\S]+(\b|$))/gim;
 
-        // Email addresses
-        var emailAddressPattern = /\w+@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6})+/gim;
+ //        // Email addresses
+ //        var emailAddressPattern = /\w+@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6})+/gim;
 
-        return text
-            .replace(urlPattern, '<a href="$&">$&</a>')
-            .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
-            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
-	},
+ //        return text
+ //            .replace(urlPattern, '<a href="$&">$&</a>')
+ //            .replace(pseudoUrlPattern, '$1<a href="http://$2">$2</a>')
+ //            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+	// },
 
 	osmosifyContent: function(text) {
-		text = this.linkify(text);
+		// text = this.linkify(text);
 		text = this.convertToMarkdown(text);
 		return text;
 	}
