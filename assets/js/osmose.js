@@ -23,7 +23,7 @@ var osm_dates = {
 		var timeDiff = -(new Date()).getTimezoneOffset();
 
 		var date = new Date(new_time_string);
-		date.setMinutes(date.getMinutes() + timeDiff);
+		date.setMinutes(date.getMinutes() + 2*timeDiff);
 
 		var diff = (((new Date()).getTime() - date.getTime()) / 1000),
 		    day_diff = Math.floor(diff / 86400);
