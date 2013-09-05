@@ -46,7 +46,11 @@ module.exports = {
         return res.api.failure(err);
       }
 
-      Courses.publishUpdate(courses[0].id, courses[0]);
+      Courses.publish(null, {
+        id: courses[0].id,
+        model: 'courses',
+        verb: 'update',
+        data: courses[0]});
       return res.api.success({'course': courses[0]});
     });
   },

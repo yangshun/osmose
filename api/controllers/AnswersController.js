@@ -50,7 +50,11 @@ module.exports = {
       else {
         Answers.getAnswerWithComments(answers[0].id, {user: req.session.user.id}, function(err, answer) {
           res.api.success({'answer': answer});
-          Answers.publishUpdate(answer.id, answer);
+          Answers.publish(null, {
+            id: answer.id,
+            model: 'answers',
+            verb: 'update',
+            data: answer});
         })
       }
     });

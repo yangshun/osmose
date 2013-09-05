@@ -53,7 +53,12 @@
     		else {
     			Questions.getQuestionWithDetails(questions[0].id, {user: req.session.user.id}, function(err, question){
     				res.api.success({'question': question});
-    				Questions.publishUpdate(question.id, question);
+    				Questions.publish(null, {
+                        id: question.id,
+                        model: 'questions',
+                        verb: 'update',
+                        data: question
+                    });
     			})
     		}
     	});

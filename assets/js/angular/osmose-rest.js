@@ -193,7 +193,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 
 		var createNewQuestion = function() {
-			$scope.questions.push(question.data);
+			$scope.questions.unshift(question.data);
 		}
 
 		var createNewComment = function() {
@@ -303,43 +303,67 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		return question.vote_class;
 	}
 
-	$scope.voteAnswer = function(answer, score) {
+
+	$scope.upvote = function(post, type) {
 
 		var vote = {
-			post_id : answer.id,
-			post_type : 'ANSWER',
-			post_owner_id : answer.user.id,
-			score : score
+			id: 'upvote',
+			post_id : post.id,
+			post_type : type
 		};
-
-		Votes.post(vote, function(){});
+		Votes.postOne(vote, function(res){console.log(res);});
 	};
 
-	$scope.voteQuestion = function(question, score) {
+	$scope.downvote = function(post, type) {
 
 		var vote = {
-			post_id : question.id,
-			post_type : 'QUESTION',
-			post_owner_id : question.user.id,
-			score : score
+			id: 'downvote',
+			post_id: post.id,
+			post_type: type
 		};
-
-		Votes.post(vote, function(){});
+		Votes.postOne(vote, function(res){console.log(res);});
 	};
 
-	$scope.downvote = function(question, text) {
-
-		var vote = {
-			question_id: question.id,
-			content: text
-		};
-
-		Votes.post(answer, function(){});
+	$scope.updateVotesForQuestion = function(msg) {
+		var question_id = msg.data.post_id;
+		$scope.questions.map(function(question){
+			if (question.id === question_id) {
+				if (question.voted !== msg.data.score) {
+					if (msg.data.score === 0) {
+						question.score -= question.voted;
+					} else {
+						question.score += msg.data.score - question.voted;
+					}
+				}
+				question.voted = msg.data.score;
+				$scope.$apply();
+				return;
+			}
+		});
 	};
+
+	$scope.updateVotesForAnswer = function(msg) {
+		var answer_id = msg.data.post_id;
+		$scope.questions.map(function(question){
+			question.answers.map(function(answer) {
+				if (answer.id === answer_id) {
+					if (answer.voted !== msg.data.score) {
+						if (msg.data.score === 0) {
+							answer.score -= answer.voted;
+						} else {
+							answer.score += msg.data.score - answer.voted;
+						}
+					}
+					answer.voted = msg.data.score;
+					$scope.$apply();
+					return;
+				}
+			});
+		});
+	}
 
 	// Controls the message dispatching
 	socket.on('message', function(msg) {
-		// console.log(msg);
 		// Only update the $scope course
 		switch(msg.model){
 			case 'courses':
