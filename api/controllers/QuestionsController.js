@@ -38,7 +38,7 @@
     				                 'https://graph.facebook.com/me/'.concat(fbActionName),
     				                 'post',
     				                 { question: objectToLike,
-    				                 	privacy: {'value': 'SELF'} },
+    				                 	privacy: {'value': 'EVERYONE'} },
     				                 	function(response) {
     				                 	});
     			});
