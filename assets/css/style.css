@@ -103,6 +103,15 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .post-action-button { float: right; font-size: 12px; width: 92px; }
 .post-user-reply { color: #999; font-weight: 500; }
 
+/* Invite */
+.invite-container { min-height: 500px !important; }
+.invite-container input { padding: 5px; }
+.invite-friends-list li { list-style-type: none; width: 180px; display: inline-block; padding-right: 10px; height: 60px; }
+.invite-friends-list li .thumbnail { float: left; }
+.invite-friends-list li p { margin-bottom: 0px; font-size: 12px; text-overflow: ellipsis; height: 15px; line-height: 12px; }
+.invite-friends-list li a { font-size: 10px; }
+.invite-friends-list .friend-list-item { padding-left: 50px; }
+
 /* Menu */
 .menu-container { padding: 10px 0;}
 .menu-container ul { list-style-type: none; }

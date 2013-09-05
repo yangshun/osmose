@@ -64,7 +64,6 @@ var AppController =  function($scope) {
 	}
 };
 
-
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 
 	$scope.page_loaded = false;
@@ -472,11 +471,13 @@ var trythis = function() {
 	});
 }
 
-var FriendController = function($scope) {
+var InviteController = function($scope) {
+	$scope.page_loaded = false;
+
 	socket.get('/facebook/friends', function(res) {
-		console.log(res.data);
 		$scope.$apply(function() {
 			$scope.fb_friends = res.data;
+			$scope.page_loaded = true;
 		});
 	});
 }
@@ -484,7 +485,7 @@ var FriendController = function($scope) {
 var controllers = {
 	'CourseController' : CourseController,
 	'AppController' : AppController,
-	'FriendController' : FriendController
+	'InviteController' : InviteController
 };
 
 OsmoseREST.controller(controllers);

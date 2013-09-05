@@ -22,7 +22,10 @@ module.exports.policies = {
   },
 
   RootController: {
-    'index': ['facebook']
+    'index': ['facebook'],
+    'about': 'facebook',
+    'team': 'facebook',
+    'help': 'facebook'
   }
 
   /*
