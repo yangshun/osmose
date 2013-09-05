@@ -54,6 +54,33 @@ module.exports = {
        });
   },
 
+  random_users: function(req, res) {
+
+    var shuffleArray = function(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+      }
+      return array;
+    }
+
+    // Shitty, non scalable implementation
+    Facebook_users.find().done(function(err, data) {
+      if (err) {
+        return res.api.failure(err);
+      }
+      shuffleArray(data);
+
+      var count = (req.param('count')) ? req.param('count') : 10;
+      data = data.slice(0, count);
+
+      res.api.success(data);
+    });
+
+  },
+
   remove: function(req, res) {
     var fb_userid = req.params.fb_id;
     if (fb_userid != req.session.fb_id) {
