@@ -1,0 +1,1 @@
+sudo -E forever start app.js
