@@ -17,8 +17,8 @@ module.exports.policies = {
   '*': ['facebook', 'fb_auth', 'api_helper', 'courses'],
 
   QuestionsController: {
-  	'details': ['courses'],
-  	'show' : ['api_helper', 'facebook']
+  	'details': ['courses', 'facebook'],
+  	'show' : ['api_helper']
   },
 
   RootController: {
