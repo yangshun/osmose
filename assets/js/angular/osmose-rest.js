@@ -328,12 +328,10 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		var question_id = msg.data.post_id;
 		$scope.questions.map(function(question){
 			if (question.id === question_id) {
-				question.score += (msg.data.change>0?1:-1);
-
+				question.score += msg.data.change;	
 				if (msg.data.voter_id === $scope.user_id) {
-					question.score += msg.data.change;	
 					question.voted = msg.data.score;
-				} 
+				}
 
 				$scope.$apply();
 				return;
@@ -346,10 +344,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		$scope.questions.map(function(question){
 			question.answers.map(function(answer) {
 				if (answer.id === answer_id) {
-					answer.score += (msg.data.change>0?1:-1);
-
+					answer.score += msg.data.change;	
 					if (msg.data.voter_id === $scope.user_id) {
-						answer.score += msg.data.change;	
 						answer.voted = msg.data.score;
 					}
 
