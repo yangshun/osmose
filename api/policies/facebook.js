@@ -32,21 +32,18 @@ function facebook_middleware(req, res, next) {
                 req.session.user = user;
                 req.session.fb_user = fb_user;
 
-                Courses.find({}).done(function(err, data){
-                    var old_view = res.view;
-                    res.view = function(params) {
-                        if (!params) {
-                            params = {};
-                        }
-
-                        params.courses = data;
-                        params.fb_user = fb_user;
-                        params.user = user;
-                        console.log(params);
-                        old_view(params);
+                var old_view = res.view;
+                res.view = function(params) {
+                    if (!params) {
+                        params = {};
                     }
-                    next();
-                });
+
+                    params.fb_user = fb_user;
+                    params.user = user;
+                    console.log(params);
+                    old_view(params);
+                }
+                next();
             }
 
             if (users.length == 0) {

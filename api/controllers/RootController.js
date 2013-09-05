@@ -46,6 +46,12 @@ module.exports = {
     });
   },
 
+  my_questions: function(req, res) {
+    return res.view({
+      _layoutFile: '../layout.ejs'
+    });
+  },
+
   about: function (req, res) {
     res.view({
       _layoutFile: 'about.ejs'
