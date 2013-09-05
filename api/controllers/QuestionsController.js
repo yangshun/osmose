@@ -85,7 +85,8 @@
     			display_type: 'question',
     			og_type: 'osmosetest:question',
     			og_url: url,
-    			og_title: question.title
+    			og_title: question.title,
+                og_description: question.content
     		});
     	});
     }
