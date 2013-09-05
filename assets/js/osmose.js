@@ -19,8 +19,13 @@ var osm_dates = {
 	timeAgo: function(time_string){
 		// Facebook style of time ago string
 		var new_time_string = (time_string || "").replace(/-/g,"/").replace(/[TZ]/g," ");
-		var date = new Date(new_time_string),
-		    diff = (((new Date()).getTime() - date.getTime()) / 1000),
+
+		var timeDiff = -(new Date()).getTimezoneOffset();
+
+		var date = new Date(new_time_string);
+		date.setMinutes(date.getMinutes() + timeDiff);
+
+		var diff = (((new Date()).getTime() - date.getTime()) / 1000),
 		    day_diff = Math.floor(diff / 86400);
 
 		if (isNaN(day_diff) || day_diff < 0) {
