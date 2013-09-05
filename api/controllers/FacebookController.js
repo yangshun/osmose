@@ -22,15 +22,20 @@ module.exports = {
   },
 
   friends: function(req, res) {
+    if (req.session.fb_friends) {
+      return res.api.success(req.session.fb_friends);
+    }
     req.facebook.api('/me/friends?fields=installed,name,username', function(err, data) {
         if (err) {
             res.api.failure(err);
         }
         else {
-            installed = data.data.filter(function(friend) { return "installed" in friend });
-            not_installed = data.data.filter(function(friend) { return !("installed" in friend)});
+            var installed = data.data.filter(function(friend) { return "installed" in friend });
+            var not_installed = data.data.filter(function(friend) { return !("installed" in friend)});
 
-            res.api.success({'installed': installed, 'not_installed': not_installed});
+            var data = {'installed': installed, 'not_installed': not_installed};
+            req.session.fb_friends = data;
+            res.api.success(data);
         }
     });
   },
