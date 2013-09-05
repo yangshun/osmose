@@ -27,6 +27,7 @@ var changeVote = function(req, res, value_change) {
                 // console.log(vote);
                 if (err) return res.api.failure(err);
                 else {
+                  vote.change = value_change;
                   Votes.publishCreate(vote);
                   res.api.success({vote: vote});
                 }
@@ -47,6 +48,7 @@ var changeVote = function(req, res, value_change) {
               }).done(function(err, vote) {
                 if (err) return res.api.failure(err);
                 else {
+                  vote.change = value_change;
                   Votes.publishCreate(vote);
                   res.api.success({vote: vote});
                 }
@@ -55,12 +57,20 @@ var changeVote = function(req, res, value_change) {
           });
         }
       } else {
-        if (vote.score != value_change) {  vote.score = value_change; } 
-        else { vote.score = 0; }
+        var score_change;
+        if (vote.score != value_change) { 
+          score_change = value_change - vote.score; 
+          vote.score = value_change; 
+        } 
+        else { 
+          score_change = -vote.score;
+          vote.score = 0; 
+        }
 
         vote.save(function(err) {
           if (err) res.api.failure(err);
           else {
+            vote.change = score_change;
             Votes.publish(null, {
               id: vote.id,
               model: 'votes',
