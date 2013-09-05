@@ -5,6 +5,70 @@
  * @description	:: Contains logic for handling requests.
  */
 
+var changeVote = function(req, res, value_change) {
+    var post_type = req.param('post_type');
+    var post_id = req.param('post_id');
+    var voter_id = req.param('voter_id');
+
+    Votes.findOne({post_type: post_type, post_id: post_id, voter_id: voter_id}).done(function(err, vote) {
+      if (err || vote == undefined) {
+        if (post_type === "QUESTION") {
+          Questions.findOne(post_id).done(function(err, question) {
+            if (err) return res.api.failure(err);
+            else {
+              Votes.create({
+                post_type: "QUESTION",
+                post_id: post_id, 
+                voter_id: voter_id,
+                post_owner_id: question.user_id,
+                score: value_change,
+                deleted: false
+              }).done(function(err, vote) {
+                // console.log(vote);
+                if (err) return res.api.failure(err);
+                else {
+                  res.api.success({vote: vote});
+                  Votes.publishCreate(vote);
+                }
+              });
+            }
+          });
+        } else if (post_type === "ANSWER") {
+          Answers.findOne(post_id).done(function(err, answer) {
+            if (err) return res.api.failure(err);
+            else {
+              Votes.create({
+                post_type: "ANSWER",
+                post_id: post_id, 
+                voter_id: voter_id,
+                post_owner_id: answer.user_id,
+                score: value_change,
+                deleted: false
+              }).done(function(err, vote) {
+                if (err) return res.api.failure(err);
+                else {
+                  res.api.success({vote: vote});
+                  Votes.publishCreate(vote);
+                }
+              });
+            }
+          });
+        }
+      } else {
+        if (vote.score != value_change) {  vote.score = value_change; } 
+        else { vote.score = 0; }
+
+        vote.save(function(err) {
+          if (err) res.api.failure(err);
+          else {
+            res.api.success({vote: vote});
+            Votes.publishUpdate(vote.id, vote);
+          }
+        });
+      }
+    });
+  }
+
 module.exports = {  
   index: function(req, res) {
     res.api.failure_code(404);
@@ -42,5 +106,20 @@ module.exports = {
         }
       });
     });
+  },
+
+  upvote: function(req, res) {
+    // var post_type = req.param('post_type');
+    // var post_id = req.param('post_id');
+    // var voter_id = req.param('voter_id');
+    // console.log(this);
+    changeVote(req, res, 1);
+  },
+
+  downvote: function(req, res) {
+    // var post_type = req.param('post_type');
+    // var post_id = req.param('post_id');
+    // var voter_id = req.param('voter_id');
+    changeVote(req, res, -1);
   }
 };
