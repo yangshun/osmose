@@ -38,19 +38,21 @@
           <hr class="post-answers-divider"/>
           <%- partial('answer.ejs') %>
         </div>
-        <form ng-show="display_state.question.display_answers">
-          <fieldset>
-            <legend>Add Your Answer</legend>
-            <div class="row">
-              <div class="large-12 columns">
-                <textarea placeholder="" ng-model="user_answer"></textarea>
+        <% if (typeof fb_user !== 'undefined') { %>
+          <form ng-show="display_state.question.display_answers">
+            <fieldset>
+              <legend>Add Your Answer</legend>
+              <div class="row">
+                <div class="large-12 columns">
+                  <textarea placeholder="" ng-model="user_answer"></textarea>
+                </div>
               </div>
-            </div>
-            <a class="button post-action-button" ng-click="addAnswer(question, user_answer); user_answer = '';">Answer</a>
-          </fieldset>
-        </form>
+              <a class="button post-action-button" ng-click="addAnswer(question, user_answer); user_answer = '';">Answer</a>
+            </fieldset>
+          </form>
+          <hr/>
+        <% } %>
       </div>
-      <hr />
     </li>
   </ul>
 </div>

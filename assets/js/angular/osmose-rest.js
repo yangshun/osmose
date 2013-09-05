@@ -420,6 +420,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				socket.get('/api/feed', function(res) {
 					if (res.success) {
 						$scope.questions = res.data;
+						// console.log('questions')
+						console.log($scope.questions)
 						$scope.page_loaded = true;
 						$scope.$apply();
 					}
