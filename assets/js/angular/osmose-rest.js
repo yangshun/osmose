@@ -393,7 +393,6 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		switch (path[1]) {
 			case 'courses':
 				params.id = path[2];
-			case 'feed':
 				Courses.get(params, function(res) {
 					if (res.success) {
 						if (!Array.isArray(res.data)) {
@@ -413,6 +412,19 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.$apply();
 					} else {
 						console.log('Error retrieving courses');
+						console.log(res);
+					}
+				});
+				break;
+			case 'feed':
+				socket.get('/api/feed', function(res) {
+					if (res.success) {
+						$scope.questions = res.data;
+						$scope.page_loaded = true;
+						$scope.$apply();
+					}
+					else {
+						console.log('Error retrieving feed');
 						console.log(res);
 					}
 				});

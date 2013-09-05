@@ -17,6 +17,33 @@ module.exports = {
       return res.api.success(data);
     });
   },
+
+  feed: function(req, res) {
+    var user_id = req.session.user.id;
+    Courses.getCoursesWithDetails(user_id, function(err, data){
+      if (err || data == undefined) {
+        return res.api.failure(err);
+      }
+
+      questions = [];
+      for (var i=0;i<data.length;i++) {
+        if (data[i].questions) {
+          questions = questions.concat(data[i].questions);
+        }
+      }
+
+      questions.sort(function(a, b) {
+        if (a.updatedAt < b.updatedAt)
+          return 1;
+        else if (a.updatedAt > b.updatedAt)
+          return -1;
+        else
+          return 0;
+      });
+
+      return res.api.success(questions);
+    });
+  },
   
   show: function(req, res) {
     var id = req.param('id');

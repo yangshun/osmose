@@ -1,0 +1,1 @@
+sudo -E forever stop app.js
