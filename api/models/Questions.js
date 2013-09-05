@@ -98,7 +98,7 @@ module.exports = {
           });
         },
         function(next) {
-          Courses.find({id: question.course_id}).done(function(err, course) {
+          Courses.findOne({id: question.course_id}).done(function(err, course) {
             if (!err) question.course_name = course.course_name;
             next(err);
           })
