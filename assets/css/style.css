@@ -44,6 +44,7 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .about-container img { height: 50px; width: 50px; border-radius: 25px; position: absolute; }
 .about-container .info { display: inline-block; margin-left: 70px; }
 @media only screen and (max-width: 480px) { 
+	.about-container .info-container h5 { text-align: center; }
     .about-container .info-container { text-align: center; width: 100%; }
     .about-container img { position: static; margin-bottom: 20px; }
     .about-container .info { margin-left: 0; }

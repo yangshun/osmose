@@ -60,6 +60,7 @@ module.exports.routes = {
   'post   /api/questions'           : 'QuestionsController.create',
   'put    /api/questions/:id'       : 'QuestionsController.update',
   'delete /api/questions/:id'       : 'QuestionsController.remove',
+  'get    /api/my-questions'        : 'QuestionsController.my_questions',
 
   // Answers routes
   'get    /api/answers'             : 'AnswersController.index',

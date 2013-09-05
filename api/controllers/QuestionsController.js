@@ -89,5 +89,15 @@
                 og_description: question.content
     		});
     	});
+    },
+
+    my_questions: function(req, res) {
+        Questions.getQuestionsForUser(req.session.user.id, {}, function(err, questions) {
+        if (err || questions == undefined) {
+            res.api.failure(err);
+        }
+
+        res.api.success(questions);
+      })
     }
   };

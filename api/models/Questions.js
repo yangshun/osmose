@@ -51,6 +51,28 @@ module.exports = {
     });
   },
 
+  getQuestionsForUser: function(user_id, options, cb) {
+      Questions.find({user_id: user_id, deleted: false,}).sort('id DESC').done(function(err, questions) {
+      if (err || questions === undefined) return cb(err,undefined);
+      var next = function(err) {
+        // console.log(err);
+      };
+
+      var result = [];
+
+      async.eachSeries(questions,
+        function(question, next) {
+          Questions.getQuestionWithDetails(question.id, options, function(err, details) {
+            if (!err) result.push(details);
+            next(err);
+          });
+        },
+        function(err) {
+          cb(err, result); 
+        });
+    });
+  },
+
   getQuestionWithDetails: function(qid, options, cb) {
     Questions.findOne({id: qid, deleted: false}).done(function(err, question) {
       if (err || question === undefined) return cb(err, undefined);
