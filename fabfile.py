@@ -8,11 +8,12 @@ env.use_ssh_config = True
 env.key_filename = '~/.ssh/osmose.pem'
 
 def deploy():
-  with cd('~/2013-fb-group-11'):
+  with cd('~/Osmose'):
     run('git remote update && git reset --hard origin/master')
     run('sudo npm install')
-    sudo("god load osmose.god")
-    sudo("god restart osmose")
+    with settings(warn_only=True):
+    	run('./d')
+    run("./s")
 
 def setup():
   with cd('~'):
