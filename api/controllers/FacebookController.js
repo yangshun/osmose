@@ -56,6 +56,7 @@ module.exports = {
 
   random_users: function(req, res) {
 
+/*
     var shuffleArray = function(array) {
       for (var i = array.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
@@ -80,6 +81,7 @@ module.exports = {
     });
 
   },
+  */
 
   remove: function(req, res) {
     var fb_userid = req.params.fb_id;

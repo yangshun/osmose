@@ -87,7 +87,6 @@ module.exports.routes = {
   'post   /api/votes/downvote'      : 'VotesController.downvote',
 
   // FB Post Routes
-  'get    /api/facebook/random-users/:count': 'FacebookController.random_users',
   'get    /api/facebook/friends'    : 'FacebookController.friends',
   'post   /api/facebook/feed'       : 'FacebookController.feed',
   'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
