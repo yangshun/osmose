@@ -58,6 +58,7 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .markup-table td { font-weight: 100; }
 .markup-table th:nth-child(even) { text-align: center; }
 .markup-table td:nth-child(odd) { text-align: left; }
+.media-table th, .media-table th:nth-child(even), .media-table  td { text-align: left; }
 
 /* Main */
 .index-container { background-color: #222; }

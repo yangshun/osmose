@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <!-- Viewport mobile tag for sensible mobile support -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <title><%- title %></title>
+        <title>Osmose</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -35,7 +35,7 @@
                         <div class="main-box">
                           <h1>Help</h1>
                           <hr/>
-                          <p>The following is a list of markdown you can use in your content.</p>
+                          <p>The following is a list of emoticons you can use in your posts.</p>
                           <table class="markup-table">
                             <thead>
                               <tr>
@@ -54,6 +54,20 @@
                                 <% } %>
                               </tr>
                               <% } %>
+                            </tbody>
+                          </table>
+                          <p>You can add media content to your posts too!</p>
+                          <table class="markup-table media-table">
+                            <thead>
+                              <tr>
+                                <th width="200">Media</th>
+                                <th width="208">Format</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr><td>Links</td><td>[link:&lt;url&gt;]</td></tr>
+                              <tr><td>Images</td><td>[img:&lt;img_url&gt;]</td></tr>
+                              <tr><td>Youtube Videos</td><td>[youtube:&lt;youtube_url&gt;]</td></tr>
                             </tbody>
                           </table>
                         </div>
