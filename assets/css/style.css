@@ -103,6 +103,7 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 /*.post-answer-container:hover .post-score-action { opacity: 1; }*/
 .post-section-title { font-size: 11px; color: #666; }
 .post-section-text { color: #333; font-size: 14px; }
+.post-section-text img { display: block; }
 .post-answers-title { font-size: 16px; color: #0977d5;; padding-left: 10px; margin-top: 30px; }
 .post-answers-divider { margin-top: 10px;}
 .post-answer-summary-column { width: 30px; margin-left: 10px; float:left; text-align: right; }
