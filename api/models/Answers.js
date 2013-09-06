@@ -44,6 +44,16 @@ module.exports = {
 	  			});
   			},
   			function(err) {
+          if (!err) {
+            result.sort(function(a, b) {
+              if (a.score < b.score)
+                return 1;
+              else if (a.score > b.score)
+                return -1;
+              else
+                return 0;
+            });
+          }
   				cb(err, result);
   			});
 	});
