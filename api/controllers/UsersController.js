@@ -35,8 +35,13 @@ module.exports = {
 
   subscribe: function(req, res) {
     // TODO: Subscribe to the correct courses and questions
+    var path = req.param('path');
+    var id = req.param('id');
+
+    if (path !== 'questions') {
+      Questions.subscribe(req.socket);
+    }
     Courses.subscribe(req.socket);
-    Questions.subscribe(req.socket);
     Answers.subscribe(req.socket);
     Comments.subscribe(req.socket);
     Votes.subscribe(req.socket);

@@ -45,7 +45,7 @@ module.exports.routes = {
   'get    /api/me'                  : 'UsersController.me',
 
   // Users routes
-  'get    /api/users/subscribe'     : 'UsersController.subscribe',
+  'get    /api/users/subscribe/:path/:id' : 'UsersController.subscribe',
 
   // Courses routes
   'get    /api/courses'             : 'CoursesController.index',
