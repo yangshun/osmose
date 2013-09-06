@@ -73,7 +73,8 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 
 /* Feed */
 .posts-list { list-style-type: none; }
-.post-title a { color: #0977d5;}
+.post-title div, .post-title a { width: 100%; text-overflow: ellipsis; overflow: hidden; }
+.post-title a { color: #0977d5; display: block; }
 .post-title a:hover { text-decoration: underline; }
 .post-question-content { margin-left: 50px; margin-bottom: 10px; }
 .post-summary-column { width: 40px; float: left; }
@@ -87,7 +88,7 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .post-details .post-action-upvote:hover, .post-details .post-action-upvoted { color: rgb(75, 212, 75); }
 .post-details .post-action-downvote:hover, .post-details .post-action-downvoted { color: rgb(233, 52, 81); }
 .post-details a:hover { text-decoration: underline; }
-.post-text { margin-bottom: 10px; }
+.post-text { margin-bottom: 10px; text-overflow: ellipsis; overflow: hidden;}
 .post-main-text { font-weight: 300; }
 .post-unanswered { font-weight: 400; color: rgb(233, 52, 81); }
 .post-unanswered:before { content: 'Unanswered'; }

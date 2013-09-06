@@ -7,9 +7,9 @@
   </div>
   <div class="post-question-content">
     <h4 class="post-title">
-      <span ng-show="display_state.title_is_link">
+      <div ng-show="display_state.title_is_link">
         <a href="/questions/{{ question.id }}" ng-bind-html-unsafe="formatText(question.title)"></a>
-      </span>
+      </div>
       <span ng-show="!display_state.title_is_link" ng-bind-html-unsafe="formatText(question.title)"></span>
     </h4>
     <p class="post-text post-main-text" ng-bind-html-unsafe="formatText(question.content)"></p>
