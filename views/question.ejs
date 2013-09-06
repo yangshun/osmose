@@ -9,9 +9,9 @@
   <div class="post-question-content">
     <h4 class="post-title">
       <div ng-show="display_state.title_is_link">
-        <a href="/questions/{{ question.id }}" ng-bind-html-unsafe="formatText(question.title)"></a>
+        <a href="/questions/{{ question.id }}" ng-bind-html-unsafe="formatText(question.title, false)"></a>
       </div>
-      <span ng-show="!display_state.title_is_link" ng-bind-html-unsafe="formatText(question.title)"></span>
+      <span ng-show="!display_state.title_is_link" ng-bind-html-unsafe="formatText(question.title, false)"></span>
     </h4>
     <p class="post-text post-main-text" ng-bind-html-unsafe="formatText(question.content)"></p>
     <p class="post-details">
