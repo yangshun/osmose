@@ -29,6 +29,13 @@
     <h6>{{ questions.length }} Questions</h6>
     <hr/>
   </div>
+  <div ng-show="!questions.length">
+    <p>You have not asked any questions. Click on one of the courses below to start asking!</p>
+    <% for (var i = 0; i < courses.length; i++) { %> 
+      <a href="/courses/<%= courses[i].id %>"><%= courses[i].course_name %></a>
+      <p><%= courses[i].description %></p>
+    <% } %>
+  </div>
   <ul class="posts-list">
     <li class="post-item" ng-repeat="question in questions">
       <%- partial('question.ejs') %>
@@ -50,9 +57,9 @@
               <a class="button post-action-button" ng-click="addAnswer(question, user_answer); user_answer = '';">Answer</a>
             </fieldset>
           </form>
-          <hr/>
         <% } %>
       </div>
+      <hr/>
     </li>
   </ul>
 </div>
