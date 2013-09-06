@@ -50,9 +50,9 @@ module.exports.routes = {
   // Courses routes
   'get    /api/courses'             : 'CoursesController.index',
   'get    /api/courses/:id'         : 'CoursesController.show',
-  'post   /api/courses'             : 'CoursesController.create',
-  'put    /api/courses/:id'         : 'CoursesController.update',
-  'delete /api/courses/:id'         : 'CoursesController.remove',
+  // 'post   /api/courses'             : 'CoursesController.create',
+  // 'put    /api/courses/:id'         : 'CoursesController.update',
+  // 'delete /api/courses/:id'         : 'CoursesController.remove',
   'get    /api/courses/stub'        : 'CoursesController.stub',
   'get    /api/feed'                : 'CoursesController.feed',
 
@@ -60,37 +60,37 @@ module.exports.routes = {
   'get    /api/questions'           : 'QuestionsController.index',
   'get    /api/questions/:id'       : 'QuestionsController.show',
   'post   /api/questions'           : 'QuestionsController.create',
-  'put    /api/questions/:id'       : 'QuestionsController.update',
-  'delete /api/questions/:id'       : 'QuestionsController.remove',
+  // 'put    /api/questions/:id'       : 'QuestionsController.update',
+  // 'delete /api/questions/:id'       : 'QuestionsController.remove',
   'get    /api/my-questions'        : 'QuestionsController.my_questions',
 
   // Answers routes
   'get    /api/answers'             : 'AnswersController.index',
   'get    /api/answers/:id'         : 'AnswersController.show',
   'post   /api/answers'             : 'AnswersController.create',
-  'put    /api/answers/:id'         : 'AnswersController.update',
-  'delete /api/answers/:id'         : 'AnswersController.remove',
+  // 'put    /api/answers/:id'         : 'AnswersController.update',
+  // 'delete /api/answers/:id'         : 'AnswersController.remove',
 
   // Comments routes
   'get    /api/comments'            : 'CommentsController.index',
   'get    /api/comments/:id'        : 'CommentsController.show',
   'post   /api/comments'            : 'CommentsController.create',
-  'put    /api/comments/:id'        : 'CommentsController.update',
-  'delete /api/comments/:id'        : 'CommentsController.remove',
+  // 'put    /api/comments/:id'        : 'CommentsController.update',
+  // 'delete /api/comments/:id'        : 'CommentsController.remove',
 
   // Votes routes
-  'get    /api/votes'               : 'VotesController.index',
-  'get    /api/votes/:id'           : 'VotesController.show',
+  // 'get    /api/votes'               : 'VotesController.index',
+  // 'get    /api/votes/:id'           : 'VotesController.show',
   // 'post   /api/votes'               : 'VotesController.create',
-  'put    /api/votes/:id'           : 'VotesController.update',
-  'delete /api/votes/:id'           : 'VotesController.remove',
+  // 'put    /api/votes/:id'           : 'VotesController.update',
+  // 'delete /api/votes/:id'           : 'VotesController.remove',
   'post   /api/votes/upvote'        : 'VotesController.upvote',
   'post   /api/votes/downvote'      : 'VotesController.downvote',
 
   // FB Post Routes
   'get    /api/facebook/friends'    : 'FacebookController.friends',
   'post   /api/facebook/feed'       : 'FacebookController.feed',
-  'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
+  // 'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
 
   // FB User Routes
   'get /api/facebook/remove/:fb_id'     : 'FacebookController.remove',

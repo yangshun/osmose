@@ -40,19 +40,19 @@ module.exports = {
     });
   },
   
-  ask_question: function(req, res) {
-    var fbActionName = 'osmosetest:ask';
-    var objectToLike = 'http://osmose.soedar.com/questions/' + req.param('id');
-    console.log(objectToLike);
-    req.facebook.api(
-       'https://graph.facebook.com/me/'.concat(fbActionName),
-       'post',
-       { question: objectToLike,
-         privacy: {'value': 'SELF'} },
-       function(response) {
-        res.send(response);
-       });
-  },
+  // ask_question: function(req, res) {
+  //   var fbActionName = 'osmosetest:ask';
+  //   var objectToLike = 'http://osmose.soedar.com/questions/' + req.param('id');
+  //   console.log(objectToLike);
+  //   req.facebook.api(
+  //      'https://graph.facebook.com/me/'.concat(fbActionName),
+  //      'post',
+  //      { question: objectToLike,
+  //        privacy: {'value': 'SELF'} },
+  //      function(response) {
+  //       res.send(response);
+  //      });
+  // },
 
 /*
   random_users: function(req, res) {
