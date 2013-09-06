@@ -373,7 +373,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			caption: question.course_name,
 			description: question.content,
 			link: 'http://osmose.soedar.com/questions/' + question.id,
-	        picture: 'http://osmose.soedar.com/img/icon-128.png'
+	        picture: 'http://osmose.soedar.com/img/icon-256.png'
 		}, function(data) {
 			console.log(data);
 		});
