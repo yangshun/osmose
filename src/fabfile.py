@@ -8,7 +8,7 @@ env.use_ssh_config = True
 env.key_filename = '~/.ssh/osmose.pem'
 
 def deploy():
-  with cd('~/Osmose'):
+  with cd('~/Osmose/src'):
     run('git remote update && git reset --hard origin/master')
     run('sudo npm install')
     with settings(warn_only=True):
