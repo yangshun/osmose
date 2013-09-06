@@ -93,7 +93,10 @@ var osmose_markdowns = {
 			.replace(/\[twitter\]/g, '<i class="icon-twitter"></i>')
 			.replace(/\[youtube\]/g, '<i class="icon-youtube"></i>')
 			.replace(/<script>/g, '&lt;script&gt;')
-			.replace(/<\/script>/g, '&lt;/script&gt;');
+			.replace(/<\/script>/g, '&lt;/script&gt;')
+			.replace(/\[img:(.*)\]/g, '<img src=$1 />')
+			.replace(/\[youtube:(.*)\]/g, "<iframe src=$1 width='560' height='315' frameborder='0' allowfullscreen></iframe>")
+			.replace(/\[link:(.*)\]/g, "<a href=$1>$1</a>");
 			return text;
 	},
 
@@ -113,7 +116,11 @@ var osmose_markdowns = {
 	// },
 
 	osmosifyContent: function(text) {
-		// text = this.linkify(text);
+		function safe_tags(str) {
+    	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') ;
+		}
+
+		text = safe_tags(text);
 		text = this.convertToMarkdown(text);
 		return text;
 	}
