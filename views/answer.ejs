@@ -1,4 +1,4 @@
-<div class="post-answer-container clearfix" ng-repeat="answer in question.answers">
+<div class="post-answer-container clearfix" ng-repeat="answer in question.answers | orderBy:'score':true">
   <div class="post-answer-summary-column">
     <img class="thumbnail-small" ng-src="{{ formatThumbnail(answer.user.facebook_id) }}" />
     <!-- <p class="post-score-action"><i class="icon-chevron-sign-up"></i></p> -->
