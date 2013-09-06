@@ -243,7 +243,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			title: title,
 			content: content
 		};
-		console.log(newQuestion)
+		// console.log(newQuestion)
 		Questions.post(newQuestion, function(){});
 	}
 
@@ -311,7 +311,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			post_id : post.id,
 			post_type : type
 		};
-		Votes.postOne(vote, function(res){console.log(res);});
+		Votes.postOne(vote, function(res){// console.log(res);});
 	};
 
 	$scope.downvote = function(post, type) {
@@ -321,7 +321,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			post_id: post.id,
 			post_type: type
 		};
-		Votes.postOne(vote, function(res){console.log(res);});
+		Votes.postOne(vote, function(res){// console.log(res);});
 	};
 
 	$scope.updateVotesForQuestion = function(msg) {
@@ -389,7 +389,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		// Set scope based on different pages
 		// TODO: put variables in ng-init for controllers to initialize
 		var params = {};
-		console.log(path);
+		// console.log(path);
 		switch (path[1]) {
 			case 'courses':
 				params.id = path[2];
@@ -399,20 +399,20 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 							res.data = [res.data];
 						}
 						$scope.courses = res.data;
-						console.log('Courses loaded');
-						console.log($scope.courses);
+						// console.log('Courses loaded');
+						// console.log($scope.courses);
 
 						$scope.questions = [];
 						res.data.map(function(course) {
 							return $scope.questions = $scope.questions.concat(course.questions);
 						});
-						console.log('Questions');
-						console.log($scope.questions);
+						// console.log('Questions');
+						// console.log($scope.questions);
 						$scope.page_loaded = true;
 						$scope.$apply();
 					} else {
-						console.log('Error retrieving courses');
-						console.log(res);
+						// console.log('Error retrieving courses');
+						// console.log(res);
 					}
 				});
 				break;
@@ -426,8 +426,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.$apply();
 					}
 					else {
-						console.log('Error retrieving feed');
-						console.log(res);
+						// console.log('Error retrieving feed');
+						// console.log(res);
 					}
 				});
 				break;
@@ -438,25 +438,25 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 							$scope.questions = res.data;
 							$scope.page_loaded = true;
 						} else {
-							console.log('Error retrieving my questions');
-							console.log(res);
+							// console.log('Error retrieving my questions');
+							// console.log(res);
 						}
 					});
 				});
 				break;
 			case 'questions':
 				Questions.get({id: path[2]}, function(res) {
-					console.log('therehere');
-					console.log(res);
+					// console.log('therehere');
+					// console.log(res);
 					if (res.success) {
 						$scope.questions = [res.data.question];
-						console.log('Question loaded');
-						console.log($scope.questions);
+						// console.log('Question loaded');
+						// console.log($scope.questions);
 						$scope.page_loaded = true;
 						$scope.$apply();
 					} else {
-						console.log('Error retrieving question');
-						console.log(res);
+						// console.log('Error retrieving question');
+						// console.log(res);
 					}
 				});
 				Courses.get({}, function(res) {
@@ -464,8 +464,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.courses = res.data;
 						$scope.$apply();
 					} else {
-						console.log('Error retrieving course stub');
-						console.log(res);
+						// console.log('Error retrieving course stub');
+						// console.log(res);
 					}
 				});
 				break;
@@ -485,7 +485,7 @@ var generateRandomWords = function(length) {
 }
 
 var trythis = function() {
-	console.log('start');
+	// console.log('start');
 	var question = {
 		user_id: 1,
 		title: generateRandomWords(50),
