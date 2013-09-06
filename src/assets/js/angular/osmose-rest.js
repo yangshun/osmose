@@ -388,7 +388,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			case 'courses':
 				return $scope.updateCourse(msg);
 			case 'questions':
-				if (path[1] === 'courses' && msg.data.course_id !== path[2]) {
+				if (path[1] === 'courses' && msg.data.course_id != path[2]) {
 					// Don't do trigger for the wrong course
 				} else {
 					return $scope.updateQuestion(msg);
