@@ -55,18 +55,22 @@ var AppController =  function($scope) {
 		return osm_user.getFacebookProfilePicture(id);
 	}
 
-	$scope.formatText = function(text) {
+	$scope.formatText = function(text, format_media) {
+		if (typeof format_media === "undefined") {
+			format_media = true;
+		}
+
 		if (!text) {
 			return '';
 		}		
-		text = osmose_markdowns.osmosifyContent(text);
+		text = osmose_markdowns.osmosifyContent(text, format_media);
 		return text;
 	}
 };
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 	$scope.page_loaded = false;
-	var ANIMATION_NAME = 'rotateIn';
+	var ANIMATION_NAME = 'fadeInRight';
 	$scope.question_container_class = { 'animated': true, ANIMATION_NAME: false };
 	$scope.display_state = {
 		title_is_link: true,

@@ -60,56 +60,67 @@ var osmose_markdowns = {
 		// { 	regex: '\(:', icon: 'smile' },
 	],
 
-	convertToMarkdown: function(text) {
-			function youtube_embeded_link(str, m1) {
-				return m1.replace('https://', '').replace('http://', '').replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="420" height="345" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
+	convertEmoticons: function(text) {
+		text = text.replace(/\(Y\)/gi, '<i class="icon-thumbs-up"></i>')
+			.replace(/\(Y2\)/gi, '<i class="icon-thumbs-up-alt"></i>')
+			.replace(/\(:/gi, '<i class="icon-smile"></i>')
+			.replace(/:\)/gi, '<i class="icon-smile"></i>')
+			.replace(/:\(/gi, '<i class="icon-frown"></i>')
+			.replace(/\):/gi, '<i class="icon-frown"></i>')
+			.replace(/:\|/gi, '<i class="icon-meh"></i>')
+			.replace(/\|:/gi, '<i class="icon-meh"></i>')
+			.replace(/\[male\]/gi, '<i class="icon-male"></i>')
+			.replace(/\[female\]/gi, '<i class="icon-female"></i>')
+			.replace(/\[bulb\]/gi, '<i class="icon-lightbulb"></i>')
+			.replace(/\[warning\]/gi, '<i class="icon-warning-sign"></i>')
+			.replace(/\[music\]/gi, '<i class="icon-music"></i>')
+			.replace(/<3/gi, '<i class="icon-heart"></i>')
+			.replace(/\[heart\]/gi, '<i class="icon-gittip"></i>')
+			.replace(/\[star\]/gi, '<i class="icon-star"></i>')
+			.replace(/\[star2\]/gi, '<i class="icon-star-empty"></i>')
+			.replace(/\[tick\]/gi, '<i class="icon-ok"></i>')
+			.replace(/\[cross\]/gi, '<i class="icon-remove"></i>')
+			.replace(/\[flag\]/gi, '<i class="icon-flag"></i>')
+			.replace(/\[coffee\]/gi, '<i class="icon-coffee"></i>')
+			.replace(/\[apple\]/gi, '<i class="icon-apple"></i>')
+			.replace(/\[android\]/gi, '<i class="icon-android"></i>')
+			.replace(/\[facebook\]/gi, '<i class="icon-facebook-sign"></i>')
+			.replace(/\[github\]/gi, '<i class="icon-github"></i>')
+			.replace(/\[instagram\]/gi, '<i class="icon-instagram"></i>')
+			.replace(/\[skype\]/gi, '<i class="icon-skype"></i>')
+			.replace(/\[tumblr\]/gi, '<i class="icon-tumblr"></i>')
+			.replace(/\[twitter\]/gi, '<i class="icon-twitter"></i>')
+			.replace(/\[youtube\]/gi, '<i class="icon-youtube"></i>')
+
+		return text;
+	},
+
+	convertMediaMarkdown: function(text) {
+		function youtube_embeded_link(str, m1) {
+			return m1.replace('https://', '').replace('http://', '').replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="420" height="345" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
+		}
+
+		function full_url(str, m1) {
+			var url = m1;
+			if (url.search('://') == -1) {
+				url = '//' + url;
 			}
 
-			function full_url(str, m1) {
-				var url = m1;
-				if (url.search('://') == -1) {
-					url = '//' + url;
-				}
+			return "<a href='" + url + "' target='_blank'>" + m1 + "</a>";
+		}
 
-				return "<a href='" + url + "' target='_blank'>" + m1 + "</a>";
-			}
-		
-			text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>')
-			.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>')
-			.replace(/\(:/g, '<i class="icon-smile"></i>')
-			.replace(/:\)/g, '<i class="icon-smile"></i>')
-			.replace(/:\(/g, '<i class="icon-frown"></i>')
-			.replace(/\):/g, '<i class="icon-frown"></i>')
-			.replace(/:\|/g, '<i class="icon-meh"></i>')
-			.replace(/\|:/g, '<i class="icon-meh"></i>')
-			.replace(/\[male\]/g, '<i class="icon-male"></i>')
-			.replace(/\[female\]/g, '<i class="icon-female"></i>')
-			.replace(/\[bulb\]/g, '<i class="icon-lightbulb"></i>')
-			.replace(/\[warning\]/g, '<i class="icon-warning-sign"></i>')
-			.replace(/\[music\]/g, '<i class="icon-music"></i>')
-			.replace(/<3/g, '<i class="icon-heart"></i>')
-			.replace(/\[heart\]/g, '<i class="icon-gittip"></i>')
-			.replace(/\[star\]/g, '<i class="icon-star"></i>')
-			.replace(/\[star2\]/g, '<i class="icon-star-empty"></i>')
-			.replace(/\[tick\]/g, '<i class="icon-ok"></i>')
-			.replace(/\[cross\]/g, '<i class="icon-remove"></i>')
-			.replace(/\[flag\]/g, '<i class="icon-flag"></i>')
-			.replace(/\[coffee\]/g, '<i class="icon-coffee"></i>')
-			.replace(/\[apple\]/g, '<i class="icon-apple"></i>')
-			.replace(/\[android\]/g, '<i class="icon-android"></i>')
-			.replace(/\[facebook\]/g, '<i class="icon-facebook-sign"></i>')
-			.replace(/\[github\]/g, '<i class="icon-github"></i>')
-			.replace(/\[instagram\]/g, '<i class="icon-instagram"></i>')
-			.replace(/\[skype\]/g, '<i class="icon-skype"></i>')
-			.replace(/\[tumblr\]/g, '<i class="icon-tumblr"></i>')
-			.replace(/\[twitter\]/g, '<i class="icon-twitter"></i>')
-			.replace(/\[youtube\]/g, '<i class="icon-youtube"></i>')
-			.replace(/<script>/g, '&lt;script&gt;')
-			.replace(/<\/script>/g, '&lt;/script&gt;')
-			.replace(/\[img:(.*)\]/g, '<img src=$1 />')
+		text = text.replace(/\[img:(.*)\]/g, '<img src=$1 />')
 			.replace(/\[youtube:(.*)\]/g, youtube_embeded_link)
 			.replace(/\[link:(.*)\]/g, full_url);
-			return text;
+			return text;	
+	},
+
+	convertToMarkdown: function(text, format_media) {
+		text = this.convertEmoticons(text);
+		if (format_media) {
+			text = this.convertMediaMarkdown(text);
+		}
+		return text;
 	},
 
 	// linkify: function(text) {
@@ -127,13 +138,13 @@ var osmose_markdowns = {
  //            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
 	// },
 
-	osmosifyContent: function(text) {
+	osmosifyContent: function(text, emoticons_only) {
 		function safe_tags(str) {
     	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') ;
 		}
 
 		text = safe_tags(text);
-		text = this.convertToMarkdown(text);
+		text = this.convertToMarkdown(text, emoticons_only);
 		return text;
 	}
 }
