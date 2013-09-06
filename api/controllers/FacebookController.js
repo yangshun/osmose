@@ -54,7 +54,6 @@ module.exports = {
   //      });
   // },
 
-/*
   random_users: function(req, res) {
 
     var shuffleArray = function(array) {
@@ -77,11 +76,12 @@ module.exports = {
       var count = (req.param('count')) ? req.param('count') : 10;
       data = data.slice(0, count);
 
-      res.api.success(data);
+      res.api.success(data.map(function(user) {
+        return user.facebook_id;
+      }));
     });
 
   },
-  */
 
   remove: function(req, res) {
     var fb_userid = req.params.fb_id;

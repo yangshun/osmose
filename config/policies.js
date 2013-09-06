@@ -16,6 +16,10 @@ module.exports.policies = {
   // (`true` allows public access) 
   '*': ['facebook', 'fb_auth', 'api_helper', 'courses'],
 
+  FacebookController: {
+    'random_users': ['facebook', 'api_helper']
+  },
+
   QuestionsController: {
   	'details': ['courses', 'facebook'],
   	'show' : ['api_helper']

@@ -91,6 +91,7 @@ module.exports.routes = {
   'get    /api/facebook/friends'    : 'FacebookController.friends',
   'post   /api/facebook/feed'       : 'FacebookController.feed',
   // 'get    /api/facebook/question/:id'   : 'FacebookController.ask_question',
+  'get    /api/facebook/random-users/:count' : 'FacebookController.random_users',
 
   // FB User Routes
   'get /api/facebook/remove/:fb_id'     : 'FacebookController.remove',
