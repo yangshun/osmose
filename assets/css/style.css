@@ -12,9 +12,10 @@ a:hover { color: #ccc;}
 input, textarea { font-weight: 300; }
 input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus { background: none; border-color: #0977d5; box-shadow: none; -webkit-box-shadow: none; }
 fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
+.no-js .top-bar-section ul li:hover>a { background-color: #07569a; }
 
-.post-question-content .facebook-share-link { display: none; float: right; font-weight: 300;}
-.post-question-content:hover .facebook-share-link { display: initial; }
+.post-question-content .facebook-share-link { display: none; float: right; font-weight: 500;}
+.post-question-content:hover .facebook-share-link { display: initial; text-decoration: none; }
 .course-label-link { font-weight: 400; }
 
 /* Navigation */
@@ -77,7 +78,7 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 
 /* Feed */
 .posts-list { list-style-type: none; }
-.post-title div, .post-title a { width: 100%; text-overflow: ellipsis; overflow: hidden; }
+.post-title div, .post-title a, .post-title span { width: 100%; text-overflow: ellipsis; overflow: hidden; display: block; }
 .post-title a { color: #0977d5; display: block; }
 .post-title a:hover { text-decoration: underline; }
 .post-question-content { margin-left: 50px; margin-bottom: 10px; }

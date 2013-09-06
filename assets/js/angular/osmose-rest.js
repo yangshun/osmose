@@ -66,7 +66,7 @@ var AppController =  function($scope) {
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 	$scope.page_loaded = false;
-	var ANIMATION_NAME = 'rotateIn';
+	var ANIMATION_NAME = 'fadeInUp';
 	$scope.question_container_class = { 'animated': true, ANIMATION_NAME: false };
 	$scope.display_state = {
 		title_is_link: true,
