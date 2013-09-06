@@ -142,8 +142,15 @@ var osmose_markdowns = {
 		function safe_tags(str) {
     	return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') ;
 		}
+		function nl2br(str) {
+			return str.replace(/\\n/g, '<br>');
+		}
+		function nl2br (str, is_xhtml) {   
+			var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+			return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+		}
 
-		text = safe_tags(text);
+		text = nl2br(safe_tags(text), false);
 		text = this.convertToMarkdown(text, emoticons_only);
 		return text;
 	}
