@@ -311,7 +311,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			post_id : post.id,
 			post_type : type
 		};
-		Votes.postOne(vote, function(res){// console.log(res);});
+		Votes.postOne(vote, function(res){
+			// console.log(res);
+		});
 	};
 
 	$scope.downvote = function(post, type) {
@@ -321,7 +323,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			post_id: post.id,
 			post_type: type
 		};
-		Votes.postOne(vote, function(res){// console.log(res);});
+		Votes.postOne(vote, function(res){
+			// console.log(res);
+		});
 	};
 
 	$scope.updateVotesForQuestion = function(msg) {
@@ -515,7 +519,7 @@ var trythis = function() {
 				user_id: 1
 			};
 			socket.post('/api/comments', ans_comment, function(data) {
-				console.log('done');
+				// console.log('done');
 			});
 		});
 	});
