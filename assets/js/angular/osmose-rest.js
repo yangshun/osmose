@@ -361,6 +361,19 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		});
 	}
 
+	$scope.shareOnFacebook = function(question) {
+		FB.ui({
+			method: 'feed',
+			name: question.title,
+			caption: question.course_name,
+			description: question.content,
+			link: 'http://osmose.soedar.com/questions/' + question.id,
+	        picture: 'http://osmose.soedar.com/img/icon-128.png'
+		}, function(data) {
+			console.log(data);
+		});
+	}
+
 	// Controls the message dispatching
 	socket.on('message', function(msg) {
 		// Only update the $scope course

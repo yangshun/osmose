@@ -60,4 +60,17 @@
 			console.log(data);
 		});
 	}
+
+	function shareQuestionOnFb(question) {
+		FB.ui({
+			method: 'feed',
+			name: question.title,
+			caption: question.course_name,
+			description: question.content,
+			link: 'http://osmose.soedar.com/questions/' + question.id,
+	        picture: 'http://osmose.soedar.com/img/icon-128.png'
+		}, function(data) {
+			console.log(data);
+		});
+	}
 </script>

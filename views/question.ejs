@@ -36,15 +36,7 @@
       </span>
       &middot; {{ formatDate(question.createdAt) }}
       <span>
-        <a style="float: right;"
-           href="#" 
-           onclick="
-          window.open(
-            'https://www.facebook.com/sharer/sharer.php?u=http://osmose.soedar.com/questions/{{ question.id }}', 
-            'facebook-share-dialog', 
-            'width=626,height=436'); 
-            return false;"> Share on Facebook
-        </a>
+        <a class="facebook-share-link" href="#" ng-click="shareOnFacebook(question)">Share on <i class="icon-facebook-sign icon-large"></i></a>
       </span>
     </p>
     <div class="post-comments-container" ng-show="question.comments.length && question.comment_open">
