@@ -23,6 +23,7 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .top-bar-section li a:not(.button) { background: #0977d5; }
 .top-bar-section li a:not(.button):hover { background: #07569a; }
 .thumbnail-navigation { width: 25px; height: 25px; margin-right: 10px; border-radius: 2px; }
+.fb-like-container { padding-top: 10px; padding-left: 10px; }
 
 /* Landing */
 .main-page { height: 100%; min-height: 100%; width: 100%; background-image: url('../img/background2.jpg'); background-repeat: no-repeat; background-size: cover;}
