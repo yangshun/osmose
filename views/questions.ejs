@@ -29,7 +29,7 @@
     <hr/>
   </div>
   <div ng-show="!questions.length">
-    <p>You have not asked any questions. Click on one of the courses below to start asking!</p>
+    <p>There are no questions. Click on one of the courses below to start asking!</p>
     <% for (var i = 0; i < courses.length; i++) { %> 
       <a href="/courses/<%= courses[i].id %>"><%= courses[i].course_name %></a>
       <p><%= courses[i].description %></p>
