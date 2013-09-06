@@ -379,6 +379,8 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		});
 	}
 
+	var path = window.location.pathname.split('/');
+	
 	// Controls the message dispatching
 	socket.on('message', function(msg) {
 		// Only update the $scope course
@@ -386,7 +388,9 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 			case 'courses':
 				return $scope.updateCourse(msg);
 			case 'questions':
-				return $scope.updateQuestion(msg);
+				if (path[1] === 'courses' && msg.data.course_id == path[2]) {
+					return $scope.updateQuestion(msg);
+				}
 			case 'answers':
 				return $scope.updateAnswer(msg);
 			case 'comments':
@@ -404,10 +408,11 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		}
 	});
 	
-	var path = window.location.pathname.split('/');
 	(function(){
 		// Subscribe to changes
-		Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
+		socket.get('/api/users/subscribe/'+path[1]+'/'+path[2], function(err, data) {
+			if (err) console.log('Unable to subscribe');console.log(err);
+		});
 
 		// Set scope based on different pages
 		var params = {};
