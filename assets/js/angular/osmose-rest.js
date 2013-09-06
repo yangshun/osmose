@@ -66,7 +66,8 @@ var AppController =  function($scope) {
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 	$scope.page_loaded = false;
-	$scope.question_container_class = { 'post-question-container': true, 'animated': true, 'fadeInRight': false };
+	var ANIMATION_NAME = 'rotateIn';
+	$scope.question_container_class = { 'animated': true, ANIMATION_NAME: false };
 	$scope.display_state = {
 		title_is_link: true,
 		display_ask_question: false,
@@ -409,7 +410,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		var params = {};
 		// console.log(path);
 		function postLoading() {
-			$scope.question_container_class['fadeInRight'] = true;
+			$scope.question_container_class[ANIMATION_NAME] = true;
 			$scope.page_loaded = true;
 			$scope.$apply();
 		}
