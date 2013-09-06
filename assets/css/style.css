@@ -1,5 +1,5 @@
 .main-container {  margin: 0 auto; }
-html { background-color: #333; }
+html { background-color: #f5f5f5; }
 body { font-family: "museo-sans", 'helvetica-neue-light', sans-serif; background-color: #eee; }
 h1, h2, h3, h4, h5, h6 { font-family: "museo-sans", 'helvetica-neue-light', sans-serif; font-weight: 500; color: #666; }
 p { font-size: 16px; font-weight: 300;}
@@ -39,8 +39,8 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 .fb-like { margin-bottom: 10px; height: 35px; }
 
 /* About */
-.about-page { background-image: none; background-color: #333; }
-.about-container { background-color: #fff;}
+.about-page { background-image: none; background-color: #f5f5f5; }
+.about-container { background-color: #fff; margin-bottom: 100px; }
 .about-container .info-container { position: relative; margin: 25px 0 35px 0; text-align: left; }
 .about-container .info-container p { margin-bottom: 10px; font-size: 14px; }
 .about-container .info-container h5 { margin-top: 0; text-align: left; }
@@ -136,5 +136,5 @@ fieldset { margin: 0; padding-bottom: 0; border-color: #0977d5;}
 
 /* Footer */
 .footer-container { background-color: #333; width: 100%; }
-.landing-page .footer-container { position: fixed; bottom: 0; top: initial;}
+.landing-page .footer-container, .about-page .footer-container  { position: fixed; bottom: 0; top: initial;}
 .footer { text-align: center; color: #fff;}
