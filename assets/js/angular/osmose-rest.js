@@ -406,13 +406,12 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		Users.get({id: 'subscribe'}, function(res){ if(!res.success) console.log('Unable to subscribe')});
 
 		// Set scope based on different pages
-		// TODO: put variables in ng-init for controllers to initialize
 		var params = {};
-		// console.log(path);
 		function postLoading() {
 			$scope.question_container_class[ANIMATION_NAME] = true;
 			$scope.page_loaded = true;
 			$scope.$apply();
+			$('textarea').autosize();
 		}
 
 		switch (path[1]) {
