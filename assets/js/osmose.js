@@ -64,6 +64,15 @@ var osmose_markdowns = {
 			function youtube_embeded_link(str, m1) {
 				return m1.replace('https://', '').replace('http://', '').replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="420" height="345" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
 			}
+
+			function full_url(str, m1) {
+				var url = m1;
+				if (url.search('://') == -1) {
+					url = '//' + url;
+				}
+
+				return "<a href='" + url + "' target='_blank'>" + m1 + "</a>";
+			}
 		
 			text = text.replace(/\(Y\)/g, '<i class="icon-thumbs-up"></i>')
 			.replace(/\(Y2\)/g, '<i class="icon-thumbs-up-alt"></i>')
@@ -99,7 +108,7 @@ var osmose_markdowns = {
 			.replace(/<\/script>/g, '&lt;/script&gt;')
 			.replace(/\[img:(.*)\]/g, '<img src=$1 />')
 			.replace(/\[youtube:(.*)\]/g, youtube_embeded_link)
-			.replace(/\[link:(.*)\]/g, "<a href=$1>$1</a>");
+			.replace(/\[link:(.*)\]/g, full_url);
 			return text;
 	},
 

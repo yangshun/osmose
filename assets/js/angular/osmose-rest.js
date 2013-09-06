@@ -66,6 +66,7 @@ var AppController =  function($scope) {
 
 var CourseController = function($route, $scope, Courses, Answers, Users, Questions, Comments, Votes) {
 	$scope.page_loaded = false;
+	$scope.question_container_class = { 'post-question-container': true, 'animated': true, 'fadeInRight': false };
 	$scope.display_state = {
 		title_is_link: true,
 		display_ask_question: false,
@@ -384,7 +385,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				}
 		}
 	});
-
+	
 	var path = window.location.pathname.split('/');
 	(function(){
 		// Subscribe to changes
@@ -394,6 +395,12 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 		// TODO: put variables in ng-init for controllers to initialize
 		var params = {};
 		// console.log(path);
+		function postLoading() {
+			$scope.question_container_class['fadeInRight'] = true;
+			$scope.page_loaded = true;
+			$scope.$apply();
+		}
+
 		switch (path[1]) {
 			case 'courses':
 				params.id = path[2];
@@ -412,8 +419,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						});
 						// console.log('Questions');
 						// console.log($scope.questions);
-						$scope.page_loaded = true;
-						$scope.$apply();
+						postLoading();
 					} else {
 						// console.log('Error retrieving courses');
 						// console.log(res);
@@ -426,8 +432,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.questions = res.data;
 						// console.log('questions')
 						console.log($scope.questions)
-						$scope.page_loaded = true;
-						$scope.$apply();
+						postLoading();
 					}
 					else {
 						// console.log('Error retrieving feed');
@@ -440,7 +445,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 					$scope.$apply(function() {
 						if (res.success) {
 							$scope.questions = res.data;
-							$scope.page_loaded = true;
+							postLoading();
 						} else {
 							// console.log('Error retrieving my questions');
 							// console.log(res);
@@ -456,8 +461,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 						$scope.questions = [res.data.question];
 						// console.log('Question loaded');
 						// console.log($scope.questions);
-						$scope.page_loaded = true;
-						$scope.$apply();
+						postLoading();
 					} else {
 						// console.log('Error retrieving question');
 						// console.log(res);
@@ -466,7 +470,7 @@ var CourseController = function($route, $scope, Courses, Answers, Users, Questio
 				Courses.get({}, function(res) {
 					if (res.success) {
 						$scope.courses = res.data;
-						$scope.$apply();
+						postLoading();
 					} else {
 						// console.log('Error retrieving course stub');
 						// console.log(res);

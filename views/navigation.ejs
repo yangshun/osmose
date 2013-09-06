@@ -16,9 +16,9 @@
       <% if (typeof fb_user !== 'undefined') { %>
         <!-- <li><a href="#/posts"></a></li> -->
         <li class="has-dropdown">
-          <a href="#"><img class="thumbnail-navigation" src="<%= 'https://graph.facebook.com/' + fb_user.username + '/picture' %>" /><%= fb_user.first_name %></a>
+          <a href="/my-questions"><img class="thumbnail-navigation" src="<%= 'https://graph.facebook.com/' + fb_user.username + '/picture' %>" /><%= fb_user.first_name %></a>
           <ul class="dropdown">
-            <li><a href="/profile"><i class="icon-gear"></i>&nbsp; Profile</a></li>
+            <!-- <li><a href="/profile"><i class="icon-gear"></i>&nbsp; Profile</a></li> -->
             <li><a href="/logout"><i class="icon-signout"></i>&nbsp; Log Out</a></li>
           </ul>
         </li>
