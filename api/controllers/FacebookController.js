@@ -74,6 +74,9 @@ module.exports = {
       shuffleArray(data);
 
       var count = (req.param('count')) ? req.param('count') : 10;
+      if (count > 10) {
+        count = 10;
+      }
       data = data.slice(0, count);
 
       res.api.success(data);
